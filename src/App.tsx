@@ -1,26 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { AppErrorBoundary } from 'components'
+import React from 'react'
+// import { GlobalStyles, ThemeProvider } from './theme'
+import { Routes } from './views/Routes'
+
+// TODO: use `AppProvider` with `pipeProviders` strategy?
+// - TODO: Redux
+// - TODO: ConnectedRouter
+// - TODO: i18N
+// - TODO: Suspense + ActivityIndicator fallback
+// - TODO: React.Suspense
+// - TODO: GlobalStyles
+// - TODO: App ErrorBoundary
+// - TODO: TrackingProvider
+// - TODO: RemoteConfigProvider
+// - TODO: ToastProvider
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <>
+      {/* <ThemeProvider> */}
+      {/* <GlobalStyles /> */}
+      <AppErrorBoundary>
+        <React.Suspense fallback={<div>Initial Suspense</div>}>
+          <Routes />
+        </React.Suspense>
+      </AppErrorBoundary>
+      {/* </ThemeProvider> */}
+    </>
+  )
 }
 
-export default App;
+export default App
