@@ -1,14 +1,13 @@
 import React from 'react'
 import { Route, Routes, Navigate } from 'react-router-dom'
 // import { SlidePanelRoute } from 'components'
-// import { Club, Federation, getClubs, getFederations } from 'olympos'
-// import { AthleteList } from '../views/AthleteList'
+import { ClientList } from '../views/ClientList'
 // import { AthleteDetails } from '../views/AthleteDetails'
 
 function ClientsRouter() {
   return (
     <Routes>
-      <Route path="/" element={<div>Clients</div>}>
+      <Route path="/" element={<ClientList />}>
         {/* <Route
           path=":athleteId"
           element={
