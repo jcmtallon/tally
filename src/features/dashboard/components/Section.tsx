@@ -1,9 +1,15 @@
 import { ReactNode } from 'react'
-import { createConstant, Constant } from '@jcmtallon/ts-allies'
 import { CriteriaProps } from './Criteria'
 
-const DASHBOARD_SECTION_DISPLAY_STATUS = createConstant(['ENABLED', 'DISABLED', 'BETA', 'WIP'])
-type DashboardSectionDisplayStatus = Constant<typeof DASHBOARD_SECTION_DISPLAY_STATUS>
+const DASHBOARD_SECTION_DISPLAY_STATUS = {
+  ENABLED: 'ENABLED',
+  DISABLED: 'DISABLED',
+  BETA: 'BETA',
+  WIP: 'WIP',
+} as const
+
+type DashboardSectionDisplayStatus =
+  typeof DASHBOARD_SECTION_DISPLAY_STATUS[keyof typeof DASHBOARD_SECTION_DISPLAY_STATUS]
 
 interface DashboardSectionDisplayConfig {
   label: ReactNode

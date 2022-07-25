@@ -1683,13 +1683,6 @@
   resolved "https://npm.pkg.github.com/download/@jcmtallon/prettier-config/0.0.1/dde362bf44bbf8c6b2374f7f850f3f63e837da636a17061f1146dc52dc14fe78#4d885a049a7dcad5d053335778b32474ddfba190"
   integrity sha512-dvT0frv+iZUJdNBJN4TD+DV2/+LbcvGm622XB5rMfurQd4ZMsVZB34CVdeMQP/xa+UaSeOFTaNk7xyvXD77P/g==
 
-"@jcmtallon/ts-allies@^0.0.1":
-  version "0.0.1"
-  resolved "https://npm.pkg.github.com/download/@jcmtallon/ts-allies/0.0.1/6101a528fa55251a0878cdf408991e68a1280222c1d034485fe91e55c83fe699#84902911d40efd1bb3a081000487fda6bd7eb67b"
-  integrity sha512-QzUBKYROJOxB+Wk3S9HC48hp2glDb/0HpDyvBZdrqLmqYdM0O2JmpVAXYxdW/SscJTwHMyNdozYVuewb0nm6nw==
-  dependencies:
-    typescript "^4.5.2"
-
 "@jest/console@^27.5.1":
   version "27.5.1"
   resolved "https://registry.yarnpkg.com/@jest/console/-/console-27.5.1.tgz#260fe7239602fe5130a94f1aa386eff54b014bba"
@@ -9210,7 +9203,7 @@ typedarray-to-buffer@^3.1.5:
   dependencies:
     is-typedarray "^1.0.0"
 
-typescript@^4.5.2, typescript@^4.7.4:
+typescript@^4.7.4:
   version "4.7.4"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.7.4.tgz#1a88596d1cf47d59507a1bcdfb5b9dfe4d488235"
   integrity sha512-C0WQT0gezHuw6AdY1M2jxUO83Rjf0HP7Sk1DtXj6j1EwkQNZrHAg2XPWlq62oqEhYvONq5pkC2Y9oPljWToLmQ==
