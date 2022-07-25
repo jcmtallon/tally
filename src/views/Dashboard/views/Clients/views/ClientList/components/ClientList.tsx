@@ -1,5 +1,6 @@
 import { DashboardLayout } from 'features/dashboard'
-import React from 'react'
+import React, { useEffect } from 'react'
+import { listClients } from 'services'
 import * as S from './ClientList.styles'
 
 interface ClientListProps {
@@ -7,6 +8,15 @@ interface ClientListProps {
 }
 
 function ClientList(props: ClientListProps) {
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await listClients({})
+      console.log(data)
+    }
+
+    fetchData()
+  }, [])
+
   return (
     <>
       <DashboardLayout>

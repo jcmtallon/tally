@@ -1,6 +1,6 @@
 import { useState, useCallback, useEffect, useRef, RefObject, MouseEvent } from 'react'
 
-const LOCAL_STORAGE_KEY = 'athlos:side_nav_collapsed'
+const LOCAL_STORAGE_KEY = 'tally:side_nav_collapsed'
 
 function useCollapsibleSideNav() {
   const [isCollapsed, toggleCollapsedNav] = useState(
