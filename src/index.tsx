@@ -1,14 +1,21 @@
 import React from 'react'
-import ReactDOM from 'react-dom/client'
-import './index.css'
+import ReactDOM from 'react-dom'
+import { BrowserRouter } from 'react-router-dom'
 import App from './App'
 import reportWebVitals from './reportWebVitals'
 
-const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
-root.render(
+// TODO: polyfill/ie11
+// TODO: polyfill/stable
+// TODO: configs: like firebase, cypress, google maps, datadog, intercom, logRocket, mixpanel, stripe, google analytics, etc.
+// TODO: tracking
+
+ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
   </React.StrictMode>,
+  document.getElementById('root'),
 )
 
 // If you want to start measuring performance in your app, pass a function
