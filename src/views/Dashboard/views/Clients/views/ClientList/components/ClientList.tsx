@@ -1,6 +1,7 @@
 import { DashboardLayout } from 'features/dashboard'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { listClients } from 'services'
+import { Client } from 'services/types'
 import * as S from './ClientList.styles'
 
 interface ClientListProps {
@@ -8,10 +9,12 @@ interface ClientListProps {
 }
 
 function ClientList(props: ClientListProps) {
+  const [clients, setClients] = useState<Client[]>([])
+
   useEffect(() => {
     const fetchData = async () => {
       const data = await listClients({})
-      console.log(data)
+      setClients(data)
     }
 
     fetchData()
@@ -24,7 +27,26 @@ function ClientList(props: ClientListProps) {
           <S.TopRow>
             <S.Header>Search</S.Header>
           </S.TopRow>
-          Some form Some Table
+          Some form
+          {clients && (
+            <table>
+              <thead>
+                <tr>
+                  <th>Name</th>
+                </tr>
+              </thead>
+              <tbody>
+                {clients.map(client => (
+                  <tr key={client.clientId}>
+                    <td>{client.name}</td>
+                    <td>{client.phone}</td>
+                    <td>{client.email}</td>
+                    <td>{client.notes}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          )}
         </S.Wrapper>
       </DashboardLayout>
     </>
