@@ -1,19 +1,21 @@
 import React, { useState } from 'react'
 import * as S from './ClientListSearchForm.styles'
 
+interface ClientListSearchFormState {
+  name: string
+  phone: string
+}
+
 interface ClientListSearchFormProps {
   className?: string
 
   // TODO: remove in favour of url param search
-  onSearchClick?: () => void
-}
-
-interface ClientListSearchFormState {
-  name: string
+  onSearchClick?: (state: ClientListSearchFormState) => void
 }
 
 const formInitialState = {
   name: '',
+  phone: '',
 }
 
 function ClientListSearchForm(props: ClientListSearchFormProps) {
@@ -25,12 +27,12 @@ function ClientListSearchForm(props: ClientListSearchFormProps) {
   // TODO: Reflect params in url
   const resetForm = () => {
     setFormState(formInitialState)
-    // TODO: Make query
+    onSearchClick?.(formState)
   }
 
   const search = () => {
     // TODO: reflect state into url
-    onSearchClick?.()
+    onSearchClick?.(formState)
   }
 
   return (
@@ -40,6 +42,11 @@ function ClientListSearchForm(props: ClientListSearchFormProps) {
           placeholder="Name"
           value={formState.name}
           onChange={e => setFormState({ ...formState, name: e.target.value })}
+        />
+        <input
+          placeholder="Telephone"
+          value={formState.phone}
+          onChange={e => setFormState({ ...formState, phone: e.target.value })}
         />
       </S.Filters>
       <S.ActionButtonWrapper>
@@ -55,4 +62,4 @@ function ClientListSearchForm(props: ClientListSearchFormProps) {
 }
 
 export { ClientListSearchForm }
-export type { ClientListSearchFormProps }
+export type { ClientListSearchFormProps, ClientListSearchFormState }

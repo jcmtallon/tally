@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { listClients } from 'services'
 import { Client } from 'services/types'
 import * as S from './ClientList.styles'
+import { ClientListSearchFormState } from './ClientListSearchForm'
 
 interface ClientListProps {
   className?: string
@@ -20,6 +21,14 @@ function ClientList(props: ClientListProps) {
     fetchData()
   }, [])
 
+  const handleClientSearch = async (state: ClientListSearchFormState) => {
+    const data = await listClients({
+      name: state.name || undefined,
+      phone: state.phone || undefined,
+    })
+    setClients(data)
+  }
+
   return (
     <>
       <DashboardLayout>
@@ -27,7 +36,7 @@ function ClientList(props: ClientListProps) {
           <S.TopRow>
             <S.Header>Search</S.Header>
           </S.TopRow>
-          <S.SearchForm onSearchClick={() => {}} />
+          <S.SearchForm onSearchClick={handleClientSearch} />
           {clients && (
             <S.TableWrapper>
               <S.Table>

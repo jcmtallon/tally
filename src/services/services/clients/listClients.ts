@@ -1,16 +1,24 @@
-import { collection, getDocs } from 'firebase/firestore/lite'
+import { collection, getDocs, WhereFilterOp, where, query } from 'firebase/firestore/lite'
 import { Client } from '../../types'
 import { firestore } from '../../firestoreSetup'
 
 interface ListClientsOptions {
   name?: string
+  phone?: string
 }
 
 const listClients = async (options: ListClientsOptions): Promise<Client[]> => {
-  const { name } = options
+  const { name, phone } = options
+
+  const filters: [string, WhereFilterOp, string][] = []
+
+  if (name) filters.push(['name', '==', name])
+  if (phone) filters.push(['phone', '==', phone])
 
   const clientsRef = collection(firestore, `clients`)
-  const docs = await getDocs(clientsRef)
+  const whereArray = filters.map(f => where(f[0], f[1], f[2]))
+  const q = query(clientsRef, ...whereArray)
+  const docs = await getDocs(q)
 
   const clients: Client[] = []
 
