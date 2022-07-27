@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { ClientListSearchForm } from './ClientListSearchForm'
 
 const Wrapper = styled.div``
 
@@ -13,4 +14,25 @@ const TopRow = styled.div`
   padding: 10px;
 `
 
-export { Header, Wrapper, TopRow }
+const SearchForm = styled(ClientListSearchForm)`
+  padding: 10px;
+`
+
+const TableWrapper = styled.div`
+  display: flex;
+  margin-top: 20px;
+  padding: 10px;
+`
+
+const Table = styled.table`
+  width: 100%;
+  border: 1px solid gray;
+  background-color: white;
+`
+
+const Cell = styled.td`
+  text-align: center;
+  padding: 6px;
+`
+
+export { Header, Wrapper, TopRow, TableWrapper, Table, Cell, SearchForm }

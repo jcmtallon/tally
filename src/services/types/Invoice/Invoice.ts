@@ -9,6 +9,7 @@ interface Invoice {
   clientAddress: string
   services: InvoiceServiceEntry[]
   status: 'draft' | 'sent' | 'paid' | 'cancelled'
+  costAmount: string
   applicableTaxRate: string
   totalAmount: string
 }

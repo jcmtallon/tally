@@ -27,25 +27,32 @@ function ClientList(props: ClientListProps) {
           <S.TopRow>
             <S.Header>Search</S.Header>
           </S.TopRow>
-          Some form
+          <S.SearchForm onSearchClick={() => {}} />
           {clients && (
-            <table>
-              <thead>
-                <tr>
-                  <th>Name</th>
-                </tr>
-              </thead>
-              <tbody>
-                {clients.map(client => (
-                  <tr key={client.clientId}>
-                    <td>{client.name}</td>
-                    <td>{client.phone}</td>
-                    <td>{client.email}</td>
-                    <td>{client.notes}</td>
+            <S.TableWrapper>
+              <S.Table>
+                <thead>
+                  <tr>
+                    <th>Nombre</th>
+                    <th>Teléfono</th>
+                    <th>Correo electrónico</th>
+                    <th>Dirección</th>
+                    <th>Notas</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {clients.map(client => (
+                    <tr key={client.clientId}>
+                      <S.Cell>{client.name}</S.Cell>
+                      <S.Cell>{client.phone}</S.Cell>
+                      <S.Cell>{client.email}</S.Cell>
+                      <S.Cell>Some long address</S.Cell>
+                      <S.Cell>{client.notes}</S.Cell>
+                    </tr>
+                  ))}
+                </tbody>
+              </S.Table>
+            </S.TableWrapper>
           )}
         </S.Wrapper>
       </DashboardLayout>
@@ -54,3 +61,4 @@ function ClientList(props: ClientListProps) {
 }
 
 export { ClientList }
+export type { ClientListProps }
