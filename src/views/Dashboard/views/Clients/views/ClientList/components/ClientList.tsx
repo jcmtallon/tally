@@ -1,7 +1,7 @@
 import { DashboardLayout } from 'features/dashboard'
 import React, { useEffect, useState } from 'react'
-import { listClients } from 'services'
-import { Client } from 'services/types'
+import { Outlet, useNavigate } from 'react-router-dom'
+import { listClients, Client } from 'services'
 import * as S from './ClientList.styles'
 import { ClientListSearchFormState } from './ClientListSearchForm'
 
@@ -11,6 +11,8 @@ interface ClientListProps {
 
 function ClientList(props: ClientListProps) {
   const [clients, setClients] = useState<Client[]>([])
+
+  const navigate = useNavigate()
 
   useEffect(() => {
     const fetchData = async () => {
@@ -27,6 +29,10 @@ function ClientList(props: ClientListProps) {
       phone: state.phone || undefined,
     })
     setClients(data)
+  }
+
+  const handleItemClick = (clientId: string) => {
+    navigate(`/dashboard/clients/${clientId}`)
   }
 
   return (
@@ -51,7 +57,7 @@ function ClientList(props: ClientListProps) {
                 </thead>
                 <tbody>
                   {clients.map(client => (
-                    <tr key={client.clientId}>
+                    <tr key={client.clientId} onClick={() => handleItemClick(client.clientId)}>
                       <S.Cell>{client.name}</S.Cell>
                       <S.Cell>{client.phone}</S.Cell>
                       <S.Cell>{client.email}</S.Cell>
@@ -63,6 +69,8 @@ function ClientList(props: ClientListProps) {
               </S.Table>
             </S.TableWrapper>
           )}
+          {/* TODO: Placed here for testing purposes. Move to outside dashboard layout. */}
+          <Outlet />
         </S.Wrapper>
       </DashboardLayout>
     </>
