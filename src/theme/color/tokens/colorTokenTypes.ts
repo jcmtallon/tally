@@ -1,4 +1,7 @@
 import { ColorValue } from '../palettes/paletteTypes'
+import { SpecificColorTokens } from './specific/specificColorTokens'
+
+type ColorRole = 'neutral'
 
 // interface ForegroundRoleColor {
 //   default: ColorValue
@@ -8,7 +11,7 @@ import { ColorValue } from '../palettes/paletteTypes'
 //   default: ColorValue
 // }
 
-interface BackgroundNeutralColor {
+interface BackgroundRoleColor {
   mutedPlus: ColorValue
   off: ColorValue
 }
@@ -19,12 +22,9 @@ interface BackgroundNeutralColor {
 
 interface ColorTokens {
   fg: {}
-
-  bg: {
-    neutral: BackgroundNeutralColor
-  }
-
+  bg: Record<ColorRole, BackgroundRoleColor>
   stroke: {}
+  specific: SpecificColorTokens
 }
 
 export type { ColorTokens }

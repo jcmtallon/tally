@@ -13,7 +13,7 @@ const Layout = styled.div`
 `
 
 const SideNav = styled.div<{ isCollapsed?: boolean }>`
-  ${bg(b => b.neutral.off)}
+  background-color: #106486; // blue 65
   grid-area: sidenav;
 
   // TODO: this solution is temp:

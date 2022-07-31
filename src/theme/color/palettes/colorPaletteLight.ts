@@ -1,6 +1,6 @@
 import { ColorPalette } from './paletteTypes'
 
-const lightPalette: ColorPalette = {
+const colorPaletteLight: ColorPalette = {
   white: '#ffffff',
   black: '#000000',
   transparent: 'transparent',
@@ -91,4 +91,4 @@ const lightPalette: ColorPalette = {
   },
 }
 
-export { lightPalette }
+export { colorPaletteLight }

@@ -14,4 +14,4 @@ interface ColorPalette {
   readonly yellow: Color
 }
 
-export type { ColorPalette, ColorValue }
+export type { ColorPalette, ColorValue, Color }

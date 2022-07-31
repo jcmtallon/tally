@@ -1,15 +1,19 @@
-import { ColorTokens, colorTokensLightThem } from './color'
-import { FlattenTypography, flattenTypography } from './typography'
+import { borderRadius } from './borderRadius/borderRadius'
+import { colorTokens, colorPalettes } from './color'
+import { ColorMode } from './colorMode'
+import { shadows } from './shadows/shadows'
+import { Theme } from './themeTypes'
+import { flattenTypography } from './typography'
 
-interface AthlosTheme {
-  typography: FlattenTypography
-  color: ColorTokens
+function getTheme(mode: ColorMode = 'light'): Theme {
+  return {
+    colorMode: mode,
+    colors: colorTokens[mode],
+    palette: colorPalettes[mode],
+    typography: flattenTypography,
+    shadow: shadows[mode],
+    borderRadius,
+  }
 }
 
-const theme: AthlosTheme = {
-  typography: flattenTypography,
-  color: colorTokensLightThem,
-}
-
-export { theme }
-export type { AthlosTheme }
+export { getTheme }

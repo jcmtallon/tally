@@ -1,8 +1,8 @@
 import { colorPaletteLight } from '../palettes/colorPaletteLight'
 import { ColorTokens } from './colorTokenTypes'
-import { specificTokensLight } from './specific/specificColorTokens'
+import { specificTokensDark } from './specific/specificColorTokens'
 
-const colorTokensLight: ColorTokens = {
+const colorTokensDark: ColorTokens = {
   fg: {},
   bg: {
     neutral: {
@@ -11,7 +11,7 @@ const colorTokensLight: ColorTokens = {
     },
   },
   stroke: {},
-  specific: specificTokensLight,
+  specific: specificTokensDark,
 }
 
-export { colorTokensLight }
+export { colorTokensDark }
