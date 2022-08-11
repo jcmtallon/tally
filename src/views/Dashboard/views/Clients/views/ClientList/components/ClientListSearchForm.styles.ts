@@ -1,3 +1,4 @@
+import { Button as BaseButton } from 'components'
 import styled from 'styled-components'
 
 const FilterRow = styled.div`
@@ -19,11 +20,7 @@ const ActionButtonWrapper = styled.div`
   grid-template-columns: auto auto;
 `
 
-const Button = styled.button`
-  padding: 6px 12px;
-  border-radius: 2px;
-  border: 1px solid gray;
-`
+const Button = styled(BaseButton)``
 
 const DivisionSelect = styled.select``
 

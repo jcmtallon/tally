@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { pickColor } from 'theme'
+import { canvas, pickColor } from 'theme'
 
 const Layout = styled.div`
   background-color: ${pickColor(c => c.specific.canvas)};
@@ -13,7 +13,7 @@ const Layout = styled.div`
 `
 
 const SideNav = styled.div<{ isCollapsed?: boolean }>`
-  background-color: white;
+  ${canvas()}
   grid-area: sidenav;
 
   // TODO: this solution is temp:

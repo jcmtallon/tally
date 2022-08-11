@@ -1,11 +1,14 @@
 import styled from 'styled-components'
+import { canvas, fg, typo } from 'theme'
 import { ClientListSearchForm } from './ClientListSearchForm'
 
 const Wrapper = styled.div``
 
-const Header = styled.div`
+const Header = styled.h1`
   font-weight: bold;
   padding: 10px;
+  ${fg(f => f.neutral.muted)};
+  ${typo(t => t.header.h4)};
 `
 
 const TopRow = styled.div`
@@ -27,7 +30,9 @@ const TableWrapper = styled.div`
 const Table = styled.table`
   width: 100%;
   border: 1px solid gray;
-  background-color: white;
+  border-radius: 12px;
+  border: none;
+  ${canvas()};
 `
 
 const Cell = styled.td`

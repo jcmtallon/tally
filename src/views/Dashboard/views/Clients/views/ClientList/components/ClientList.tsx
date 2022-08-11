@@ -40,7 +40,7 @@ function ClientList(props: ClientListProps) {
       <DashboardLayout>
         <S.Wrapper className={props.className}>
           <S.TopRow>
-            <S.Header>Search</S.Header>
+            <S.Header>Facturas</S.Header>
           </S.TopRow>
           <S.SearchForm onSearchClick={handleClientSearch} />
           {clients && (

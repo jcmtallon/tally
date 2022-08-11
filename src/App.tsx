@@ -18,7 +18,7 @@ import { Routes } from './views/Routes'
 function App() {
   return (
     <>
-      <ThemeProvider>
+      <ThemeProvider colorMode="light">
         <GlobalStyles />
         <AppErrorBoundary>
           <React.Suspense fallback={<div>Initial Suspense</div>}>

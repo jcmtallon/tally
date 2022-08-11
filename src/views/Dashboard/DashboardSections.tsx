@@ -25,6 +25,28 @@ const dashboardSections = [
     requiresFeatureFlag: '',
     requiresSubscriptionFeature: '',
   }),
+  createDashboardSection('metrics', {
+    label: 'Metrics',
+    desc: 'Some desc',
+    icon: <IconRunner />,
+    to: 'metrics',
+    mobileStatus: 'ENABLED',
+    desktopStatus: 'ENABLED',
+    requiresPermission: '',
+    requiresFeatureFlag: '',
+    requiresSubscriptionFeature: '',
+  }),
+  createDashboardSection('settings', {
+    label: 'Settings',
+    desc: 'Some desc',
+    icon: <IconRunner />,
+    to: 'settings',
+    mobileStatus: 'ENABLED',
+    desktopStatus: 'ENABLED',
+    requiresPermission: '',
+    requiresFeatureFlag: '',
+    requiresSubscriptionFeature: '',
+  }),
 ]
 
 // TODO: change to TallyDashboardSectionId
