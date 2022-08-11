@@ -1,8 +1,8 @@
 import styled from 'styled-components'
-import { bg } from 'theme'
+import { pickColor } from 'theme'
 
 const Layout = styled.div`
-  ${bg(b => b.neutral.off)}
+  background-color: ${pickColor(c => c.specific.canvas)};
 
   display: grid;
   grid-template-columns: min-content auto;
@@ -13,7 +13,7 @@ const Layout = styled.div`
 `
 
 const SideNav = styled.div<{ isCollapsed?: boolean }>`
-  background-color: #106486; // blue 65
+  background-color: white;
   grid-area: sidenav;
 
   // TODO: this solution is temp:
@@ -21,7 +21,7 @@ const SideNav = styled.div<{ isCollapsed?: boolean }>`
 `
 
 const Content = styled.div`
-  ${bg(b => b.neutral.mutedPlus)}
+  background-color: #f3f4f9;
   grid-area: content;
 `
 

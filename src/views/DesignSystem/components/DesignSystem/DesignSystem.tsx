@@ -22,7 +22,74 @@ function DesignSystem() {
       <S.Xs>Typography (xs)</S.Xs>
       <S.Xxs>Typography (xxs)</S.Xxs>
 
-      <h1>Colors</h1>
+      <h1>Tokens</h1>
+      <h2>FG</h2>
+      <div style={{ backgroundColor: theme.colors.fg.neutral.onEmphasis }}>neutral.onEmphasis</div>
+      <div style={{ backgroundColor: theme.colors.fg.neutral.default }}>neutral.default</div>
+      <div style={{ backgroundColor: theme.colors.fg.neutral.muted }}>neutral.muted</div>
+      <div style={{ backgroundColor: theme.colors.fg.neutral.mutedPlus }}>neutral.mutedPlus</div>
+      <div style={{ backgroundColor: theme.colors.fg.primary.onEmphasis }}>primary.onEmphasis</div>
+      <div style={{ backgroundColor: theme.colors.fg.primary.default }}>primary.default</div>
+      <div style={{ backgroundColor: theme.colors.fg.primary.muted }}>primary.muted</div>
+      <div style={{ backgroundColor: theme.colors.fg.primary.mutedPlus }}>primary.mutedPlus</div>
+      <div style={{ backgroundColor: theme.colors.fg.highlight.onEmphasis }}>highlight.onEmphasis</div>
+      <div style={{ backgroundColor: theme.colors.fg.highlight.default }}>highlight.default</div>
+      <div style={{ backgroundColor: theme.colors.fg.highlight.muted }}>highlight.muted</div>
+      <div style={{ backgroundColor: theme.colors.fg.highlight.mutedPlus }}>highlight.mutedPlus</div>
+      <div style={{ backgroundColor: theme.colors.fg.success.onEmphasis }}>success.onEmphasis</div>
+      <div style={{ backgroundColor: theme.colors.fg.success.default }}>success.default</div>
+      <div style={{ backgroundColor: theme.colors.fg.success.muted }}>success.muted</div>
+      <div style={{ backgroundColor: theme.colors.fg.success.mutedPlus }}>success.mutedPlus</div>
+      <div style={{ backgroundColor: theme.colors.fg.warning.onEmphasis }}>warning.onEmphasis</div>
+      <div style={{ backgroundColor: theme.colors.fg.warning.default }}>warning.default</div>
+      <div style={{ backgroundColor: theme.colors.fg.warning.muted }}>warning.muted</div>
+      <div style={{ backgroundColor: theme.colors.fg.warning.mutedPlus }}>warning.mutedPlus</div>
+      <div style={{ backgroundColor: theme.colors.fg.danger.onEmphasis }}>danger.onEmphasis</div>
+      <div style={{ backgroundColor: theme.colors.fg.danger.default }}>danger.default</div>
+      <div style={{ backgroundColor: theme.colors.fg.danger.muted }}>danger.muted</div>
+      <div style={{ backgroundColor: theme.colors.fg.danger.mutedPlus }}>danger.mutedPlus</div>
+
+      <h2>BG</h2>
+      <div style={{ backgroundColor: theme.colors.bg.neutral.emphasis }}>neutral.emphasis</div>
+      <div style={{ backgroundColor: theme.colors.bg.neutral.default }}>neutral.default</div>
+      <div style={{ backgroundColor: theme.colors.bg.neutral.muted }}>neutral.muted</div>
+      <div style={{ backgroundColor: theme.colors.bg.primary.emphasis }}>primary.emphasis</div>
+      <div style={{ backgroundColor: theme.colors.bg.primary.default }}>primary.default</div>
+      <div style={{ backgroundColor: theme.colors.bg.primary.muted }}>primary.muted</div>
+      <div style={{ backgroundColor: theme.colors.bg.highlight.emphasis }}>highlight.emphasis</div>
+      <div style={{ backgroundColor: theme.colors.bg.highlight.default }}>highlight.default</div>
+      <div style={{ backgroundColor: theme.colors.bg.highlight.muted }}>highlight.muted</div>
+      <div style={{ backgroundColor: theme.colors.bg.success.emphasis }}>success.emphasis</div>
+      <div style={{ backgroundColor: theme.colors.bg.success.default }}>success.default</div>
+      <div style={{ backgroundColor: theme.colors.bg.success.muted }}>success.muted</div>
+      <div style={{ backgroundColor: theme.colors.bg.warning.emphasis }}>warning.emphasis</div>
+      <div style={{ backgroundColor: theme.colors.bg.warning.default }}>warning.default</div>
+      <div style={{ backgroundColor: theme.colors.bg.warning.muted }}>warning.muted</div>
+      <div style={{ backgroundColor: theme.colors.bg.danger.emphasis }}>danger.emphasis</div>
+      <div style={{ backgroundColor: theme.colors.bg.danger.default }}>danger.default</div>
+      <div style={{ backgroundColor: theme.colors.bg.danger.muted }}>danger.muted</div>
+
+      <h2>Stroke</h2>
+      <div style={{ backgroundColor: theme.colors.stroke.neutral.emphasis }}>neutral.emphasis</div>
+      <div style={{ backgroundColor: theme.colors.stroke.neutral.default }}>neutral.default</div>
+      <div style={{ backgroundColor: theme.colors.stroke.neutral.muted }}>neutral.muted</div>
+      <div style={{ backgroundColor: theme.colors.stroke.primary.emphasis }}>primary.emphasis</div>
+      <div style={{ backgroundColor: theme.colors.stroke.primary.default }}>primary.default</div>
+      <div style={{ backgroundColor: theme.colors.stroke.primary.muted }}>primary.muted</div>
+      <div style={{ backgroundColor: theme.colors.stroke.highlight.emphasis }}>highlight.emphasis</div>
+      <div style={{ backgroundColor: theme.colors.stroke.highlight.default }}>highlight.default</div>
+      <div style={{ backgroundColor: theme.colors.stroke.highlight.muted }}>highlight.muted</div>
+      <div style={{ backgroundColor: theme.colors.stroke.success.emphasis }}>neutral.success</div>
+      <div style={{ backgroundColor: theme.colors.stroke.success.default }}>neutral.success</div>
+      <div style={{ backgroundColor: theme.colors.stroke.success.muted }}>neutral.success</div>
+      <div style={{ backgroundColor: theme.colors.stroke.warning.emphasis }}>neutral.warning</div>
+      <div style={{ backgroundColor: theme.colors.stroke.warning.default }}>neutral.warning</div>
+      <div style={{ backgroundColor: theme.colors.stroke.warning.muted }}>neutral.warning</div>
+      <div style={{ backgroundColor: theme.colors.stroke.danger.emphasis }}>neutral.danger</div>
+      <div style={{ backgroundColor: theme.colors.stroke.danger.default }}>neutral.danger</div>
+      <div style={{ backgroundColor: theme.colors.stroke.danger.muted }}>neutral.danger</div>
+
+      <h1>Palettes</h1>
       <div style={{ backgroundColor: theme.palette.grey[15] }}>grey15</div>
       <div style={{ backgroundColor: theme.palette.grey[20] }}>grey20</div>
       <div style={{ backgroundColor: theme.palette.grey[25] }}>grey25</div>

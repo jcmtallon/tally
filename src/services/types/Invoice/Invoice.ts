@@ -4,6 +4,7 @@ interface Invoice {
   invoiceId: string
   invoiceNumber: string
   created: Date
+  sent: Date
   paid: Date
   clientName: string
   clientAddress: string
