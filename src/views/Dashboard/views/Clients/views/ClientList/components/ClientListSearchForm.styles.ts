@@ -1,4 +1,4 @@
-import { Button as BaseButton } from 'components'
+import { Button as BaseButton, Input } from 'components'
 import styled from 'styled-components'
 
 const FilterRow = styled.div`
@@ -7,22 +7,14 @@ const FilterRow = styled.div`
 
 const Filters = styled.div`
   display: grid;
-  flex: 1;
-  grid-column-gap: 14px;
-  grid-template-columns: auto;
-`
-
-const ActionButtonWrapper = styled.div`
-  display: grid;
-  padding-left: 24px;
   grid-column-gap: 8px;
   grid-template-columns: auto auto;
 `
 
-const Button = styled(BaseButton).attrs({ size: 'medium', color: 'highlight' })``
+const SearchInput = styled(Input)`
+  min-width: 600px;
+`
 
-const DivisionSelect = styled.select``
+const Button = styled(BaseButton).attrs({ size: 'large', color: 'highlight' })``
 
-const EmptyOption = styled.option``
-
-export { Button, EmptyOption, FilterRow, Filters, ActionButtonWrapper, DivisionSelect }
+export { Button, FilterRow, Filters, SearchInput }

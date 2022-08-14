@@ -30,15 +30,13 @@ function ClientListSearchForm(props: ClientListSearchFormProps) {
   return (
     <S.FilterRow className={className}>
       <S.Filters>
-        <input
+        <S.SearchInput
           placeholder="Name"
           value={formState.name}
           onChange={e => setFormState({ ...formState, name: e.target.value })}
         />
-      </S.Filters>
-      <S.ActionButtonWrapper>
         <S.Button onClick={search}>Buscar</S.Button>
-      </S.ActionButtonWrapper>
+      </S.Filters>
     </S.FilterRow>
   )
 }
