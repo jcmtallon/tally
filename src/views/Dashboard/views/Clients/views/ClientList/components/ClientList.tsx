@@ -26,7 +26,6 @@ function ClientList(props: ClientListProps) {
   const handleClientSearch = async (state: ClientListSearchFormState) => {
     const data = await listClients({
       name: state.name || undefined,
-      phone: state.phone || undefined,
     })
     setClients(data)
   }
@@ -40,9 +39,11 @@ function ClientList(props: ClientListProps) {
       <DashboardLayout>
         <S.Wrapper className={props.className}>
           <S.TopRow>
-            <S.Header>Facturas</S.Header>
+            <S.Header>Clientes</S.Header>
+            <S.CreateClientButton onClick={() => null}>Crear cliente</S.CreateClientButton>
           </S.TopRow>
           <S.SearchForm onSearchClick={handleClientSearch} />
+          {/* Table actions */}
           {clients && (
             <S.TableWrapper>
               <S.Table>

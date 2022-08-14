@@ -1,3 +1,4 @@
+import { Button } from 'components'
 import styled from 'styled-components'
 import { canvas, fg, typo } from 'theme'
 import { ClientListSearchForm } from './ClientListSearchForm'
@@ -10,6 +11,8 @@ const Header = styled.h1`
   ${fg(f => f.neutral.muted)};
   ${typo(t => t.header.h4)};
 `
+
+const CreateClientButton = styled(Button).attrs({ size: 'large' })``
 
 const TopRow = styled.div`
   display: flex;
@@ -40,4 +43,4 @@ const Cell = styled.td`
   padding: 6px;
 `
 
-export { Header, Wrapper, TopRow, TableWrapper, Table, Cell, SearchForm }
+export { Header, Wrapper, TopRow, TableWrapper, Table, Cell, SearchForm, CreateClientButton }

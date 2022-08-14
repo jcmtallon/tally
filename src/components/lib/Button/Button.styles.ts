@@ -1,11 +1,16 @@
 import styled from 'styled-components'
-import { pickColor } from 'theme'
 import { BaseButton } from './BaseButton'
+import { ButtonColor, ButtonSize, ButtonVariant } from './ButtonTypes'
+import { getVariantStyles } from './ButtonVariantStyles'
+import { getSizeStyles } from './ButtonSizeStyles'
 
-const Button = styled(BaseButton)`
-  border: 1px solid ${pickColor(s => s.stroke.neutral.default)};
-  border-radius: 50px;
-  padding: 6px 24px;
+const Button = styled(BaseButton)<{
+  color: ButtonColor
+  size: ButtonSize
+  variant: ButtonVariant
+}>`
+  ${props => getVariantStyles(props.variant, props.color, props.theme)};
+  ${props => getSizeStyles(props.size)};
 `
 
 export { Button }

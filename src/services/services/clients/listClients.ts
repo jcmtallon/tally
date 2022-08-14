@@ -4,16 +4,14 @@ import { firestore } from '../../firestoreSetup'
 
 interface ListClientsOptions {
   name?: string
-  phone?: string
 }
 
 const listClients = async (options: ListClientsOptions): Promise<Client[]> => {
-  const { name, phone } = options
+  const { name } = options
 
   const filters: [string, WhereFilterOp, string][] = []
 
   if (name) filters.push(['name', '==', name])
-  if (phone) filters.push(['phone', '==', phone])
 
   const clientsRef = collection(firestore, `clients`)
   const whereArray = filters.map(f => where(f[0], f[1], f[2]))

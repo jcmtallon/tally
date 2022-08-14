@@ -3,7 +3,6 @@ import * as S from './ClientListSearchForm.styles'
 
 interface ClientListSearchFormState {
   name: string
-  phone: string
 }
 
 interface ClientListSearchFormProps {
@@ -15,7 +14,6 @@ interface ClientListSearchFormProps {
 
 const formInitialState = {
   name: '',
-  phone: '',
 }
 
 function ClientListSearchForm(props: ClientListSearchFormProps) {
@@ -23,12 +21,6 @@ function ClientListSearchForm(props: ClientListSearchFormProps) {
 
   // TODO: Reflect params in url.
   const [formState, setFormState] = useState<ClientListSearchFormState>(formInitialState)
-
-  // TODO: Reflect params in url
-  const resetForm = () => {
-    setFormState(formInitialState)
-    onSearchClick?.(formState)
-  }
 
   const search = () => {
     // TODO: reflect state into url
@@ -43,19 +35,9 @@ function ClientListSearchForm(props: ClientListSearchFormProps) {
           value={formState.name}
           onChange={e => setFormState({ ...formState, name: e.target.value })}
         />
-        <input
-          placeholder="Telephone"
-          value={formState.phone}
-          onChange={e => setFormState({ ...formState, phone: e.target.value })}
-        />
       </S.Filters>
       <S.ActionButtonWrapper>
-        <S.Button type="button" onClick={resetForm}>
-          Reset
-        </S.Button>
-        <S.Button type="button" onClick={search}>
-          Search
-        </S.Button>
+        <S.Button onClick={search}>Buscar</S.Button>
       </S.ActionButtonWrapper>
     </S.FilterRow>
   )

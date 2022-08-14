@@ -3,14 +3,13 @@ import styled from 'styled-components'
 
 const FilterRow = styled.div`
   display: flex;
-  justify-content: space-between;
 `
 
 const Filters = styled.div`
   display: grid;
   flex: 1;
   grid-column-gap: 14px;
-  grid-template-columns: auto auto auto auto auto auto;
+  grid-template-columns: auto;
 `
 
 const ActionButtonWrapper = styled.div`
@@ -20,7 +19,7 @@ const ActionButtonWrapper = styled.div`
   grid-template-columns: auto auto;
 `
 
-const Button = styled(BaseButton)``
+const Button = styled(BaseButton).attrs({ size: 'medium', color: 'highlight' })``
 
 const DivisionSelect = styled.select``
 

@@ -17,6 +17,8 @@ const Button = styled.button`
   user-select: none;
   appearance: none;
 
+  height: fit-content;
+
   ${typo(t => t.body.base)}
 
   transition: color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1), background-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1), border-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);

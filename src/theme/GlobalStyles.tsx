@@ -1,6 +1,10 @@
 import { createGlobalStyle } from 'styled-components'
+import { CssNormalize } from './CssNormalize'
 
 const GlobalStyles = createGlobalStyle`
+
+  ${CssNormalize}
+
   html,
   body,
   div,

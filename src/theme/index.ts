@@ -4,5 +4,6 @@ export { GlobalStyles } from './GlobalStyles'
 export { getTheme } from './theme'
 export { fg, bg, canvas, pickCanvas, stroke, pickColor } from './color'
 
+export type { Theme } from './themeTypes'
 // TODO: remove this testing export
 // export { colorPaletteLight } from './color/palettes/colorPaletteLight'
