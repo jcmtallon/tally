@@ -8,4 +8,24 @@
         "typescriptreact",
         "javascriptreact"
       ],
+      "workbench.colorCustomizations": {
+        "activityBar.activeBackground": "#11c072",
+        "activityBar.background": "#11c072",
+        "activityBar.foreground": "#15202b",
+        "activityBar.inactiveForeground": "#15202b99",
+        "activityBarBadge.background": "#9a32ed",
+        "activityBarBadge.foreground": "#e7e7e7",
+        "commandCenter.border": "#e7e7e799",
+        "sash.hoverBorder": "#11c072",
+        "statusBar.background": "#0d9156",
+        "statusBar.foreground": "#e7e7e7",
+        "statusBarItem.hoverBackground": "#11c072",
+        "statusBarItem.remoteBackground": "#0d9156",
+        "statusBarItem.remoteForeground": "#e7e7e7",
+        "titleBar.activeBackground": "#0d9156",
+        "titleBar.activeForeground": "#e7e7e7",
+        "titleBar.inactiveBackground": "#0d915699",
+        "titleBar.inactiveForeground": "#e7e7e799"
+      },
+      "peacock.color": "#0d9156",
   }
