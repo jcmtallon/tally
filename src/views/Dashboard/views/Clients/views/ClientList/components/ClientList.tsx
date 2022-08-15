@@ -43,28 +43,43 @@ function ClientList(props: ClientListProps) {
             <S.CreateClientButton onClick={() => null}>Crear cliente</S.CreateClientButton>
           </S.TopRow>
           <S.SearchForm onSearchClick={handleClientSearch} />
-          {/* Table actions */}
+          <S.TableActionsBar>
+            <S.TableStatsWrapper>
+              <div>cargos 0€</div>
+              <div>ganancias 0€</div>
+            </S.TableStatsWrapper>
+            <S.TableActionsWrapper>
+              <div>2 seleccionados</div>
+              <S.TableActionButton onClick={() => null}>Borrar</S.TableActionButton>
+            </S.TableActionsWrapper>
+          </S.TableActionsBar>
           {clients && (
             <S.TableWrapper>
               <S.Table>
-                <thead>
+                <S.Thead>
                   <tr>
-                    <th>Nombre</th>
-                    <th>Teléfono</th>
-                    <th>Correo electrónico</th>
-                    <th>Dirección</th>
-                    <th>Notas</th>
+                    <S.Th>
+                      <S.Checkbox />
+                    </S.Th>
+                    <S.Th>Nombre</S.Th>
+                    <S.Th>E-mail</S.Th>
+                    <S.Th>Teléfono</S.Th>
+                    <S.Th>Facturas</S.Th>
+                    <S.Th>Creado</S.Th>
                   </tr>
-                </thead>
+                </S.Thead>
                 <tbody>
                   {clients.map(client => (
-                    <tr key={client.clientId} onClick={() => handleItemClick(client.clientId)}>
+                    <S.Tr key={client.clientId} onClick={() => handleItemClick(client.clientId)}>
+                      <S.Cell>
+                        <S.Checkbox />
+                      </S.Cell>
                       <S.Cell>{client.name}</S.Cell>
                       <S.Cell>{client.phone}</S.Cell>
                       <S.Cell>{client.email}</S.Cell>
                       <S.Cell>Some long address</S.Cell>
                       <S.Cell>{client.notes}</S.Cell>
-                    </tr>
+                    </S.Tr>
                   ))}
                 </tbody>
               </S.Table>

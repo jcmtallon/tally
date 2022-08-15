@@ -5,7 +5,7 @@ import { ButtonSize, Css } from './ButtonTypes'
 function getSizeStyles(size: ButtonSize): Css {
   const sizes: { [key in ButtonSize]: Css } = {
     medium: css`
-      ${typo(t => t.body.xs)};
+      ${typo(t => t.body.sm)};
       padding: 6px 18px;
       border-radius: 40px;
       min-height: 24px;
