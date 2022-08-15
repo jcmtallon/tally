@@ -1,18 +1,19 @@
 import { DashboardLayout } from 'features/dashboard'
 import React, { useEffect, useState } from 'react'
-import { Outlet, useNavigate } from 'react-router-dom'
+import { Outlet } from 'react-router-dom'
 import { listClients, Client } from 'services'
 import * as S from './ClientList.styles'
 import { ClientListSearchFormState } from './ClientListSearchForm'
 
 interface ClientListProps {
+  onCreateClientButtonClicked?: () => void
+  onShowClientDetailsClicked?: (clientId: string) => void
   className?: string
 }
 
 function ClientList(props: ClientListProps) {
+  const { onCreateClientButtonClicked, onShowClientDetailsClicked, ...otherProps } = props
   const [clients, setClients] = useState<Client[]>([])
-
-  const navigate = useNavigate()
 
   useEffect(() => {
     const fetchData = async () => {
@@ -29,18 +30,13 @@ function ClientList(props: ClientListProps) {
     })
     setClients(data)
   }
-
-  const handleItemClick = (clientId: string) => {
-    navigate(`/dashboard/clients/${clientId}`)
-  }
-
   return (
     <>
       <DashboardLayout>
-        <S.Wrapper className={props.className}>
+        <S.Wrapper {...otherProps}>
           <S.TopRow>
             <S.Header>Clientes</S.Header>
-            <S.CreateClientButton onClick={() => null}>Crear cliente</S.CreateClientButton>
+            <S.CreateClientButton onClick={onCreateClientButtonClicked}>Crear cliente</S.CreateClientButton>
           </S.TopRow>
           <S.SearchForm onSearchClick={handleClientSearch} />
           <S.TableActionsBar>
@@ -70,7 +66,7 @@ function ClientList(props: ClientListProps) {
                 </S.Thead>
                 <tbody>
                   {clients.map(client => (
-                    <S.Tr key={client.clientId} onClick={() => handleItemClick(client.clientId)}>
+                    <S.Tr key={client.clientId} onClick={() => onShowClientDetailsClicked?.(client.clientId)}>
                       <S.Cell>
                         <S.Checkbox />
                       </S.Cell>
