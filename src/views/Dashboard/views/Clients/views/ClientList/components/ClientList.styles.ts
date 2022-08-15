@@ -1,9 +1,26 @@
 import { Button, Checkbox as BaseCheckbox } from 'components'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { canvas, fg, pickColor, typo } from 'theme'
 import { ClientListSearchForm } from './ClientListSearchForm'
 
-const Wrapper = styled.div``
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`
+
+const ContentSection = css`
+  max-width: 1200px;
+  width: 100%;
+`
+
+const TopRow = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 10px;
+
+  ${ContentSection}
+`
 
 const Header = styled.h1`
   font-weight: bold;
@@ -14,17 +31,15 @@ const Header = styled.h1`
 
 const CreateClientButton = styled(Button).attrs({ size: 'large' })``
 
-const TopRow = styled.div`
-  display: flex;
-  justify-content: space-between;
-  padding: 20px 10px;
-`
-
 const SearchForm = styled(ClientListSearchForm)`
+  ${ContentSection}
+
   padding: 10px;
 `
 
 const TableActionsBar = styled.div`
+  ${ContentSection}
+
   display: flex;
   justify-content: space-between;
   padding: 10px 10px 0px;
@@ -44,6 +59,8 @@ const TableActionsWrapper = styled.div`
 const TableWrapper = styled.div`
   display: flex;
   padding: 10px;
+
+  ${ContentSection}
 `
 
 const TableActionButton = styled(Button).attrs({ color: 'highlight', size: 'medium' })``
@@ -95,5 +112,5 @@ export {
   Th,
   Tr,
   TopRow,
-  Wrapper,
+  Container,
 }

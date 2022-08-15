@@ -33,7 +33,7 @@ function ClientList(props: ClientListProps) {
   return (
     <>
       <DashboardLayout>
-        <S.Wrapper {...otherProps}>
+        <S.Container {...otherProps}>
           <S.TopRow>
             <S.Header>Clientes</S.Header>
             <S.CreateClientButton onClick={onCreateClientButtonClicked}>Crear cliente</S.CreateClientButton>
@@ -83,7 +83,7 @@ function ClientList(props: ClientListProps) {
           )}
           {/* TODO: Placed here for testing purposes. Move to outside dashboard layout. */}
           <Outlet />
-        </S.Wrapper>
+        </S.Container>
       </DashboardLayout>
     </>
   )
