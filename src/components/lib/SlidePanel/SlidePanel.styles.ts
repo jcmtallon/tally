@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { canvas } from 'theme'
 
 const animationTimeout = 250
 
@@ -39,10 +40,9 @@ const Backdrop = styled.div`
 `
 
 const Panel = styled.div`
-  // TODO(theme): use theme color
-  background-color: white;
+  ${canvas()};
 
-  width: 1200px;
+  width: 700px;
   position: absolute;
   top: 0;
   right: 0;

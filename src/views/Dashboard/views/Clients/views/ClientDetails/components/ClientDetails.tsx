@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { getClient, Client } from 'services'
+import * as S from './ClientDetails.styles'
 
 function ClientDetails() {
   const [clientDetails, setClientDetails] = useState<Client | null>(null)
@@ -20,10 +21,9 @@ function ClientDetails() {
   if (!clientDetails) return <>Loading!</>
 
   return (
-    <div>
-      <h1>Detalles del cliente</h1>
-      <div>Name: {}</div>
-    </div>
+    <S.PanelLayout title="Detalles de Cliente" footer="Editar">
+      Info
+    </S.PanelLayout>
   )
 }
 

@@ -24,6 +24,8 @@ function ClientList(props: ClientListProps) {
     fetchData()
   }, [])
 
+  // TODO: accesibilidad
+
   const handleClientSearch = async (state: ClientListSearchFormState) => {
     const data = await listClients({
       name: state.name || undefined,

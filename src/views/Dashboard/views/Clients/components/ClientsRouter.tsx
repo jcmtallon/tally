@@ -3,7 +3,7 @@ import { Route, Routes, Navigate, useNavigate } from 'react-router-dom'
 import { SlidePanelRoute } from 'components'
 import { ClientList } from '../views/ClientList'
 import { ClientDetails } from '../views/ClientDetails'
-import { ClientCreate } from '../views/ClientCreate'
+import { ClientCreation } from '../views/ClientCreation'
 
 function ClientsRouter() {
   const navigate = useNavigate()
@@ -19,10 +19,10 @@ function ClientsRouter() {
           />
         }>
         <Route
-          path=":create"
+          path="create"
           element={
             <SlidePanelRoute parentRouteUrl="/dashboard/clients/">
-              <ClientCreate />
+              <ClientCreation />
             </SlidePanelRoute>
           }
         />
