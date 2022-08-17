@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { pickColor, typo, fg } from 'theme'
 
-const Input = styled.input`
+const TextArea = styled.textarea`
   ${typo(t => t.body.md)};
   ${fg(f => f.neutral.default)};
 
@@ -16,4 +16,4 @@ const Input = styled.input`
   }
 `
 
-export { Input }
+export { TextArea }

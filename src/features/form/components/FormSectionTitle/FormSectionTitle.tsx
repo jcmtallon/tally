@@ -2,14 +2,14 @@ import React, { ReactNode } from 'react'
 import { createStylableComponent } from 'utils'
 import * as S from './FormSectionTitle.styles'
 
-interface FormSectionTitleProps {
+interface FormSectionTitleProps extends React.HTMLAttributes<HTMLDivElement> {
   className?: string
-  title?: ReactNode
+  text?: ReactNode
 }
 
 function FormSectionTitle(props: FormSectionTitleProps) {
-  const { title, ...otherProps } = props
-  return <S.FormSectionTitle {...otherProps}>{title}</S.FormSectionTitle>
+  const { text, ...otherProps } = props
+  return <S.FormSectionTitle {...otherProps}>{text}</S.FormSectionTitle>
 }
 
 const StylableFormSectionTitle = createStylableComponent(S, FormSectionTitle)
