@@ -1,4 +1,5 @@
 import { SlidePanelLayout } from 'components'
+import { ClientForm } from 'features/clients'
 import styled from 'styled-components'
 
 const PanelLayout = styled(SlidePanelLayout)``
@@ -11,6 +12,6 @@ const FormWrapper = styled.div`
   overflow: overlay;
 `
 
-const Form = styled.div``
+const Form = styled(ClientForm)``
 
 export { PanelLayout, FormWrapper, Form }
