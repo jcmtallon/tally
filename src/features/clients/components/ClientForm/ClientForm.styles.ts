@@ -7,7 +7,7 @@ import {
   TextArea as BaseTextArea,
 } from 'components'
 
-const Container = styled.div`
+const Form = styled.form`
   display: grid;
   gap: 16px;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -87,4 +87,4 @@ const SectionTitle = styled(FormSectionTitle)`
 
 const TextArea = styled(BaseTextArea)``
 
-export { Container, Field, Input, SectionTitle, Select, TextArea }
+export { Form, Field, Input, SectionTitle, Select, TextArea }
