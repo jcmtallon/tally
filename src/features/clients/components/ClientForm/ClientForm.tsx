@@ -13,46 +13,29 @@ function ClientForm(props: ClientFormProps) {
 
   return (
     <Form {...formProps}>
-      {form => (
-        <S.Form className={className}>
-          <S.Field id="type" label="Tipo">
-            <S.Select>
-              <option value="private">Particular</option>
-              <option value="company">Empresa</option>
-            </S.Select>
-          </S.Field>
-          <S.Field id="name" label="Nombre/Razón social">
-            <S.Input onChange={form.handleChange} value={form.values.name} />
-          </S.Field>
-          <S.Field id="identification" label="DNI/NIE/CIF">
-            <S.Input />
-          </S.Field>
-          <S.SectionTitle id="contact_title" text="Contacto" />
-          <S.Field id="email" label="E-mail">
-            <S.Input onChange={form.handleChange} value={form.values.email} />
-          </S.Field>
-          <S.Field id="phone" label="Teléfono">
-            <S.Input />
-          </S.Field>
-          <S.SectionTitle id="address_title" text="Dirección" />
-          <S.Field id="street" label="Calle y número">
-            <S.Input />
-          </S.Field>
-          <S.Field id="house_number" label="Piso">
-            <S.Input />
-          </S.Field>
-          <S.Field id="postal_code" label="Código Postal">
-            <S.Input />
-          </S.Field>
-          <S.Field id="city" label="Localidad">
-            <S.Input />
-          </S.Field>
-          <S.SectionTitle id="other_title" text="Otros" />
-          <S.Field id="notes" label="Notas">
-            <S.TextArea />
-          </S.Field>
-        </S.Form>
-      )}
+      <S.Form className={className}>
+        {/* TODO: replace with new field component */}
+        <S.FieldOld id="type" label="Tipo">
+          <S.Select>
+            <option value="private">Particular</option>
+            <option value="company">Empresa</option>
+          </S.Select>
+        </S.FieldOld>
+        <S.Field id="name" label="Nombre/Razón social" />
+        <S.Field id="taxId" label="DNI/NIE/CIF" />
+        <S.SectionTitle id="contactTitle" text="Contacto" />
+        <S.Field id="email" label="E-mail" />
+        <S.Field id="phone" label="Teléfono" />
+        <S.SectionTitle id="addressTitle" text="Dirección" />
+        <S.Field id="street" label="Calle y número" />
+        <S.Field id="houseNumber" label="Número" />
+        <S.Field id="postalCode" label="Código postal" />
+        <S.Field id="city" label="Localidad" />
+        <S.SectionTitle id="otherTitle" text="Otros" />
+        <S.Field id="notes" label="Notas">
+          <S.TextArea />
+        </S.Field>
+      </S.Form>
     </Form>
   )
 }

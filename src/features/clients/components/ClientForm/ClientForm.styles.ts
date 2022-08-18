@@ -1,4 +1,4 @@
-import { FormSectionTitle } from 'features/form'
+import { FormSectionTitle, FormTextField } from 'features/form'
 import styled from 'styled-components'
 import {
   Field as BaseField,
@@ -13,13 +13,13 @@ const Form = styled.form`
   grid-template-columns: repeat(3, minmax(0, 1fr));
   grid-template-areas:
     'type name name'
-    'identification . .'
-    'contact_title . .'
+    'taxId . .'
+    'contactTitle . .'
     'email email phone'
-    'address_title . .'
+    'addressTitle . .'
     'street street street'
-    'house_number postal_code city'
-    'other_title . .'
+    'houseNumber postalCode city'
+    'otherTitle . .'
     'notes notes notes';
 
   #type {
@@ -30,12 +30,12 @@ const Form = styled.form`
     grid-area: name;
   }
 
-  #identification {
-    grid-area: identification;
+  #taxId {
+    grid-area: taxId;
   }
 
-  #contact_title {
-    grid-area: contact_title;
+  #contactTitle {
+    grid-area: contactTitle;
   }
 
   #email {
@@ -46,28 +46,28 @@ const Form = styled.form`
     grid-area: phone;
   }
 
-  #address_title {
-    grid-area: address_title;
+  #addressTitle {
+    grid-area: addressTitle;
   }
 
   #street {
     grid-area: street;
   }
 
-  #house_number {
-    grid-area: house_number;
+  #houseNumber {
+    grid-area: houseNumber;
   }
 
-  #postal_code {
-    grid-area: postal_code;
+  #postalCode {
+    grid-area: postalCode;
   }
 
   #city {
     grid-area: city;
   }
 
-  #other_title {
-    grid-area: other_title;
+  #otherTitle {
+    grid-area: otherTitle;
   }
 
   #notes {
@@ -75,7 +75,9 @@ const Form = styled.form`
   }
 `
 
-const Field = styled(BaseField)``
+const FieldOld = styled(BaseField)``
+
+const Field = styled(FormTextField)``
 
 const Select = styled(BaseSelect)``
 
@@ -87,4 +89,4 @@ const SectionTitle = styled(FormSectionTitle)`
 
 const TextArea = styled(BaseTextArea)``
 
-export { Form, Field, Input, SectionTitle, Select, TextArea }
+export { Form, Field, FieldOld, Input, SectionTitle, Select, TextArea }
