@@ -37,7 +37,7 @@ const colorTokensLight: ColorTokens = {
     },
     danger: {
       onEmphasis: '',
-      default: '',
+      default: '#EB4771',
       muted: '',
       mutedPlus: '',
     },
@@ -69,8 +69,8 @@ const colorTokensLight: ColorTokens = {
       muted: '',
     },
     danger: {
-      emphasis: '',
-      default: '',
+      emphasis: '#FB3C70',
+      default: '#FBDAE2',
       muted: '',
     },
   },
@@ -102,7 +102,7 @@ const colorTokensLight: ColorTokens = {
     },
     danger: {
       emphasis: '',
-      default: '',
+      default: '#FA3564',
       muted: '',
     },
   },

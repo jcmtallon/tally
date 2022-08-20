@@ -22,12 +22,11 @@ const Label = styled.label`
 const Content = styled.div``
 
 const Error = styled.div`
-  ${fg(f => f.warning.default)};
-  ${typo(t => t.body.sm)}
-  text-align: right;
+  ${fg(f => f.danger.default)};
+  ${typo(t => t.body.sm)};
+  padding-left: 15px;
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
 `
 
 const Wrapper = styled.div`

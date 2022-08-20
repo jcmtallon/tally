@@ -7,7 +7,7 @@ import {
   TextArea as BaseTextArea,
 } from 'components'
 
-const Form = styled.form`
+const FormContainer = styled.form`
   display: grid;
   gap: 16px;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -75,9 +75,9 @@ const Form = styled.form`
   }
 `
 
-const FieldOld = styled(BaseField)``
+const Field = styled(BaseField)``
 
-const Field = styled(FormTextField)``
+const TextField = styled(FormTextField)``
 
 const Select = styled(BaseSelect)``
 
@@ -89,4 +89,4 @@ const SectionTitle = styled(FormSectionTitle)`
 
 const TextArea = styled(BaseTextArea)``
 
-export { Form, Field, FieldOld, Input, SectionTitle, Select, TextArea }
+export { FormContainer, TextField, Field, Input, SectionTitle, Select, TextArea }

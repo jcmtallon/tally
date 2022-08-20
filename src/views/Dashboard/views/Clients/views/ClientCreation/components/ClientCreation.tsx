@@ -5,12 +5,12 @@ import { useFormRef } from 'features/form'
 import * as S from './ClientCreation.styles'
 
 function ClientCreation() {
-  const { formRef, form } = useFormRef<ClientFormValues>()
+  const { formRef } = useFormRef<ClientFormValues>()
   const formConfig = useClientFormConfig()
 
   const submitHandle = useCallback(async () => {
-    form?.handleSubmit()
-  }, [form])
+    formRef.current?.handleSubmit()
+  }, [formRef])
 
   const handleCreateClick = async () => {
     await submitHandle()

@@ -13,29 +13,29 @@ function ClientForm(props: ClientFormProps) {
 
   return (
     <Form {...formProps}>
-      <S.Form className={className}>
+      <S.FormContainer className={className}>
         {/* TODO: replace with new field component */}
-        <S.FieldOld id="type" label="Tipo">
+        <S.Field id="type" label="Tipo">
           <S.Select>
             <option value="private">Particular</option>
             <option value="company">Empresa</option>
           </S.Select>
-        </S.FieldOld>
-        <S.Field id="name" label="Nombre/Razón social" />
-        <S.Field id="taxId" label="DNI/NIE/CIF" />
+        </S.Field>
+        <S.TextField id="name" label="Nombre/Razón social" />
+        <S.TextField id="taxId" label="DNI/NIE/CIF" />
         <S.SectionTitle id="contactTitle" text="Contacto" />
-        <S.Field id="email" label="E-mail" />
-        <S.Field id="phone" label="Teléfono" />
+        <S.TextField id="email" label="E-mail" />
+        <S.TextField id="phone" label="Teléfono" />
         <S.SectionTitle id="addressTitle" text="Dirección" />
-        <S.Field id="street" label="Calle y número" />
-        <S.Field id="houseNumber" label="Número" />
-        <S.Field id="postalCode" label="Código postal" />
-        <S.Field id="city" label="Localidad" />
+        <S.TextField id="street" label="Calle y número" />
+        <S.TextField id="houseNumber" label="Número" />
+        <S.TextField id="postalCode" label="Código postal" />
+        <S.TextField id="city" label="Localidad" />
         <S.SectionTitle id="otherTitle" text="Otros" />
         <S.Field id="notes" label="Notas">
           <S.TextArea />
         </S.Field>
-      </S.Form>
+      </S.FormContainer>
     </Form>
   )
 }
