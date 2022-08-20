@@ -13,6 +13,7 @@ function ClientForm(props: ClientFormProps) {
 
   return (
     <Form {...formProps}>
+      {/* TODO: include this in the form component? */}
       <S.FormContainer className={className}>
         {/* TODO: replace with new field component */}
         <S.Field id="type" label="Tipo">
@@ -24,7 +25,7 @@ function ClientForm(props: ClientFormProps) {
         <S.TextField id="name" label="Nombre/Razón social" />
         <S.TextField id="taxId" label="DNI/NIE/CIF" />
         <S.SectionTitle id="contactTitle" text="Contacto" />
-        <S.TextField id="email" label="E-mail" />
+        <S.TextField id="mail" label="Client Email" />
         <S.TextField id="phone" label="Teléfono" />
         <S.SectionTitle id="addressTitle" text="Dirección" />
         <S.TextField id="street" label="Calle y número" />

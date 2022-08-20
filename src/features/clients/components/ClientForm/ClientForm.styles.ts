@@ -15,7 +15,7 @@ const FormContainer = styled.form`
     'type name name'
     'taxId . .'
     'contactTitle . .'
-    'email email phone'
+    'mail mail phone'
     'addressTitle . .'
     'street street street'
     'houseNumber postalCode city'
@@ -38,8 +38,8 @@ const FormContainer = styled.form`
     grid-area: contactTitle;
   }
 
-  #email {
-    grid-area: email;
+  #mail {
+    grid-area: mail;
   }
 
   #phone {

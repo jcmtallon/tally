@@ -108,6 +108,7 @@ const GlobalStyles = createGlobalStyle`
 
   html {
     position: relative;
+    overflow-x: hidden; // TODO: kind of a hack. Revisit this.
   }
 
   body {
@@ -190,6 +191,12 @@ const GlobalStyles = createGlobalStyle`
 
   a {
     outline: none !important;
+  }
+
+  // Very drastic measure for hiding all intrusive lastpass icons in the form
+  // fields. Find a more elegant, generic and selective solution for achieving the same thing.
+  [data-lastpass-icon-root]{
+    display: none;
   }
 
   /* TODO: focus outline styles */

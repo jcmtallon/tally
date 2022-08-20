@@ -1,4 +1,4 @@
-import { Button } from 'components'
+import { Button, Input } from 'components'
 import React, { useCallback } from 'react'
 import { useClientFormConfig, ClientFormValues } from 'features/clients'
 import { useFormRef } from 'features/form'

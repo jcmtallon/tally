@@ -3,7 +3,7 @@ import { useMemo } from 'react'
 
 interface ClientFormValues {
   name: string
-  email: string
+  mail: string
   taxId: string
   phone: string
   street: string
@@ -20,7 +20,7 @@ function useClientFormValidationScheme() {
     () =>
       yup.object<ClientFormValues>({
         name: yup.string().defined(),
-        email: yup.string().email('Wrong e-mail, baby!').defined(),
+        mail: yup.string().email('Wrong e-mail, baby!').defined(),
         taxId: yup.string().defined(),
         phone: yup.string().length(7, 'too short, babe!').required(),
         street: yup.string().defined(),
@@ -39,7 +39,7 @@ function useClientFormConfig(config: Partial<ClientFormConfig> = {}): ClientForm
 
   const initialValues = {
     name: '',
-    email: '',
+    mail: '',
     taxId: '',
     phone: '',
     street: '',
