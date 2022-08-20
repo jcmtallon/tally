@@ -7,12 +7,13 @@ interface FieldProps extends React.HTMLAttributes<HTMLDivElement> {
   children: ReactNode
   label?: string | ReactElement
   error?: string
+  rounded?: boolean
   // TODO: required
   // TODO: helper text
 }
 
 function Field(props: FieldProps) {
-  const { children, error, id: providedId, label, ...otherProps } = props
+  const { children, error, rounded = false, id: providedId, label, ...otherProps } = props
   const id = useMemo(() => providedId ?? uniqueId('input-'), [providedId])
 
   const hasError = Boolean(error)
@@ -35,6 +36,7 @@ function Field(props: FieldProps) {
         name: id,
         hasError: hasError ? true : undefined,
         hasErrors: hasError ? true : undefined,
+        rounded: rounded ? true : undefined,
         error,
         'aria-invalid': hasError ? true : undefined,
         'aria-errormessage': hasError ? errorId : undefined,
@@ -48,7 +50,7 @@ function Field(props: FieldProps) {
   }
 
   const renderLabel = () => (
-    <S.LabelWrapper>
+    <S.LabelWrapper withOffset={rounded}>
       <S.Label htmlFor={inputId}>{label}</S.Label>
     </S.LabelWrapper>
   )
@@ -57,7 +59,11 @@ function Field(props: FieldProps) {
     <S.Wrapper id={id} {...otherProps}>
       {renderLabel()}
       <S.Content>{renderInput()}</S.Content>
-      {error && <S.Error id={errorId}>{renderErrorText()}</S.Error>}
+      {error && (
+        <S.Error withOffset={rounded} id={errorId}>
+          {renderErrorText()}
+        </S.Error>
+      )}
     </S.Wrapper>
   )
 }

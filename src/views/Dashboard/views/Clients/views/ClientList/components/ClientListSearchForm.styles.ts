@@ -12,7 +12,7 @@ const Filters = styled.div`
   align-items: flex-end;
 `
 
-const Field = styled(BaseField)``
+const Field = styled(BaseField).attrs({ rounded: true })``
 
 const SearchInput = styled(Input)`
   min-width: 600px;
