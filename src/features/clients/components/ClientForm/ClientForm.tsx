@@ -17,15 +17,9 @@ function ClientForm(props: ClientFormProps) {
   return (
     <Form {...formProps}>
       <S.FormContainer className={className}>
-        <S.SelectField
-          id="type"
-          label="Tipo"
-          forwardedRef={firstFieldRef}
-          options={[
-            { value: 'private', label: 'Particular' },
-            { value: 'company', label: 'Empresa' },
-          ]}
-        />
+        <S.FormField id="type" label="tipo">
+          <S.TypeSelect forwardedRef={firstFieldRef} />
+        </S.FormField>
         <S.TextField id="name" label="Nombre/Razón social" />
         <S.TextField id="taxId" label="DNI/NIE/CIF" />
         <S.SectionTitle id="contactTitle" text="Contacto" />
