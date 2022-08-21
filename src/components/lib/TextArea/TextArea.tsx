@@ -4,12 +4,13 @@ import * as S from './TextArea.styles'
 interface TextAreaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   forwardedRef?: React.Ref<HTMLTextAreaElement>
   rounded?: boolean
+  error?: boolean
 }
 
 function ForwardedRefTextArea(props: TextAreaProps) {
-  const { forwardedRef, rounded = false, ...otherProps } = props
+  const { forwardedRef, error = undefined, rounded = false, ...otherProps } = props
 
-  return <S.TextArea ref={forwardedRef} rounded={rounded} {...otherProps} />
+  return <S.TextArea ref={forwardedRef} showError={!!error} rounded={rounded} {...otherProps} />
 }
 
 const TextArea = React.forwardRef((props: TextAreaProps, ref: React.Ref<HTMLTextAreaElement>) => (

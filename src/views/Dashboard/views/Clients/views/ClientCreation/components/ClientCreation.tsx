@@ -1,4 +1,3 @@
-import { Button, Input } from 'components'
 import React, { useCallback } from 'react'
 import { useClientFormConfig, ClientFormValues } from 'features/clients'
 import { useFormRef } from 'features/form'
@@ -17,7 +16,9 @@ function ClientCreation() {
   }
 
   return (
-    <S.PanelLayout title="Crear nuevo cliente" footer={<Button onClick={handleCreateClick}>Create</Button>}>
+    <S.PanelLayout
+      title="Crear nuevo cliente"
+      footer={<S.SubmitButton onClick={handleCreateClick}>Create</S.SubmitButton>}>
       <S.FormWrapper>
         <S.Form formRef={formRef} {...formConfig} />
       </S.FormWrapper>

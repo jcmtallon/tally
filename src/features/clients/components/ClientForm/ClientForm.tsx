@@ -16,15 +16,16 @@ function ClientForm(props: ClientFormProps) {
 
   return (
     <Form {...formProps}>
-      {/* TODO: include this in the form component? */}
       <S.FormContainer className={className}>
-        {/* TODO: replace with new field component */}
-        <S.Field id="type" label="Tipo">
-          <S.Select ref={firstFieldRef}>
-            <option value="private">Particular</option>
-            <option value="company">Empresa</option>
-          </S.Select>
-        </S.Field>
+        <S.SelectField
+          id="type"
+          label="Tipo"
+          forwardedRef={firstFieldRef}
+          options={[
+            { value: 'private', label: 'Particular' },
+            { value: 'company', label: 'Empresa' },
+          ]}
+        />
         <S.TextField id="name" label="Nombre/Razón social" />
         <S.TextField id="taxId" label="DNI/NIE/CIF" />
         <S.SectionTitle id="contactTitle" text="Contacto" />
@@ -36,9 +37,7 @@ function ClientForm(props: ClientFormProps) {
         <S.TextField id="postalCode" label="Código postal" />
         <S.TextField id="city" label="Localidad" />
         <S.SectionTitle id="otherTitle" text="Otros" />
-        <S.Field id="notes" label="Notas">
-          <S.TextArea />
-        </S.Field>
+        <S.TextAreaField id="notes" label="Notas" />
       </S.FormContainer>
     </Form>
   )

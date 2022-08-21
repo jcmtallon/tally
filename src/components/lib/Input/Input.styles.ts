@@ -7,10 +7,12 @@ const Input = styled.input<{ showError: Boolean; rounded: Boolean }>`
 
   border: 1px solid
     ${props => pickColor(c => (props.showError ? c.stroke.danger.default : c.stroke.neutral.default))};
-  border-radius: ${props => (props.rounded ? '40px' : '10px')};
+  border-radius: ${props => (props.rounded ? '40px' : '6px')};
   padding: 6px 15px;
 
   width: 100%; // TODO: reconsider this behavior
+
+  min-height: 40px;
 
   &::placeholder {
     ${fg(f => f.neutral.mutedPlus)};

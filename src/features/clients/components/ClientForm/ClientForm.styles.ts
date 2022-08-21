@@ -1,11 +1,6 @@
-import { FormSectionTitle, FormTextField } from 'features/form'
+import { FormSectionTitle, FormTextField, FormSelectField, FormTextAreaField } from 'features/form'
 import styled from 'styled-components'
-import {
-  Field as BaseField,
-  Input as BaseInput,
-  Select as BaseSelect,
-  TextArea as BaseTextArea,
-} from 'components'
+import { Field as BaseField, Input as BaseInput } from 'components'
 
 const FormContainer = styled.form`
   display: grid;
@@ -77,9 +72,11 @@ const FormContainer = styled.form`
 
 const Field = styled(BaseField)``
 
+const SelectField = styled(FormSelectField)``
+
 const TextField = styled(FormTextField)``
 
-const Select = styled(BaseSelect)``
+const TextAreaField = styled(FormTextAreaField)``
 
 const Input = styled(BaseInput)``
 
@@ -87,6 +84,4 @@ const SectionTitle = styled(FormSectionTitle)`
   padding-top: 16px;
 `
 
-const TextArea = styled(BaseTextArea)``
-
-export { FormContainer, TextField, Field, Input, SectionTitle, Select, TextArea }
+export { FormContainer, TextField, Field, Input, SectionTitle, SelectField, TextAreaField }

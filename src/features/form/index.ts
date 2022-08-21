@@ -6,6 +6,8 @@ export { yup }
 export { FormSectionTitle } from './components/FormSectionTitle'
 export { Form } from './components/Form'
 export { FormTextField } from './components/FormTextField'
+export { FormTextAreaField } from './components/FormTextAreaField'
+export { FormSelectField } from './components/FormSelectField'
 
 export { useFormRef } from './hooks/useFormRef'
 export { useFieldAutoFocusEffect } from './hooks/useFieldAutoFocusEffect'
