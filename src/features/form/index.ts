@@ -8,6 +8,7 @@ export { Form } from './components/Form'
 export { FormTextField } from './components/FormTextField'
 
 export { useFormRef } from './hooks/useFormRef'
+export { useFieldAutoFocusEffect } from './hooks/useFieldAutoFocusEffect'
 
 export type { FormProps } from './components/Form'
 export type { FormConfig, FormErrors, FormValues } from './types'

@@ -1,6 +1,7 @@
 import React from 'react'
 import { createStylableComponent } from 'utils'
-import { Form, FormProps } from 'features/form'
+import { Form, FormProps, useFieldAutoFocusEffect } from 'features/form'
+import { slidePanelAnimationTimeout } from 'components'
 import { ClientFormValues } from '../../hooks/useClientFormConfig'
 import * as S from './ClientForm.styles'
 
@@ -11,13 +12,15 @@ interface ClientFormProps extends FormProps<ClientFormValues> {
 function ClientForm(props: ClientFormProps) {
   const { className, ...formProps } = props
 
+  const firstFieldRef = useFieldAutoFocusEffect(slidePanelAnimationTimeout)
+
   return (
     <Form {...formProps}>
       {/* TODO: include this in the form component? */}
       <S.FormContainer className={className}>
         {/* TODO: replace with new field component */}
         <S.Field id="type" label="Tipo">
-          <S.Select>
+          <S.Select ref={firstFieldRef}>
             <option value="private">Particular</option>
             <option value="company">Empresa</option>
           </S.Select>
