@@ -13,7 +13,7 @@ interface FormTextAreaFieldProps extends TextAreaProps {
 
 // TODO: Can we use same wrapper with all field components in this feature?
 function FormTextAreaField(props: FormTextAreaFieldProps) {
-  const { id, label, className, ...inputProps } = props
+  const { id, label, required, className, ...inputProps } = props
 
   const [field, meta] = useField(id)
 
@@ -21,7 +21,7 @@ function FormTextAreaField(props: FormTextAreaFieldProps) {
   const error = meta.touched ? meta.error : undefined
 
   return (
-    <S.Field id={id} label={label} className={className} error={error}>
+    <S.Field id={id} label={label} className={className} error={error} required={required}>
       <S.TextArea {...field} {...inputProps} />
     </S.Field>
   )

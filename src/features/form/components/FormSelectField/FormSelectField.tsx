@@ -14,7 +14,7 @@ interface FormSelectFieldProps extends SelectProps {
 }
 
 function FormSelectField(props: FormSelectFieldProps) {
-  const { id, label, forwardedRef, className, ...inputProps } = props
+  const { id, label, required, forwardedRef, className, ...inputProps } = props
 
   const [field, meta] = useField(id)
 
@@ -22,7 +22,7 @@ function FormSelectField(props: FormSelectFieldProps) {
   const error = meta.touched ? meta.error : undefined
 
   return (
-    <S.Field id={id} label={label} className={className} error={error}>
+    <S.Field id={id} label={label} className={className} error={error} required={required}>
       <S.Select {...field} {...inputProps} ref={forwardedRef} />
     </S.Field>
   )

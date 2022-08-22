@@ -21,17 +21,17 @@ function ClientForm(props: ClientFormProps) {
           <S.TypeSelect forwardedRef={firstFieldRef} />
         </S.FormField>
         <S.TextField id="name" label="Nombre/Razón social" />
-        <S.TextField id="taxId" label="DNI/NIE/CIF" />
+        <S.TextField id="taxId" label="DNI/NIE/CIF" required={false} />
         <S.SectionTitle id="contactTitle" text="Contacto" />
-        <S.TextField id="mail" label="Client Email" />
-        <S.TextField id="phone" label="Teléfono" />
+        <S.TextField id="mail" label="Client Email" required={false} />
+        <S.TextField id="phone" label="Teléfono" required={false} />
         <S.SectionTitle id="addressTitle" text="Dirección" />
-        <S.TextField id="street" label="Calle y número" />
-        <S.TextField id="houseNumber" label="Número" />
-        <S.TextField id="postalCode" label="Código postal" />
-        <S.TextField id="city" label="Localidad" />
+        <S.TextField id="street" label="Calle y número" required={false} />
+        <S.TextField id="houseNumber" label="Número" required={false} />
+        <S.TextField id="postalCode" label="Código postal" required={false} />
+        <S.TextField id="city" label="Localidad" required={false} />
         <S.SectionTitle id="otherTitle" text="Otros" />
-        <S.TextAreaField id="notes" label="Notas" />
+        <S.TextAreaField id="notes" label="Notas" required={false} />
       </S.FormContainer>
     </Form>
   )

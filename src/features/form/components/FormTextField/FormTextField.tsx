@@ -12,7 +12,7 @@ interface FormTextFieldProps extends InputProps {
 }
 
 function FormTextField(props: FormTextFieldProps) {
-  const { id, label, className, ...inputProps } = props
+  const { id, label, required, className, ...inputProps } = props
 
   const [field, meta] = useField(id)
 
@@ -20,7 +20,7 @@ function FormTextField(props: FormTextFieldProps) {
   const error = meta.touched ? meta.error : undefined
 
   return (
-    <S.Field id={id} label={label} className={className} error={error}>
+    <S.Field id={id} label={label} className={className} error={error} required={required}>
       <S.Input {...field} {...inputProps} />
     </S.Field>
   )

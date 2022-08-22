@@ -10,6 +10,7 @@ interface ClientFormValues {
   houseNumber: string
   postalCode: string
   city: string
+  notes: string
 }
 
 type ClientFormConfig = FormConfig<ClientFormValues>
@@ -20,13 +21,14 @@ function useClientFormValidationScheme() {
     () =>
       yup.object<ClientFormValues>({
         name: yup.string().defined(),
-        mail: yup.string().email('Wrong e-mail, baby!').defined(),
-        taxId: yup.string().defined(),
-        phone: yup.string().length(7, 'too short, babe!').required(),
-        street: yup.string().defined(),
-        houseNumber: yup.string().defined(),
-        postalCode: yup.string().defined(),
-        city: yup.string().defined(),
+        mail: yup.string().email('Wrong e-mail, baby!'),
+        taxId: yup.string(),
+        phone: yup.string().length(7, 'too short, babe!'),
+        street: yup.string(),
+        houseNumber: yup.string(),
+        postalCode: yup.string(),
+        city: yup.string(),
+        notes: yup.string(),
       }),
     [],
   )
@@ -46,6 +48,7 @@ function useClientFormConfig(config: Partial<ClientFormConfig> = {}): ClientForm
     houseNumber: '',
     postalCode: '',
     city: '',
+    notes: '',
   }
 
   return {

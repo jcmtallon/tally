@@ -24,6 +24,14 @@ const Label = styled.label`
   }
 `
 
+const OptionalIndicator = styled.span`
+  ${fg(f => f.neutral.mutedPlus)};
+  ${typo(t => t.body.sm)};
+  margin-left: 4px;
+  font-style: italic;
+  text-transform: lowercase;
+`
+
 const Content = styled.div``
 
 const Error = styled.div<{ withOffset: boolean }>`
@@ -41,4 +49,4 @@ const Wrapper = styled.div`
   flex-direction: column;
 `
 
-export { Content, Label, Wrapper, LabelWrapper, Error }
+export { Content, Label, Wrapper, LabelWrapper, Error, OptionalIndicator }

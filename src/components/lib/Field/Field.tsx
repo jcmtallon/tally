@@ -8,13 +8,13 @@ interface FieldProps extends React.HTMLAttributes<HTMLDivElement> {
   label?: string | ReactElement
   error?: string
   rounded?: boolean
-  // TODO: required
+  required?: boolean | undefined
   // TODO: helper text
 }
 
 function Field(props: FieldProps) {
   const [focused, setFocused] = useState(false)
-  const { children, error, rounded = false, id: providedId, label, ...otherProps } = props
+  const { children, error, rounded = false, id: providedId, required, label, ...otherProps } = props
   const id = useMemo(() => providedId ?? uniqueId('input-'), [providedId])
 
   const hasError = Boolean(error)
@@ -39,6 +39,7 @@ function Field(props: FieldProps) {
         hasErrors: hasError ? true : undefined,
         rounded: rounded ? true : undefined,
         error,
+        'aria-required': required ? true : undefined,
         'aria-invalid': hasError ? true : undefined,
         'aria-errormessage': hasError ? errorId : undefined,
         ...child.props,
@@ -61,6 +62,7 @@ function Field(props: FieldProps) {
   const renderLabel = () => (
     <S.LabelWrapper focused={focused} withOffset={rounded}>
       <S.Label htmlFor={inputId}>{label}</S.Label>
+      {required === false ? <S.OptionalIndicator aria-hidden>(opcional)</S.OptionalIndicator> : null}
     </S.LabelWrapper>
   )
 
