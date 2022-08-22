@@ -17,6 +17,11 @@ const Input = styled.input<{ showError: Boolean; rounded: Boolean }>`
   &::placeholder {
     ${fg(f => f.neutral.mutedPlus)};
   }
+
+  &:focus-visible {
+    --outline-offset: -1px;
+    border-color: ${pickColor(c => c.stroke.primary.default)};
+  }
 `
 
 export { Input }

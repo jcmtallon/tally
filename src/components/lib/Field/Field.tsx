@@ -1,5 +1,5 @@
 import { uniqueId } from 'lodash'
-import React, { ReactElement, ReactNode, useMemo } from 'react'
+import React, { ReactElement, ReactNode, useMemo, useState } from 'react'
 import { createStylableComponent } from 'utils'
 import * as S from './Field.styles'
 
@@ -13,6 +13,7 @@ interface FieldProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 function Field(props: FieldProps) {
+  const [focused, setFocused] = useState(false)
   const { children, error, rounded = false, id: providedId, label, ...otherProps } = props
   const id = useMemo(() => providedId ?? uniqueId('input-'), [providedId])
 
@@ -41,6 +42,14 @@ function Field(props: FieldProps) {
         'aria-invalid': hasError ? true : undefined,
         'aria-errormessage': hasError ? errorId : undefined,
         ...child.props,
+        onBlur: (e: unknown) => {
+          setFocused(false)
+          child.props?.onBlur?.(e)
+        },
+        onFocus: (e: unknown) => {
+          setFocused(true)
+          child.props?.onFocus?.(e)
+        },
       }
 
       return React.cloneElement(child, enhancedProps)
@@ -50,7 +59,7 @@ function Field(props: FieldProps) {
   }
 
   const renderLabel = () => (
-    <S.LabelWrapper withOffset={rounded}>
+    <S.LabelWrapper focused={focused} withOffset={rounded}>
       <S.Label htmlFor={inputId}>{label}</S.Label>
     </S.LabelWrapper>
   )

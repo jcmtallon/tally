@@ -3,6 +3,10 @@ import { getTheme, Theme } from 'theme'
 import { getButtonColors } from './ButtonColors'
 import { ButtonColor, ButtonVariant, Css } from './ButtonTypes'
 
+function isEmphasisColorButton(color: ButtonColor): boolean {
+  return ['primary'].includes(color)
+}
+
 function getSolidStyles(color: ButtonColor, theme: Theme): Css {
   const buttonColors = getButtonColors(theme)
   const { quiet } = buttonColors[color].solid
@@ -11,6 +15,10 @@ function getSolidStyles(color: ButtonColor, theme: Theme): Css {
     color: ${quiet.fg};
     background-color: ${quiet.bg};
     border-color: ${quiet.stroke};
+
+    &:focus-visible {
+      --outline-offset: ${isEmphasisColorButton(color) ? '1px' : '-2px'};
+    }
   `
 }
 

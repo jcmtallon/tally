@@ -16,6 +16,12 @@ const Select = styled.select<{ rounded: Boolean }>`
   &::placeholder {
     ${fg(f => f.neutral.mutedPlus)};
   }
+
+  &:focus-visible {
+    --outline-color: ${pickColor(c => c.stroke.primary.default)};
+    --outline-offset: -1px;
+    border-color: ${pickColor(c => c.stroke.primary.default)};
+  }
 `
 
 const Option = styled.option``

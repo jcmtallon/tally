@@ -10,13 +10,11 @@ const Wrapper = styled.div`
 `
 
 const PanelHeader = styled.div`
-  margin-bottom: 16px;
-  margin-bottom: 16px;
-  padding: 32px 40px 0;
+  padding: 28px 40px 16px;
 `
 
 const TitleContainer = styled.div`
-  ${typo(t => t.header.h4)};
+  ${typo(t => t.header.h5)};
   ${fg(f => f.neutral.default)};
 `
 const Content = styled.div`
@@ -30,7 +28,7 @@ const Content = styled.div`
 const Footer = styled.div`
   display: grid;
   grid-row-gap: 32px;
-  padding: 32px 40px;
+  padding: 16px 40px 28px;
 `
 
 export { Wrapper, Footer, PanelHeader, TitleContainer, Content }

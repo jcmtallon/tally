@@ -1,5 +1,8 @@
 import { createGlobalStyle } from 'styled-components'
 import { CssNormalize } from './CssNormalize'
+import { getTheme } from './theme'
+
+const theme = getTheme()
 
 const GlobalStyles = createGlobalStyle`
 
@@ -184,9 +187,7 @@ const GlobalStyles = createGlobalStyle`
     background-color: white;
     cursor: pointer;
     border-radius: 0;
-    &:focus {
-      outline: none !important;
-    }
+    font-family: inherit;
   }
 
   a {
@@ -199,7 +200,44 @@ const GlobalStyles = createGlobalStyle`
     display: none;
   }
 
-  /* TODO: focus outline styles */
+  // Standardizing focus outline styles -------------
+
+  // Ref:
+  // https://css-tricks.com/standardizing-focus-styles-with-css-custom-properties/
+  // https://www.sarasoueidan.com/blog/focus-indicators/
+  
+  // Outline global variables.
+  &:is(a, button, input, textarea, summary, select) {
+    // We ensure outlines of at least 2px that grow proportionally to the size
+    // of the wrapped element.
+    --outline-size: max(2px, 0.08em);
+    --outline-style: solid;
+    --outline-color: ${theme.colors.stroke.primary.default};
+  }
+
+  // Even though we don't want to display any outline when elements are focused 
+  // by a mouse click event, we set these rules to make outline styling compatible
+  // with older browsers, and for new browsers we disable it with the 
+  // :focus:not(:focus-visible) selector used below in this file.
+  &:is(a, button, input, textarea, summary, select):focus {
+    outline: var(--outline-size) var(--outline-style) var(--outline-color);
+    outline-offset: var(--outline-offset, var(--outline-size));
+  }
+
+  // Focus visible allow us to apply an outline only when an element is focused
+  // via the keyboard tab key and not via a mouse click. 
+  &:is(a, button, input, textarea, summary, select):focus-visible {
+    outline: var(--outline-size) var(--outline-style) var(--outline-color);
+    outline-offset: var(--outline-offset, var(--outline-size));
+  }
+
+  // Disables outline applies with above :focus selector, so outlines are only 
+  // displayed when elements are accessed via Tab key.
+  &:is(a, button, input, textarea, summary, select):focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  // Standardizing focus outline styles -------------
 `
 
 export { GlobalStyles }
