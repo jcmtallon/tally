@@ -24,6 +24,7 @@ const listClients = async (options: ListClientsOptions): Promise<Client[]> => {
     const data = doc.data()
     clients.push({
       clientId: doc.id,
+      clientType: 'individual', // TODO
       name: data.name,
       email: data.email,
       phone: data.phone,

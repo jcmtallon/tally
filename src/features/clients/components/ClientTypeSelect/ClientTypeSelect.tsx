@@ -13,7 +13,7 @@ function ClientTypeSelect(props: ClientTypeSelectProps) {
       // all the time.
       ref={props.forwardedRef}
       options={[
-        { value: 'private', label: 'Particular' },
+        { value: 'individual', label: 'Particular' },
         { value: 'company', label: 'Empresa' },
       ]}
     />
