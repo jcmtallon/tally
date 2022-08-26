@@ -1,4 +1,4 @@
-import { Button, Checkbox as BaseCheckbox } from 'components'
+import { Button, Checkbox as BaseCheckbox, Table as BaseTable, TableHead as BaseTableHead } from 'components'
 import styled, { css } from 'styled-components'
 import { canvas, fg, pickColor, typo } from 'theme'
 import { ClientListSearchForm } from './ClientListSearchForm'
@@ -65,7 +65,7 @@ const TableWrapper = styled.div`
 
 const TableActionButton = styled(Button).attrs({ color: 'highlight', size: 'medium' })``
 
-const Table = styled.table`
+const Table = styled(BaseTable)`
   width: 100%;
   border: 1px solid gray;
   border-radius: 12px;
@@ -73,7 +73,7 @@ const Table = styled.table`
   ${canvas()};
 `
 
-const Thead = styled.thead`
+const TableHead = styled(BaseTableHead)`
   text-align: center;
   ${fg(f => f.neutral.muted)};
   ${typo(t => t.body.md)};
@@ -108,7 +108,7 @@ export {
   TableActionsWrapper,
   TableStatsWrapper,
   TableWrapper,
-  Thead,
+  TableHead,
   Th,
   Tr,
   TopRow,

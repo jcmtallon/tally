@@ -53,8 +53,8 @@ function ClientList(props: ClientListProps) {
           </S.TableActionsBar>
           {clients && (
             <S.TableWrapper>
-              <S.Table>
-                <S.Thead>
+              <S.Table aria-label="Clients Table">
+                <S.TableHead>
                   <tr>
                     <S.Th>
                       <S.Checkbox />
@@ -65,7 +65,7 @@ function ClientList(props: ClientListProps) {
                     <S.Th>Facturas</S.Th>
                     <S.Th>Creado</S.Th>
                   </tr>
-                </S.Thead>
+                </S.TableHead>
                 <tbody>
                   {clients.map(client => (
                     <S.Tr key={client.clientId} onClick={() => onShowClientDetailsClicked?.(client.clientId)}>
