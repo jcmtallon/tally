@@ -1,4 +1,12 @@
-import { Button, Checkbox as BaseCheckbox, Table as BaseTable, TableHead as BaseTableHead } from 'components'
+import {
+  Button,
+  Checkbox as BaseCheckbox,
+  Table as BaseTable,
+  TableCell as BaseTableCell,
+  TableHead as BaseTableHead,
+  TableRow as BaseTableRow,
+  TableBody as BaseTableBody,
+} from 'components'
 import styled, { css } from 'styled-components'
 import { canvas, fg, pickColor, typo } from 'theme'
 import { ClientListSearchForm } from './ClientListSearchForm'
@@ -79,16 +87,14 @@ const TableHead = styled(BaseTableHead)`
   ${typo(t => t.body.md)};
 `
 
-const Th = styled.th`
-  padding: 10px;
-`
+const TableBody = styled(BaseTableBody)``
 
-const Cell = styled.td`
+const Cell = styled(BaseTableCell)`
   text-align: center;
   padding: 12px;
 `
 
-const Tr = styled.tr`
+const TableRow = styled(BaseTableRow)`
   ${Cell} {
     border-top: 1px solid ${pickColor(s => s.stroke.neutral.muted)};
   }
@@ -99,6 +105,7 @@ const Checkbox = styled(BaseCheckbox)``
 export {
   Cell,
   Checkbox,
+  Container,
   CreateClientButton,
   Header,
   SearchForm,
@@ -106,11 +113,10 @@ export {
   TableActionButton,
   TableActionsBar,
   TableActionsWrapper,
+  TableBody,
+  TableHead,
+  TableRow,
   TableStatsWrapper,
   TableWrapper,
-  TableHead,
-  Th,
-  Tr,
   TopRow,
-  Container,
 }

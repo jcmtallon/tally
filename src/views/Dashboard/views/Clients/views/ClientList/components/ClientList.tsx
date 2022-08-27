@@ -55,20 +55,22 @@ function ClientList(props: ClientListProps) {
             <S.TableWrapper>
               <S.Table aria-label="Clients Table">
                 <S.TableHead>
-                  <tr>
-                    <S.Th>
+                  <S.TableRow>
+                    <S.Cell>
                       <S.Checkbox />
-                    </S.Th>
-                    <S.Th>Nombre</S.Th>
-                    <S.Th>E-mail</S.Th>
-                    <S.Th>Teléfono</S.Th>
-                    <S.Th>Facturas</S.Th>
-                    <S.Th>Creado</S.Th>
-                  </tr>
+                    </S.Cell>
+                    <S.Cell>Nombre</S.Cell>
+                    <S.Cell>E-mail</S.Cell>
+                    <S.Cell>Teléfono</S.Cell>
+                    <S.Cell>Facturas</S.Cell>
+                    <S.Cell>Creado</S.Cell>
+                  </S.TableRow>
                 </S.TableHead>
-                <tbody>
+                <S.TableBody>
                   {clients.map(client => (
-                    <S.Tr key={client.clientId} onClick={() => onShowClientDetailsClicked?.(client.clientId)}>
+                    <S.TableRow
+                      key={client.clientId}
+                      onClick={() => onShowClientDetailsClicked?.(client.clientId)}>
                       <S.Cell>
                         <S.Checkbox />
                       </S.Cell>
@@ -77,9 +79,9 @@ function ClientList(props: ClientListProps) {
                       <S.Cell>{client.email}</S.Cell>
                       <S.Cell>Some long address</S.Cell>
                       <S.Cell>{client.notes}</S.Cell>
-                    </S.Tr>
+                    </S.TableRow>
                   ))}
-                </tbody>
+                </S.TableBody>
               </S.Table>
             </S.TableWrapper>
           )}
