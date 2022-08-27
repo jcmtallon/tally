@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { Ref } from 'react'
 import { Merge } from 'type-fest'
+import * as S from './TableRow.styles'
 
 type TableRowProps = Merge<
   React.InputHTMLAttributes<HTMLTableRowElement>,
@@ -9,9 +10,11 @@ type TableRowProps = Merge<
   }
 >
 
-function TableRow(props: TableRowProps) {
-  return <tr {...props} />
+function TableRow(props: TableRowProps, ref: Ref<HTMLTableRowElement>) {
+  return <S.TableRow ref={ref} {...props} />
 }
 
-export { TableRow }
+const ForwardRefTableRow = React.forwardRef(TableRow)
+
+export { ForwardRefTableRow as TableRow }
 export type { TableRowProps }

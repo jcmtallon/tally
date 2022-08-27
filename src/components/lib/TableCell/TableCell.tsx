@@ -1,11 +1,12 @@
-import React from 'react'
+import React, { Ref } from 'react'
 import { Merge } from 'type-fest'
+import * as S from './TableCell.styles'
 
 type TableCellProps = Merge<
   React.InputHTMLAttributes<HTMLTableCellElement>,
   {
     /** Specify the cell type. The prop defaults to the value inherited from the parent TableHead, TableBody, or TableFooter components. */
-    variant?: 'body' | 'head'
+    variant?: 'body' | 'head' | 'footer'
 
     /** Set the text-align on the table cell content. */
     align?: 'center' | 'inherit' | 'left' | 'right'
@@ -17,15 +18,21 @@ type TableCellProps = Merge<
   }
 >
 
-function TableCell(props: TableCellProps) {
+function TableCell(props: TableCellProps, ref: Ref<HTMLTableCellElement>) {
   const { variant = 'body', align = 'inherit', size = 'medium', sortDirection = false, ...otherProps } = props
 
   if (variant === 'head') {
-    return <th {...otherProps} />
+    return <S.HeadCell ref={ref} {...otherProps} />
   }
 
-  return <td {...otherProps} />
+  if (variant === 'footer') {
+    return <S.FootCell ref={ref} {...otherProps} />
+  }
+
+  return <S.DataCell ref={ref} {...otherProps} />
 }
 
-export { TableCell }
+const ForwardRefTableCell = React.forwardRef(TableCell)
+
+export { ForwardRefTableCell as TableCell }
 export type { TableCellProps }
