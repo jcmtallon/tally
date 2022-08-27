@@ -1,13 +1,12 @@
 import { createContext, useContext } from 'react'
+import { TableSize } from './TableTypes'
 
 interface TableContext {
-  padding: string
-  size: 'small' | 'medium'
+  size: TableSize
   stickyHeader: boolean
 }
 
 const tableContext = createContext<TableContext>({
-  padding: '',
   size: 'medium',
   stickyHeader: false,
 })

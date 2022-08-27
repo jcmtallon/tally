@@ -1,7 +1,8 @@
 import React, { Ref } from 'react'
 import { Merge } from 'type-fest'
-import * as S from './Table.styles'
 import { TableContextProvider } from './TableContextProvider'
+import { TableSize } from './TableTypes'
+import * as S from './Table.styles'
 
 type TableProps = Merge<
   React.InputHTMLAttributes<HTMLTableElement>,
@@ -13,7 +14,7 @@ type TableProps = Merge<
     stickyHeader?: boolean
 
     /** TableCells inherit the size specified in this prop */
-    size?: 'small' | 'medium'
+    size?: TableSize
   }
 >
 

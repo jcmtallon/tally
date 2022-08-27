@@ -8,7 +8,7 @@ import {
   TableBody as BaseTableBody,
 } from 'components'
 import styled, { css } from 'styled-components'
-import { canvas, fg, pickColor, typo } from 'theme'
+import { fg, typo } from 'theme'
 import { ClientListSearchForm } from './ClientListSearchForm'
 
 const Container = styled.div`
@@ -77,24 +77,10 @@ const Table = styled(BaseTable)`
   border-radius: 12px;
 `
 
-const TableHead = styled(BaseTableHead)`
-  text-align: center;
-  ${fg(f => f.neutral.muted)};
-  ${typo(t => t.body.md)};
-`
-
+const TableHead = styled(BaseTableHead)``
 const TableBody = styled(BaseTableBody)``
-
-const Cell = styled(BaseTableCell)`
-  text-align: center;
-  padding: 12px;
-`
-
-const TableRow = styled(BaseTableRow)`
-  ${Cell} {
-    border-top: 1px solid ${pickColor(s => s.stroke.neutral.muted)};
-  }
-`
+const TableRow = styled(BaseTableRow)``
+const Cell = styled(BaseTableCell)``
 
 const Checkbox = styled(BaseCheckbox)``
 

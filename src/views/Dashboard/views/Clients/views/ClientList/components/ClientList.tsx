@@ -63,7 +63,7 @@ function ClientList(props: ClientListProps) {
                     <S.Cell>E-mail</S.Cell>
                     <S.Cell>Teléfono</S.Cell>
                     <S.Cell>Facturas</S.Cell>
-                    <S.Cell>Creado</S.Cell>
+                    <S.Cell align="right">Creado</S.Cell>
                   </S.TableRow>
                 </S.TableHead>
                 <S.TableBody>
@@ -78,7 +78,7 @@ function ClientList(props: ClientListProps) {
                       <S.Cell>{client.phone}</S.Cell>
                       <S.Cell>{client.email}</S.Cell>
                       <S.Cell>Some long address</S.Cell>
-                      <S.Cell>{client.notes}</S.Cell>
+                      <S.Cell align="right">{client.notes}</S.Cell>
                     </S.TableRow>
                   ))}
                 </S.TableBody>
