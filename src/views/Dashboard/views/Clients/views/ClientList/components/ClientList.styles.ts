@@ -74,11 +74,7 @@ const TableWrapper = styled.div`
 const TableActionButton = styled(Button).attrs({ color: 'highlight', size: 'medium' })``
 
 const Table = styled(BaseTable)`
-  width: 100%;
-  border: 1px solid gray;
   border-radius: 12px;
-  border: none;
-  ${canvas()};
 `
 
 const TableHead = styled(BaseTableHead)`
