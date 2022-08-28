@@ -1,11 +1,11 @@
 import { uniqueId } from 'lodash'
-import React, { ReactElement, ReactNode, useMemo, useState } from 'react'
+import React, { ReactNode, useMemo, useRef, useState } from 'react'
 import { createStylableComponent } from 'utils'
 import * as S from './Field.styles'
 
 interface FieldProps extends React.HTMLAttributes<HTMLDivElement> {
   children: ReactNode
-  label?: string | ReactElement
+  label?: string
   error?: string
   rounded?: boolean
   required?: boolean | undefined
@@ -13,9 +13,16 @@ interface FieldProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 function Field(props: FieldProps) {
-  const [focused, setFocused] = useState(false)
+  const [focused, setFocused] = useState(false) // Use focus-within strategy instead.
   const { children, error, rounded = false, id: providedId, required, label, ...otherProps } = props
   const id = useMemo(() => providedId ?? uniqueId('input-'), [providedId])
+
+  const labelRef = useRef<HTMLLabelElement>(null)
+  const labelShowsEllipsis = useMemo(() => {
+    const labelOffsetWidth = labelRef?.current?.offsetWidth || 0
+    const labelScrollWidth = labelRef?.current?.scrollWidth || 0
+    return labelOffsetWidth < labelScrollWidth
+  }, [labelRef])
 
   const hasError = Boolean(error)
   const errorId = `error-${id}`
@@ -60,8 +67,16 @@ function Field(props: FieldProps) {
   }
 
   const renderLabel = () => (
-    <S.LabelWrapper focused={focused} withOffset={rounded}>
-      <S.Label htmlFor={inputId}>{label}</S.Label>
+    <S.LabelWrapper
+      title={labelShowsEllipsis ? label : undefined}
+      // When using title, the 'group' role is assigned automatically to the element.
+      // To avoid creating confusion when using a screen reader, we explicitly set the role as none.
+      role="none"
+      focused={focused}
+      withOffset={rounded}>
+      <S.Label ref={labelRef} htmlFor={inputId}>
+        {label}
+      </S.Label>
       {required === false ? <S.OptionalIndicator aria-hidden>(opcional)</S.OptionalIndicator> : null}
     </S.LabelWrapper>
   )

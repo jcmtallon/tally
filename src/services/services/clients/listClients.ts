@@ -63,7 +63,7 @@ const listClients = async (options: ListClientsOptions): Promise<Client[]> => {
     })
   })
 
-  return mockData // Put clients back.
+  return clients // Put clients back.
 }
 
 export { listClients }

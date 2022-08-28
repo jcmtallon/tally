@@ -54,36 +54,38 @@ function ClientList(props: ClientListProps) {
           </S.TableActionsBar>
           {clients && (
             <S.TableWrapper>
-              <S.Table stickyHeader aria-label="Clients Table">
-                <S.TableHead>
-                  <S.TableRow>
-                    <S.Cell align="center">
-                      <S.Checkbox />
-                    </S.Cell>
-                    <S.Cell>Nombre</S.Cell>
-                    <S.Cell>E-mail</S.Cell>
-                    <S.Cell>Teléfono</S.Cell>
-                    <S.Cell>Facturas</S.Cell>
-                    <S.Cell align="right">Creado</S.Cell>
-                  </S.TableRow>
-                </S.TableHead>
-                <S.TableBody>
-                  {clients.map(client => (
-                    <S.TableRow
-                      key={client.clientId}
-                      onClick={() => onShowClientDetailsClicked?.(client.clientId)}>
+              <S.TableContainer>
+                <S.Table stickyHeader aria-label="Clients Table">
+                  <S.TableHead>
+                    <S.TableRow>
                       <S.Cell align="center">
                         <S.Checkbox />
                       </S.Cell>
-                      <S.Cell>{client.name}</S.Cell>
-                      <S.Cell>{client.phone}</S.Cell>
-                      <S.Cell>{client.email}</S.Cell>
-                      <S.Cell>Some long address</S.Cell>
-                      <S.Cell align="right">{client.notes}</S.Cell>
+                      <S.Cell>Nombre</S.Cell>
+                      <S.Cell>E-mail</S.Cell>
+                      <S.Cell>Teléfono</S.Cell>
+                      <S.Cell>Facturas</S.Cell>
+                      <S.Cell align="right">Creado</S.Cell>
                     </S.TableRow>
-                  ))}
-                </S.TableBody>
-              </S.Table>
+                  </S.TableHead>
+                  <S.TableBody>
+                    {clients.map(client => (
+                      <S.TableRow
+                        key={client.clientId}
+                        onClick={() => onShowClientDetailsClicked?.(client.clientId)}>
+                        <S.Cell align="center">
+                          <S.Checkbox />
+                        </S.Cell>
+                        <S.Cell>{client.name}</S.Cell>
+                        <S.Cell>{client.phone}</S.Cell>
+                        <S.Cell>{client.email}</S.Cell>
+                        <S.Cell>Some long address</S.Cell>
+                        <S.Cell align="right">{client.notes}</S.Cell>
+                      </S.TableRow>
+                    ))}
+                  </S.TableBody>
+                </S.Table>
+              </S.TableContainer>
             </S.TableWrapper>
           )}
           {/* TODO: Placed here for testing purposes. Move to outside dashboard layout. */}

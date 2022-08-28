@@ -19,6 +19,10 @@ const LabelWrapper = styled.div<{ withOffset: boolean; focused: boolean }>`
 `
 
 const Label = styled.label`
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
   &:first-letter {
     text-transform: uppercase;
   }
