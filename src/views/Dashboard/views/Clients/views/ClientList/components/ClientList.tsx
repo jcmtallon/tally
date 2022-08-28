@@ -32,6 +32,7 @@ function ClientList(props: ClientListProps) {
     })
     setClients(data)
   }
+
   return (
     <>
       <DashboardLayout>
@@ -53,7 +54,7 @@ function ClientList(props: ClientListProps) {
           </S.TableActionsBar>
           {clients && (
             <S.TableWrapper>
-              <S.Table aria-label="Clients Table">
+              <S.Table stickyHeader aria-label="Clients Table">
                 <S.TableHead>
                   <S.TableRow>
                     <S.Cell align="center">

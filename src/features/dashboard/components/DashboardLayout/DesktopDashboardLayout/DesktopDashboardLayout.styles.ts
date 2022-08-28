@@ -21,6 +21,8 @@ const SideNav = styled.div<{ isCollapsed?: boolean }>`
 `
 
 const Content = styled.div`
+  //TODO: Prevent the scroll from affecting the container width
+  overflow-y: auto;
   background-color: #f3f4f9;
   grid-area: content;
 `

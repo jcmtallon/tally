@@ -1,5 +1,5 @@
-import styled from 'styled-components'
-import { pickColor, fg, typo } from 'theme'
+import styled, { css } from 'styled-components'
+import { pickColor, fg, typo, canvas } from 'theme'
 import { TableSize } from '../Table'
 
 function calculatePadding(size: TableSize, padding: 'none' | 'inherit'): string {
@@ -19,19 +19,30 @@ function calculatePadding(size: TableSize, padding: 'none' | 'inherit'): string 
 const Cell = styled.td<{
   size: TableSize
   padding: 'none' | 'inherit'
+  stickyHeader: boolean
   textAlign: 'center' | 'inherit' | 'left' | 'right' | 'justify'
 }>`
+  ${canvas()};
   border-bottom: 1px solid ${pickColor(s => s.stroke.neutral.muted)};
   text-align: ${props => props.textAlign};
   padding: ${({ size, padding }) => calculatePadding(size, padding)};
+
+  ${props =>
+    props.stickyHeader &&
+    css`
+      position: sticky;
+      top: 0;
+      z-index: 2;
+    `}
 `
 
 const HeadCell = styled.th`
   ${fg(f => f.neutral.muted)};
-  ${typo(t => t.body.md)};
+  ${typo(t => t.body.md.strong)};
 `
 
 const BodyCell = styled.td`
+  ${typo(t => t.body.md)};
   ${fg(f => f.neutral.muted)};
 `
 

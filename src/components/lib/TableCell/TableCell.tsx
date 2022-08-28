@@ -29,7 +29,7 @@ function TableCell(props: TableCellProps, ref: Ref<HTMLTableCellElement>) {
     padding = 'inherit',
     size = undefined,
     sortDirection = undefined,
-    variant = undefined,
+    variant: variantProp = undefined,
     ...otherProps
   } = props
 
@@ -42,8 +42,10 @@ function TableCell(props: TableCellProps, ref: Ref<HTMLTableCellElement>) {
     footer: S.FootCell,
   }
 
-  const component = componentType[variant || tableSection.variant || 'body']
+  const variant = variantProp || tableSection.variant || 'body'
+  const component = componentType[variant]
   const sizeStyle = size || table.size || 'medium'
+  const stickyHeader = Boolean(variant === 'head' && table && table.stickyHeader)
 
   // The aria-sort attribute indicates if items in a table or grid
   // are sorted in ascending or descending order.
@@ -60,6 +62,7 @@ function TableCell(props: TableCellProps, ref: Ref<HTMLTableCellElement>) {
       padding={padding}
       size={sizeStyle}
       textAlign={align}
+      stickyHeader={stickyHeader}
       {...otherProps}
     />
   )
