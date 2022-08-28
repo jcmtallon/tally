@@ -1,16 +1,8 @@
-import {
-  Button,
-  Checkbox as BaseCheckbox,
-  Table as BaseTable,
-  TableCell as BaseTableCell,
-  TableContainer as BaseTableContainer,
-  TableHead as BaseTableHead,
-  TableRow as BaseTableRow,
-  TableBody as BaseTableBody,
-} from 'components'
 import styled, { css } from 'styled-components'
 import { fg, typo } from 'theme'
+import { Button } from 'components'
 import { ClientListSearchForm } from './ClientListSearchForm'
+import { ClientTable } from './ClientTable'
 
 const Container = styled.div`
   display: flex;
@@ -74,35 +66,18 @@ const TableWrapper = styled.div`
 
 const TableActionButton = styled(Button).attrs({ color: 'highlight', size: 'medium' })``
 
-const TableContainer = styled(BaseTableContainer)`
-  max-height: 600px;
-  border-radius: 12px;
-`
-
-const Table = styled(BaseTable)``
-const TableHead = styled(BaseTableHead)``
-const TableBody = styled(BaseTableBody)``
-const TableRow = styled(BaseTableRow)``
-const Cell = styled(BaseTableCell)``
-
-const Checkbox = styled(BaseCheckbox)``
+const Table = styled(ClientTable)``
 
 export {
-  Cell,
-  Checkbox,
   Container,
   CreateClientButton,
   Header,
   SearchForm,
-  Table,
   TableActionButton,
   TableActionsBar,
   TableActionsWrapper,
-  TableBody,
-  TableContainer,
-  TableHead,
-  TableRow,
   TableStatsWrapper,
   TableWrapper,
+  Table,
   TopRow,
 }
