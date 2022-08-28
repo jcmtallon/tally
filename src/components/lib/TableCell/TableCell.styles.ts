@@ -2,10 +2,28 @@ import styled from 'styled-components'
 import { pickColor, fg, typo } from 'theme'
 import { TableSize } from '../Table'
 
-const Cell = styled.td<{ size: TableSize; textAlign: 'center' | 'inherit' | 'left' | 'right' | 'justify' }>`
+function calculatePadding(size: TableSize, padding: 'none' | 'inherit'): string {
+  const sizePadding: Record<TableSize, string> = {
+    small: '6px 16px',
+    medium: '16px',
+  }
+
+  const paddingSetting: Record<'none' | 'inherit', string> = {
+    none: '0px',
+    inherit: sizePadding[size],
+  }
+
+  return paddingSetting[padding]
+}
+
+const Cell = styled.td<{
+  size: TableSize
+  padding: 'none' | 'inherit'
+  textAlign: 'center' | 'inherit' | 'left' | 'right' | 'justify'
+}>`
   border-bottom: 1px solid ${pickColor(s => s.stroke.neutral.muted)};
   text-align: ${props => props.textAlign};
-  padding: ${props => (props.size === 'medium' ? '16px' : '6px 16px')};
+  padding: ${({ size, padding }) => calculatePadding(size, padding)};
 `
 
 const HeadCell = styled.th`

@@ -15,6 +15,9 @@ type TableCellProps = Merge<
     /** Specify the size of the cell. The prop defaults to the value 'medium' inherited from the parent Table component. */
     size?: TableSize
 
+    /** Sets padding applied for specific cases. Defaults to padding applied by 'size' props. */
+    padding?: 'none' | 'inherit' // TODO: add checkbox option
+
     /** Set aria-sort direction. */
     sortDirection?: 'asc' | 'desc'
   }
@@ -23,6 +26,7 @@ type TableCellProps = Merge<
 function TableCell(props: TableCellProps, ref: Ref<HTMLTableCellElement>) {
   const {
     align = 'inherit',
+    padding = 'inherit',
     size = undefined,
     sortDirection = undefined,
     variant = undefined,
@@ -53,6 +57,7 @@ function TableCell(props: TableCellProps, ref: Ref<HTMLTableCellElement>) {
       aria-sort={getAriaSort(sortDirection)}
       as={component}
       ref={ref}
+      padding={padding}
       size={sizeStyle}
       textAlign={align}
       {...otherProps}

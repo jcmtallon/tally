@@ -56,7 +56,7 @@ function ClientList(props: ClientListProps) {
               <S.Table aria-label="Clients Table">
                 <S.TableHead>
                   <S.TableRow>
-                    <S.Cell>
+                    <S.Cell align="center">
                       <S.Checkbox />
                     </S.Cell>
                     <S.Cell>Nombre</S.Cell>
@@ -71,7 +71,7 @@ function ClientList(props: ClientListProps) {
                     <S.TableRow
                       key={client.clientId}
                       onClick={() => onShowClientDetailsClicked?.(client.clientId)}>
-                      <S.Cell>
+                      <S.Cell align="center">
                         <S.Checkbox />
                       </S.Cell>
                       <S.Cell>{client.name}</S.Cell>
