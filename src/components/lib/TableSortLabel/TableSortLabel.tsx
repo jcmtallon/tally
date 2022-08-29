@@ -1,4 +1,4 @@
-import React, { HTMLAttributes } from 'react'
+import React, { HTMLAttributes, Ref } from 'react'
 import { Merge } from 'type-fest'
 import { createStylableComponent } from 'utils'
 import * as S from './TableSortLabel.styles'
@@ -8,20 +8,29 @@ type TableSortLabelProps = Merge<
   {
     /** Displays active styling. Should be true for the sorted column. */
     active?: boolean
+
+    /** The current sort direction. */
+    direction?: 'asc' | 'desc'
+
+    /** Hide sort icon when active is false. */
+    hideSortIcon?: boolean
   }
 >
 
-function TableSortLabel(props: TableSortLabelProps) {
-  const { children, ...otherProps } = props
+function TableSortLabel(props: TableSortLabelProps, ref: Ref<HTMLSpanElement>) {
+  const { direction = 'desc', active = false, hideSortIcon = false, children, ...otherProps } = props
+
   return (
-    <S.Span {...otherProps}>
+    <S.Span active={active} ref={ref} {...otherProps} tabIndex={0} role="button">
       {children}
-      <S.ArrowIcon />
+      {hideSortIcon && !active ? <></> : <S.ArrowIcon direction={direction} />}
     </S.Span>
   )
 }
 
-const StylableTableSortLabel = createStylableComponent(S, TableSortLabel)
+const ForwardRefTableSortLabel = React.forwardRef(TableSortLabel)
+
+const StylableTableSortLabel = createStylableComponent(S, ForwardRefTableSortLabel)
 
 export { StylableTableSortLabel as TableSortLabel }
 export type { TableSortLabelProps }

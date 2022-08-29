@@ -1,8 +1,13 @@
 import React from 'react'
 
-function SortArrowDown() {
+interface SortArrowDown {
+  className?: string
+}
+
+function SortArrowDown(props: SortArrowDown) {
   return (
     <svg
+      className={props.className}
       stroke="currentColor"
       fill="currentColor"
       strokeWidth="0"

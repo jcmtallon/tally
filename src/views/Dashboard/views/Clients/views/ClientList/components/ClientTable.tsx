@@ -27,9 +27,11 @@ function ClientTable(props: ClientTableProps) {
               <S.Checkbox onChange={() => {}} onClick={handleCheckboxClick} />
             </S.Cell>
             <S.Cell>
-              <S.SortLabel>Nombre</S.SortLabel>
+              <S.SortLabel direction="asc">Nombre</S.SortLabel>
             </S.Cell>
-            <S.Cell>E-mail</S.Cell>
+            <S.Cell>
+              <S.SortLabel active>E-mail</S.SortLabel>
+            </S.Cell>
             <S.Cell>Teléfono</S.Cell>
             <S.Cell>Facturas</S.Cell>
             <S.Cell align="right">Creado</S.Cell>
