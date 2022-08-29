@@ -22,7 +22,7 @@ function ClientsRouter() {
           path="create"
           element={
             <SlidePanelRoute parentRouteUrl="/dashboard/clients/">
-              <ClientCreation />
+              <ClientCreation onClientCreated={() => navigate(`/dashboard/clients/`)} />
             </SlidePanelRoute>
           }
         />

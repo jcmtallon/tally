@@ -1,6 +1,6 @@
 import { FormConfig, yup } from 'features/form'
 import { useMemo } from 'react'
-import { Client } from 'services'
+import { addClient, Client } from 'services'
 
 interface ClientFormValues {
   type: string // TODO: create type
@@ -26,7 +26,7 @@ function useClientFormValidationScheme() {
         name: yup.string().defined(),
         mail: yup.string().email('Wrong e-mail, baby!'),
         taxId: yup.string(),
-        phone: yup.string().length(7, 'too short, babe!'),
+        phone: yup.string(),
         street: yup.string(),
         houseNumber: yup.string(),
         postalCode: yup.string(),
@@ -58,7 +58,13 @@ function useClientFormConfig(config: Partial<ClientFormConfig> = {}): ClientForm
   return {
     validationSchema,
     onSubmit: values => {
-      console.log(values)
+      // Temp implementation
+      addClient({
+        name: values.name,
+        email: values.mail,
+        phone: values.phone,
+        notes: values.notes,
+      })
     },
     ...config,
     initialValues: { ...initialValues, ...config.initialValues },
