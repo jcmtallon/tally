@@ -34,7 +34,12 @@ function ClientForm(props: ClientFormProps) {
           />
           <S.SectionTitle id="contactTitle" text="Contacto" />
           <S.TextField id="mail" label="Client Email" required={false} placeholder="mariator@gmail.com" />
-          <S.TextField id="phone" label="Teléfono" required={false} placeholder="744544765" />
+          <S.TextField
+            id="phone"
+            label="A horribly long telephone number"
+            required={false}
+            placeholder="744544765"
+          />
           <S.SectionTitle id="addressTitle" text="Dirección" />
           <S.TextField
             id="street"
