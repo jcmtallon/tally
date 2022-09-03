@@ -14,6 +14,9 @@ type TableSortLabelProps = Merge<
 
     /** Hide sort icon when active is false. */
     hideSortIcon?: boolean
+
+    /** Triggers when sort label is clicked */
+    onClick?: React.MouseEventHandler<HTMLSpanElement> | undefined
   }
 >
 

@@ -7,7 +7,7 @@ import {
   TableHead as BaseTableHead,
   TableRow as BaseTableRow,
   TableBody as BaseTableBody,
-  TableSortLabel,
+  TableSortableCell,
 } from 'components'
 
 const TableContainer = styled(BaseTableContainer)`
@@ -20,8 +20,8 @@ const TableHead = styled(BaseTableHead)``
 const TableBody = styled(BaseTableBody)``
 const TableRow = styled(BaseTableRow)``
 const Cell = styled(BaseTableCell)``
-const SortLabel = styled(TableSortLabel)``
+const SortableCell = styled(TableSortableCell)``
 
 const Checkbox = styled(BaseCheckbox)``
 
-export { Cell, Checkbox, Table, TableBody, TableContainer, TableHead, TableRow, SortLabel }
+export { Cell, Checkbox, Table, TableBody, TableContainer, TableHead, TableRow, SortableCell }

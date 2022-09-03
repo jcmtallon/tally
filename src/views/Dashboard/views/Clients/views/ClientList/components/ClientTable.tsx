@@ -78,22 +78,18 @@ function ClientTable(props: ClientTableProps) {
               />
             </S.Cell>
             {/* Combine Cell and SortLabel into SortableHeaderCell? */}
-            <S.Cell>
-              <S.SortLabel
-                active={orderBy === 'name'}
-                direction={orderBy === 'name' ? order : 'asc'}
-                onClick={() => handleSortClick('name')}>
-                Nombre
-              </S.SortLabel>
-            </S.Cell>
-            <S.Cell>
-              <S.SortLabel
-                active={orderBy === 'email'}
-                direction={orderBy === 'email' ? order : 'asc'}
-                onClick={() => handleSortClick('email')}>
-                E-mail
-              </S.SortLabel>
-            </S.Cell>
+            <S.SortableCell
+              active={orderBy === 'name'}
+              direction={orderBy === 'name' ? order : 'asc'}
+              onClick={() => handleSortClick('name')}>
+              Nombre
+            </S.SortableCell>
+            <S.SortableCell
+              active={orderBy === 'email'}
+              direction={orderBy === 'email' ? order : 'asc'}
+              onClick={() => handleSortClick('email')}>
+              E-mail
+            </S.SortableCell>
             <S.Cell>Teléfono</S.Cell>
             <S.Cell>Facturas</S.Cell>
             <S.Cell align="right">Creado</S.Cell>
