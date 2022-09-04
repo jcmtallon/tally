@@ -8,7 +8,12 @@ import {
   TableRow as BaseTableRow,
   TableBody as BaseTableBody,
   TableSortableCell,
+  TablePagination,
 } from 'components'
+
+const Container = styled.div`
+  width: 100%;
+`
 
 const TableContainer = styled(BaseTableContainer)`
   max-height: 600px;
@@ -24,4 +29,19 @@ const SortableCell = styled(TableSortableCell)``
 
 const Checkbox = styled(BaseCheckbox)``
 
-export { Cell, Checkbox, Table, TableBody, TableContainer, TableHead, TableRow, SortableCell }
+const Pagination = styled(TablePagination)`
+  padding: 10px 0px;
+`
+
+export {
+  Cell,
+  Checkbox,
+  Container,
+  Pagination,
+  SortableCell,
+  Table,
+  TableBody,
+  TableContainer,
+  TableHead,
+  TableRow,
+}

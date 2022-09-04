@@ -1,2 +1,6 @@
+export { IconChevronLeft } from './Icons/IconChevronLeft'
+export { IconChevronRight } from './Icons/IconChevronRight'
+export { IconFirstPage } from './Icons/IconFirstPage'
+export { IconLastPage } from './Icons/IconLastPage'
 export { IconRunner } from './Icons/IconRunner'
-export { SortArrowDown } from './Icons/SortArrowDown'
+export { IconSortArrowDown } from './Icons/IconSortArrowDown'

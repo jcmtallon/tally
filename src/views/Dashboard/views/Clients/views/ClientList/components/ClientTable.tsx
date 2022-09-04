@@ -66,61 +66,64 @@ function ClientTable(props: ClientTableProps) {
   // Use context to pass props to sortlabel?
 
   return (
-    <S.TableContainer {...otherProps}>
-      <S.Table stickyHeader aria-label="Clients Table">
-        <S.TableHead>
-          <S.TableRow>
-            <S.Cell align="center">
-              <S.Checkbox
-                onChange={handleSelectAllClick}
-                aria-label="some aria label"
-                checked={clients.length > 0 && selected.length === clients.length}
-              />
-            </S.Cell>
-            {/* Combine Cell and SortLabel into SortableHeaderCell? */}
-            <S.SortableCell
-              active={orderBy === 'name'}
-              direction={orderBy === 'name' ? order : 'asc'}
-              onClick={() => handleSortClick('name')}>
-              Nombre
-            </S.SortableCell>
-            <S.SortableCell
-              active={orderBy === 'email'}
-              direction={orderBy === 'email' ? order : 'asc'}
-              onClick={() => handleSortClick('email')}>
-              E-mail
-            </S.SortableCell>
-            <S.Cell>Teléfono</S.Cell>
-            <S.Cell>Facturas</S.Cell>
-            <S.Cell align="right">Creado</S.Cell>
-          </S.TableRow>
-        </S.TableHead>
-        <S.TableBody>
-          {clients.map((client, index) => {
-            const isItemSelected = isSelected(client.clientId)
-            const labelId = `enhanced-table-checkbox-${index}`
+    <S.Container>
+      <S.TableContainer {...otherProps}>
+        <S.Table stickyHeader aria-label="Clients Table">
+          <S.TableHead>
+            <S.TableRow>
+              <S.Cell align="center">
+                <S.Checkbox
+                  onChange={handleSelectAllClick}
+                  aria-label="some aria label"
+                  checked={clients.length > 0 && selected.length === clients.length}
+                />
+              </S.Cell>
+              {/* Combine Cell and SortLabel into SortableHeaderCell? */}
+              <S.SortableCell
+                active={orderBy === 'name'}
+                direction={orderBy === 'name' ? order : 'asc'}
+                onClick={() => handleSortClick('name')}>
+                Nombre
+              </S.SortableCell>
+              <S.SortableCell
+                active={orderBy === 'email'}
+                direction={orderBy === 'email' ? order : 'asc'}
+                onClick={() => handleSortClick('email')}>
+                E-mail
+              </S.SortableCell>
+              <S.Cell>Teléfono</S.Cell>
+              <S.Cell>Facturas</S.Cell>
+              <S.Cell align="right">Creado</S.Cell>
+            </S.TableRow>
+          </S.TableHead>
+          <S.TableBody>
+            {clients.map((client, index) => {
+              const isItemSelected = isSelected(client.clientId)
+              const labelId = `enhanced-table-checkbox-${index}`
 
-            return (
-              <S.TableRow key={client.clientId} onClick={() => onRowClicked?.(client.clientId)}>
-                <S.Cell align="center">
-                  <S.Checkbox
-                    aria-labelledby={labelId}
-                    checked={isItemSelected}
-                    onChange={() => handleCheckboxChange(client.clientId)}
-                    onClick={e => e.stopPropagation()}
-                  />
-                </S.Cell>
-                <S.Cell>{client.name}</S.Cell>
-                <S.Cell>{client.phone}</S.Cell>
-                <S.Cell>{client.email}</S.Cell>
-                <S.Cell>Some long address</S.Cell>
-                <S.Cell align="right">{client.notes}</S.Cell>
-              </S.TableRow>
-            )
-          })}
-        </S.TableBody>
-      </S.Table>
-    </S.TableContainer>
+              return (
+                <S.TableRow key={client.clientId} onClick={() => onRowClicked?.(client.clientId)}>
+                  <S.Cell align="center">
+                    <S.Checkbox
+                      aria-labelledby={labelId}
+                      checked={isItemSelected}
+                      onChange={() => handleCheckboxChange(client.clientId)}
+                      onClick={e => e.stopPropagation()}
+                    />
+                  </S.Cell>
+                  <S.Cell>{client.name}</S.Cell>
+                  <S.Cell>{client.phone}</S.Cell>
+                  <S.Cell>{client.email}</S.Cell>
+                  <S.Cell>Some long address</S.Cell>
+                  <S.Cell align="right">{client.notes}</S.Cell>
+                </S.TableRow>
+              )
+            })}
+          </S.TableBody>
+        </S.Table>
+      </S.TableContainer>
+      <S.Pagination rowCount={100} page={0} rowsPerPage={10} />
+    </S.Container>
   )
 }
 

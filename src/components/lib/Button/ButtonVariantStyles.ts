@@ -19,6 +19,10 @@ function getSolidStyles(color: ButtonColor, theme: Theme): Css {
     &:focus-visible {
       --outline-offset: ${isEmphasisColorButton(color) ? '1px' : '-2px'};
     }
+
+    &:disabled {
+      opacity: 0.3;
+    }
   `
 }
 

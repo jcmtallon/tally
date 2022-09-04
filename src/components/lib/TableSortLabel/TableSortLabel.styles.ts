@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
 import { fg } from 'theme'
-import { SortArrowDown } from '../icons'
+import { IconSortArrowDown } from '../icons'
 
 const Span = styled.span<{ active: boolean }>`
   cursor: pointer;
@@ -32,7 +32,7 @@ const Span = styled.span<{ active: boolean }>`
     `}
 `
 
-const ArrowIcon = styled(SortArrowDown)<{ direction: 'asc' | 'desc' }>`
+const ArrowIcon = styled(IconSortArrowDown)<{ direction: 'asc' | 'desc' }>`
   //Hidden by default.
   opacity: 0;
   transition: opacity 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, transform 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;

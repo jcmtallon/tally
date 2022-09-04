@@ -1,10 +1,10 @@
 import React from 'react'
 
-interface SortArrowDown {
+interface IconChevronLeftProps {
   className?: string
 }
 
-function SortArrowDown(props: SortArrowDown) {
+function IconChevronLeft(props: IconChevronLeftProps) {
   return (
     <svg
       className={props.className}
@@ -17,10 +17,11 @@ function SortArrowDown(props: SortArrowDown) {
       width="1em"
       role="img"
       xmlns="http://www.w3.org/2000/svg">
-      <title>Sort Icon Down</title>
-      <path d="M5.8 9.7l6.2 6.3 6.2-6.3c.2-.2.3-.5.3-.7s-.1-.5-.3-.7c-.2-.2-.4-.3-.7-.3h-11c-.3 0-.5.1-.7.3-.2.2-.3.4-.3.7s.1.5.3.7z" />
+      <title>Chevron Left</title>
+      <path d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z" />
     </svg>
   )
 }
 
-export { SortArrowDown }
+export { IconChevronLeft }
+export type { IconChevronLeftProps }
