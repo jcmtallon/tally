@@ -16,6 +16,10 @@ module.exports = {
           namedComponents: 'function-declaration',
           unnamedComponents: 'arrow-function',
         }],
+        'react/no-unstable-nested-components': [
+          "error",
+          { allowAsProps: true }
+        ],
         '@typescript-eslint/no-unused-vars': ['warn', { vars: 'all', args: 'after-used', ignoreRestSiblings: true }]
       },
       // Eslint was complaining that this file didn't match my project config. 
