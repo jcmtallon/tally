@@ -1,3 +1,11 @@
-export { addClient } from './clients/addClient'
-export { listClients } from './clients/listClients'
-export { getClient } from './clients/getClient'
+import { addClient } from './clients/addClient'
+import { list } from './clients/listClients'
+import { getClient } from './clients/getClient'
+
+const clients = {
+  add: addClient,
+  get: getClient,
+  list,
+}
+
+export { clients }

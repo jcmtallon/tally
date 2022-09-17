@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { getClient, Client } from 'services'
+import { clients as apiClients, Client } from 'services'
 import * as S from './ClientDetails.styles'
 
 function ClientDetails() {
@@ -11,7 +11,7 @@ function ClientDetails() {
   useEffect(() => {
     const fetchData = async () => {
       if (!clientId) return
-      const data = await getClient(clientId)
+      const data = await apiClients.get(clientId)
       setClientDetails(data)
     }
 

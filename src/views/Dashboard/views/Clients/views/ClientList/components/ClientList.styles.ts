@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
 import { fg, typo } from 'theme'
-import { Button } from 'components'
+import { Button, TablePagination as BaseTablePagination } from 'components'
 import { ClientListSearchForm } from './ClientListSearchForm'
 import { ClientTable } from './ClientTable'
 
@@ -59,12 +59,16 @@ const TableActionsWrapper = styled.div`
 
 const TableWrapper = styled.div`
   display: flex;
+  flex-direction: column;
   padding: 10px;
+  row-gap: 10px;
 
   ${ContentSection}
 `
 
 const TableActionButton = styled(Button).attrs({ color: 'highlight', size: 'medium' })``
+
+const TablePagination = styled(BaseTablePagination)``
 
 const Table = styled(ClientTable)``
 
@@ -78,6 +82,7 @@ export {
   TableActionsWrapper,
   TableStatsWrapper,
   TableWrapper,
+  TablePagination,
   Table,
   TopRow,
 }

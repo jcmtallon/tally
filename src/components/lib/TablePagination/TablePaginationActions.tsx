@@ -22,7 +22,7 @@ type TablePaginationActionsProps = Merge<
     showLastPageButton?: boolean
 
     /** Callback fired when the page is changed. */
-    onPageChange?: (event: MouseEvent<HTMLButtonElement>, page: number) => {}
+    onPageChange?: (event: MouseEvent<HTMLButtonElement>, page: number) => void
 
     /** Use it to provide user-friendly names for the action buttons. Important for screen reader users. */
     getItemAriaLabel?: (type: string) => string
@@ -55,8 +55,8 @@ function TablePaginationActions(props: TablePaginationActionsProps, ref: Ref<HTM
     previousPageButtonProps = {},
     nextPageButtonProps = {},
     lastPageButtonProps = {},
-    showFirstPageButton = true,
-    showLastPageButton = true,
+    showFirstPageButton = false,
+    showLastPageButton = false,
     getItemAriaLabel = defaultGetAriaLabel,
     ...otherProps
   } = props

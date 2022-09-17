@@ -8,7 +8,6 @@ import {
   TableRow as BaseTableRow,
   TableBody as BaseTableBody,
   TableSortableCell,
-  TablePagination,
 } from 'components'
 
 const Container = styled.div`
@@ -29,19 +28,4 @@ const SortableCell = styled(TableSortableCell)``
 
 const Checkbox = styled(BaseCheckbox)``
 
-const Pagination = styled(TablePagination)`
-  padding: 10px 0px;
-`
-
-export {
-  Cell,
-  Checkbox,
-  Container,
-  Pagination,
-  SortableCell,
-  Table,
-  TableBody,
-  TableContainer,
-  TableHead,
-  TableRow,
-}
+export { Cell, Checkbox, Container, SortableCell, Table, TableBody, TableContainer, TableHead, TableRow }
