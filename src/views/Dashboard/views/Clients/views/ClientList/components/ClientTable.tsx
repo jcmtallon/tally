@@ -12,6 +12,8 @@ import * as S from './ClientTable.styles'
 
 const columnHelper = createColumnHelper<Client>()
 
+// TODO: lines
+
 // TODO: extend container props?
 // TODO: clicking sort icon 3 times disables sorting.
 interface ClientTableProps extends HTMLAttributes<HTMLDivElement> {
@@ -104,7 +106,9 @@ function ClientTable(props: ClientTableProps) {
                   return header.column.getCanSort() ? (
                     <S.SortableCell
                       key={header.id}
-                      onSortLabelClick={header.column.getToggleSortingHandler()}
+                      onSortLabelClick={() =>
+                        header.column.toggleSorting(header.column.getIsSorted() === 'asc')
+                      }
                       active={header.column.getIsSorted() !== false}
                       direction={header.column.getIsSorted() || undefined}>
                       {flexRender(header.column.columnDef.header, header.getContext())}

@@ -4,14 +4,17 @@ import * as S from './ClientListPagination.styles'
 
 interface ClientListPaginationProps {
   resultsCount: number
+  page: number
 
-  onPreviousPageButtonClicked?: () => Promise<void>
-  onNextPageButtonClicked?: () => Promise<void>
-  onRowsPerPageChange?: (value: number) => Promise<void>
+  onPreviousPageButtonClicked?: () => void
+  onNextPageButtonClicked?: () => void
+  onRowsPerPageChange?: (value: number) => void
+  resetPagination?: () => void
 }
 
 function ClientListPagination(props: ClientListPaginationProps) {
   const {
+    page,
     resultsCount,
     onPreviousPageButtonClicked,
     onNextPageButtonClicked,
@@ -19,22 +22,19 @@ function ClientListPagination(props: ClientListPaginationProps) {
     ...otherProps
   } = props
 
-  const [page, setPage] = useState(0)
   const [rowsPerPage, setRowsPerPage] = useState(10)
 
-  const handlePreviousPageClick = async () => {
-    await onPreviousPageButtonClicked?.()
-    setPage(page => page - 1)
+  const handlePreviousPageClick = () => {
+    onPreviousPageButtonClicked?.()
   }
 
-  const handleNextPageClick = async () => {
-    await onNextPageButtonClicked?.()
-    setPage(page => page + 1)
+  const handleNextPageClick = () => {
+    onNextPageButtonClicked?.()
   }
 
-  const handleRowsPerPageChange = async (event: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleRowsPerPageChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const newRowsPerPage = +event.target.value
-    await onRowsPerPageChange?.(newRowsPerPage)
+    onRowsPerPageChange?.(newRowsPerPage)
     setRowsPerPage(newRowsPerPage)
   }
 

@@ -3,6 +3,8 @@ import { DashboardLayout } from 'features/dashboard'
 import React, { HTMLAttributes, useEffect, useState } from 'react'
 import { Outlet } from 'react-router-dom'
 import { clients as apiClients, Client } from 'services'
+import { useClientListSearchParams } from '../hooks/useClientListSearchParams'
+import { searchParamsQueryToClientListOptions as mapParamsToOptions } from '../utils/searchParamsQueryToClientListOptions'
 import * as S from './ClientList.styles'
 import { ClientListSearchFormState } from './ClientListSearchForm'
 
@@ -11,27 +13,24 @@ interface ClientListProps extends HTMLAttributes<HTMLDivElement> {
   onShowClientDetailsClicked?: (clientId: string) => void
 }
 
-// TODO: we don't have access to search, or selected pagination or sorting from this parent component.
-// Changing a controller should edit both the internal state and the URL (via callback). Then changes in
-// the URL causes the page to refetch.
-
 // TODO: Initial query running twice?? Check out why
 
 function ClientList(props: ClientListProps) {
   const { onCreateClientButtonClicked, onShowClientDetailsClicked, ...otherProps } = props
 
+  const { searchParamsQuery, setLimitParams, setSortingParams } = useClientListSearchParams()
   const [clients, setClients] = useState<Client[]>([])
+  const [page, setPage] = useState(0)
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await apiClients.list.query({})
+      const data = await apiClients.list.query(mapParamsToOptions(searchParamsQuery))
       setClients(data)
+      setPage(0)
     }
 
     fetchData()
-  }, [])
-
-  // TODO: accesibilidad
+  }, [searchParamsQuery])
 
   const handleClientSearch = async (state: ClientListSearchFormState) => {
     const data = await apiClients.list.query({
@@ -40,27 +39,25 @@ function ClientList(props: ClientListProps) {
     setClients(data)
   }
 
-  const handleSortChange = async (sorting: SortingState) => {
-    const data = await apiClients.list.query({
-      sortBy: sorting[0]?.id || undefined,
-      desc: sorting[0]?.desc,
-    })
-    setClients(data)
+  const handleSortChange = (sorting: SortingState) => {
+    setSortingParams(sorting)
+  }
+
+  const handleRowsPerPageChange = (value: number) => {
+    setLimitParams(value)
+    setPage(0)
   }
 
   const handlePreviousPageClick = async () => {
     const data = await apiClients.list.previousPage()
     setClients(data)
+    setPage(page => page - 1)
   }
 
   const handleNextPageClick = async () => {
     const data = await apiClients.list.nextPage()
     setClients(data)
-  }
-
-  const handleRowsPerPageChange = async (value: number) => {
-    const data = await apiClients.list.changePagesize(value)
-    setClients(data)
+    setPage(page => page + 1)
   }
 
   return (
@@ -89,6 +86,7 @@ function ClientList(props: ClientListProps) {
               onSortingChange={handleSortChange}
             />
             <S.TablePagination
+              page={page}
               resultsCount={clients.length}
               onPreviousPageButtonClicked={handlePreviousPageClick}
               onNextPageButtonClicked={handleNextPageClick}

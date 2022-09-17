@@ -7,7 +7,6 @@ import {
   orderBy,
   limit as LimitFn,
   startAfter,
-  startAt,
   QueryDocumentSnapshot,
   DocumentData,
   QuerySnapshot,
@@ -20,17 +19,15 @@ import { firestore } from '../../firestoreSetup'
 import { docsToClients } from './docToClient'
 
 // Constants
-
 const clientsRef = collection(firestore, `clients`)
 const defaultLimit = 10
 
 // Query caching
-
 let firstSnapshot: QueryDocumentSnapshot<DocumentData> | undefined
 let lastSnapshot: QueryDocumentSnapshot<DocumentData> | undefined
-
 let whereConstraints: QueryConstraint[] = []
 let orderConstraints: QueryConstraint[] = []
+let paginationConstraints: QueryConstraint[] = []
 let limit: number = defaultLimit
 
 function cacheSnapshots(docs: QuerySnapshot<DocumentData>) {
@@ -38,6 +35,7 @@ function cacheSnapshots(docs: QuerySnapshot<DocumentData>) {
   lastSnapshot = docs.docs[docs.docs.length - 1] || undefined
 }
 
+// Query execution
 async function executeQuery(...queryParams: Parameters<typeof query<DocumentData>>): Promise<Client[]> {
   const q = query(...queryParams)
   const docs = await getDocs(q)
@@ -45,14 +43,14 @@ async function executeQuery(...queryParams: Parameters<typeof query<DocumentData
   return docsToClients(docs)
 }
 
-interface ListClientsOptions {
+interface ListClientsQueryOptions {
   name?: string // TODO: group into 1 object
   desc?: boolean
   sortBy?: string
   pageSize?: number
 }
 
-async function listClients(options: ListClientsOptions): Promise<Client[]> {
+async function listClients(options: ListClientsQueryOptions): Promise<Client[]> {
   const { name, desc = false, sortBy = 'name', pageSize = defaultLimit } = options
 
   // Filtering
@@ -65,34 +63,25 @@ async function listClients(options: ListClientsOptions): Promise<Client[]> {
 
   // Pagination
   limit = pageSize
-  const paginationConstraints = [LimitFn(limit)]
-  if (firstSnapshot !== undefined) paginationConstraints.push(startAt(firstSnapshot))
+  paginationConstraints = [LimitFn(limit)]
 
   // Fetching
   return executeQuery(clientsRef, ...whereConstraints, ...orderConstraints, ...paginationConstraints)
 }
 
 async function listClientsRefresh(): Promise<Client[]> {
-  const paginationConstraints = [LimitFn(limit)]
-  if (firstSnapshot !== undefined) paginationConstraints.push(startAt(firstSnapshot))
   return executeQuery(clientsRef, ...whereConstraints, ...orderConstraints, ...paginationConstraints)
 }
 
 async function listClientsNextPage(): Promise<Client[]> {
-  const paginationConstraints = [LimitFn(limit)]
+  paginationConstraints = [LimitFn(limit)]
   if (lastSnapshot !== undefined) paginationConstraints.push(startAfter(lastSnapshot))
   return executeQuery(clientsRef, ...whereConstraints, ...orderConstraints, ...paginationConstraints)
 }
 
 async function listClientsPreviousPage(): Promise<Client[]> {
-  const paginationConstraints = [limitToLast(limit)]
+  paginationConstraints = [limitToLast(limit)]
   if (firstSnapshot !== undefined) paginationConstraints.push(endBefore(firstSnapshot))
-  return executeQuery(clientsRef, ...whereConstraints, ...orderConstraints, ...paginationConstraints)
-}
-
-async function listClientsPageSizeChange(pageSize: number): Promise<Client[]> {
-  limit = pageSize
-  const paginationConstraints = [LimitFn(limit)]
   return executeQuery(clientsRef, ...whereConstraints, ...orderConstraints, ...paginationConstraints)
 }
 
@@ -101,10 +90,10 @@ const list = {
   refresh: listClientsRefresh,
   previousPage: listClientsPreviousPage,
   nextPage: listClientsNextPage,
-  changePagesize: listClientsPageSizeChange,
 }
 
 export { list }
+export type { ListClientsQueryOptions }
 
 // // Temporary mock data
 // const mockData: Client[] = [
