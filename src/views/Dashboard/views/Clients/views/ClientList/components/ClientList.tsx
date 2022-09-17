@@ -1,28 +1,26 @@
 import { SortingState } from '@tanstack/react-table'
 import { DashboardLayout } from 'features/dashboard'
-import React, { useEffect, useState } from 'react'
+import React, { HTMLAttributes, useEffect, useState } from 'react'
 import { Outlet } from 'react-router-dom'
 import { clients as apiClients, Client } from 'services'
 import * as S from './ClientList.styles'
 import { ClientListSearchFormState } from './ClientListSearchForm'
 
-interface ClientListProps {
+interface ClientListProps extends HTMLAttributes<HTMLDivElement> {
   onCreateClientButtonClicked?: () => void
   onShowClientDetailsClicked?: (clientId: string) => void
-  className?: string
 }
 
 // TODO: we don't have access to search, or selected pagination or sorting from this parent component.
 // Changing a controller should edit both the internal state and the URL (via callback). Then changes in
 // the URL causes the page to refetch.
 
+// TODO: Initial query running twice?? Check out why
+
 function ClientList(props: ClientListProps) {
   const { onCreateClientButtonClicked, onShowClientDetailsClicked, ...otherProps } = props
-  const [clients, setClients] = useState<Client[]>([])
 
-  // TODO: Place this inside view's Pagination component?
-  const [page, setPage] = useState(0)
-  const [rowsPerPage, setRowsPerPage] = useState(10)
+  const [clients, setClients] = useState<Client[]>([])
 
   useEffect(() => {
     const fetchData = async () => {
@@ -52,19 +50,16 @@ function ClientList(props: ClientListProps) {
 
   const handlePreviousPageClick = async () => {
     const data = await apiClients.list.previousPage()
-    setPage(page => page - 1)
     setClients(data)
   }
 
   const handleNextPageClick = async () => {
     const data = await apiClients.list.nextPage()
-    setPage(page => page + 1)
     setClients(data)
   }
 
-  const handleRowsPerPageChange = async (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const data = await apiClients.list.changePagesize(+event.target.value)
-    setRowsPerPage(+event.target.value)
+  const handleRowsPerPageChange = async (value: number) => {
+    const data = await apiClients.list.changePagesize(value)
     setClients(data)
   }
 
@@ -94,11 +89,9 @@ function ClientList(props: ClientListProps) {
               onSortingChange={handleSortChange}
             />
             <S.TablePagination
-              rowCount={-1}
-              page={page}
-              rowsPerPage={rowsPerPage}
-              previousPageButtonProps={{ onClick: handlePreviousPageClick }}
-              nextPageButtonProps={{ onClick: handleNextPageClick }}
+              resultsCount={clients.length}
+              onPreviousPageButtonClicked={handlePreviousPageClick}
+              onNextPageButtonClicked={handleNextPageClick}
               onRowsPerPageChange={handleRowsPerPageChange}
             />
           </S.TableWrapper>

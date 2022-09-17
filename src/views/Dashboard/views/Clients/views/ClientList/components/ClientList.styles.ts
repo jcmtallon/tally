@@ -1,8 +1,9 @@
 import styled, { css } from 'styled-components'
 import { fg, typo } from 'theme'
-import { Button, TablePagination as BaseTablePagination } from 'components'
+import { Button } from 'components'
 import { ClientListSearchForm } from './ClientListSearchForm'
 import { ClientTable } from './ClientTable'
+import { ClientListPagination } from './ClientListPagination/ClientListPagination'
 
 const Container = styled.div`
   display: flex;
@@ -68,7 +69,7 @@ const TableWrapper = styled.div`
 
 const TableActionButton = styled(Button).attrs({ color: 'highlight', size: 'medium' })``
 
-const TablePagination = styled(BaseTablePagination)``
+const TablePagination = styled(ClientListPagination)``
 
 const Table = styled(ClientTable)``
 

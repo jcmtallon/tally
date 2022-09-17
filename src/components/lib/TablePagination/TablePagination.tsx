@@ -93,7 +93,7 @@ function TablePagination(props: TablePaginationProps, ref: Ref<HTMLDivElement>) 
           {labelDisplayedRows({
             from: rowCount === 0 ? 0 : page * rowsPerPage + 1,
             to: getLabelDisplayedRowsTo(),
-            count: rowCount === -1 ? -1 : rowCount,
+            count: rowCount === -1 ? -1 : rowCount, // TODO: What?
           })}
         </S.DisplayedRowsLabel>
         <S.Actions
