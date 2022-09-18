@@ -15,7 +15,6 @@ const columnHelper = createColumnHelper<Client>()
 // TODO: lines
 
 // TODO: extend container props?
-// TODO: clicking sort icon 3 times disables sorting.
 interface ClientTableProps extends HTMLAttributes<HTMLDivElement> {
   clients?: Client[]
   // sortingState

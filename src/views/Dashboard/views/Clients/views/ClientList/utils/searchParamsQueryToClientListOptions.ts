@@ -12,6 +12,8 @@ function searchParamsQueryToClientListOptions(query: ClientListSearchParams): Li
   // TODO: make sure it is a valid sort field
   if (query.sort !== null) options.sortBy = query.sort
 
+  if (query.name) options.name = query.name
+
   return options
 }
 

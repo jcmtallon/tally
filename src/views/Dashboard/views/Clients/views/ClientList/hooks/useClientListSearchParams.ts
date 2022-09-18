@@ -1,17 +1,20 @@
 import { SortingState } from '@tanstack/react-table'
 import { useCallback, useMemo } from 'react'
 import { useSearchParams } from 'react-router-dom'
+import { ClientListSearchFormState } from '../components/ClientListSearchForm'
 
 const paramKey = {
   sort: 'sort',
   dir: 'dir',
   limit: 'limit',
+  name: 'name',
 }
 
 type ClientListSearchParams = {
   sort: string | null
   direction: string | null
   limit: string | null
+  name: string | null
 }
 
 function useClientListSearchParams() {
@@ -48,15 +51,27 @@ function useClientListSearchParams() {
     [setSearchParams],
   )
 
-  const setFilterParams = useCallback(() => {
-    setSearchParams({ name: 'test' })
-  }, [setSearchParams])
+  const setFilterParams = useCallback(
+    (values: ClientListSearchFormState) => {
+      setSearchParams(params => {
+        if (values.name !== '') {
+          params.set(paramKey.name, values.name)
+        } else {
+          params.delete(paramKey.name)
+        }
+
+        return params
+      })
+    },
+    [setSearchParams],
+  )
 
   const searchParamsQuery: ClientListSearchParams = useMemo(() => {
     return {
       sort: searchParams.get(paramKey.sort),
       direction: searchParams.get(paramKey.dir),
       limit: searchParams.get(paramKey.limit),
+      name: searchParams.get(paramKey.name),
     }
   }, [searchParams])
 

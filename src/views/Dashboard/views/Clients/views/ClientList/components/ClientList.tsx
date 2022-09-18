@@ -18,7 +18,7 @@ interface ClientListProps extends HTMLAttributes<HTMLDivElement> {
 function ClientList(props: ClientListProps) {
   const { onCreateClientButtonClicked, onShowClientDetailsClicked, ...otherProps } = props
 
-  const { searchParamsQuery, setLimitParams, setSortingParams } = useClientListSearchParams()
+  const { searchParamsQuery, setLimitParams, setSortingParams, setFilterParams } = useClientListSearchParams()
   const [clients, setClients] = useState<Client[]>([])
   const [page, setPage] = useState(0)
 
@@ -33,10 +33,7 @@ function ClientList(props: ClientListProps) {
   }, [searchParamsQuery])
 
   const handleClientSearch = async (state: ClientListSearchFormState) => {
-    const data = await apiClients.list.query({
-      name: state.name || undefined,
-    })
-    setClients(data)
+    setFilterParams(state)
   }
 
   const handleSortChange = (sorting: SortingState) => {
