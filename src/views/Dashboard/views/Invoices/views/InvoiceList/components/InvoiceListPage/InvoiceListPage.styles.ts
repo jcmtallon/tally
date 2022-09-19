@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components'
 import { fg, typo } from 'theme'
-import { InvoiceTable } from './InvoiceTable'
+import { Button } from 'components'
+import { InvoiceList as BaseInvoiceList } from '../InvoiceList'
 
 const Container = styled.div`
   display: flex;
@@ -20,7 +21,6 @@ const TopRow = styled.div`
 
   ${ContentSection}
 `
-
 const Header = styled.h1`
   font-weight: bold;
   padding: 10px;
@@ -28,13 +28,10 @@ const Header = styled.h1`
   ${typo(t => t.header.h4)};
 `
 
-const TableWrapper = styled.div`
-  display: flex;
-  padding: 10px;
+const CreateInvoiceButton = styled(Button).attrs({ size: 'large' })``
 
+const InvoiceList = styled(BaseInvoiceList)`
   ${ContentSection}
 `
 
-const Table = styled(InvoiceTable)``
-
-export { Header, Container, TopRow, TableWrapper, Table }
+export { Container, TopRow, Header, CreateInvoiceButton, InvoiceList }

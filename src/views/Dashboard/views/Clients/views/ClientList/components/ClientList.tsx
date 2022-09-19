@@ -4,7 +4,6 @@ import React, { HTMLAttributes, useEffect, useState } from 'react'
 import { Outlet } from 'react-router-dom'
 import { clients as apiClients, Client } from 'services'
 import { useClientListSearchParams } from '../hooks/useClientListSearchParams'
-import { searchParamsQueryToClientListOptions as mapParamsToOptions } from '../utils/searchParamsQueryToClientListOptions'
 import * as S from './ClientList.styles'
 import { ClientListSearchFormState } from './ClientListSearchForm'
 
@@ -24,13 +23,13 @@ function ClientList(props: ClientListProps) {
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await apiClients.list.query(mapParamsToOptions(searchParamsQuery))
+      const data = await apiClients.list()
       setClients(data)
       setPage(0)
     }
 
     fetchData()
-  }, [searchParamsQuery])
+  }, [])
 
   const handleClientSearch = async (state: ClientListSearchFormState) => {
     setFilterParams(state)
@@ -46,14 +45,10 @@ function ClientList(props: ClientListProps) {
   }
 
   const handlePreviousPageClick = async () => {
-    const data = await apiClients.list.previousPage()
-    setClients(data)
     setPage(page => page - 1)
   }
 
   const handleNextPageClick = async () => {
-    const data = await apiClients.list.nextPage()
-    setClients(data)
     setPage(page => page + 1)
   }
 

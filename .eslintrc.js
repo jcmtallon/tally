@@ -20,7 +20,25 @@ module.exports = {
           "error",
           { allowAsProps: true }
         ],
-        '@typescript-eslint/no-unused-vars': ['warn', { vars: 'all', args: 'after-used', ignoreRestSiblings: true }]
+        '@typescript-eslint/no-unused-vars': ['warn', { vars: 'all', args: 'after-used', ignoreRestSiblings: true }],
+        'no-param-reassign': ['error', {
+          props: true,
+          ignorePropertyModificationsFor: [
+            'acc', // for reduce accumulators
+            'accumulator', // for reduce accumulators
+            'e', // for e.returnvalue
+            'ctx', // for Koa routing
+            'context', // for Koa routing
+            'draft', // for immer produce
+            'ref', // for React static refs
+            'req', // for Express requests
+            'request', // for Express requests
+            'res', // for Express responses
+            'response', // for Express responses
+            '$scope', // for Angular 1 scopes
+            'staticContext', // for ReactRouter context
+          ]
+        }],
       },
       // Eslint was complaining that this file didn't match my project config. 
       // I applied the most voted solution indicated in this thread. Narrowing down the parser option to only ts files. 

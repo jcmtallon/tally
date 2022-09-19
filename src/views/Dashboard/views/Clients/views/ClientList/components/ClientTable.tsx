@@ -5,6 +5,7 @@ import {
   getCoreRowModel,
   flexRender,
   SortingState,
+  getPaginationRowModel,
 } from '@tanstack/react-table'
 import { createStylableComponent } from 'utils'
 import { Client } from 'services'
@@ -88,10 +89,9 @@ function ClientTable(props: ClientTableProps) {
     state: {
       sorting,
     },
-    manualPagination: true,
-    pageCount: -1, // # of pages unknown due to Firebase limitations (don't wanna paid for a Club function either)
     getCoreRowModel: getCoreRowModel(),
     onSortingChange: handleSortingChange,
+    getPaginationRowModel: getPaginationRowModel(),
   })
 
   return (

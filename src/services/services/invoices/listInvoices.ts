@@ -1,62 +1,45 @@
-import { collection, getDocs, WhereFilterOp, where, query } from 'firebase/firestore/lite'
+// import { collection, getDocs, query } from 'firebase/firestore/lite'
+// import { firestore } from '../../firestoreSetup'
 import { Invoice } from '../../types'
-import { firestore } from '../../firestoreSetup'
+import { paginateData, sortData } from '../../utils'
+import { mockInvoices } from './mockInvoices'
+
+// TODO: cache data.
+// TODO: refresh method for refreshing the list? Or different method to update only updated element...
+// but when a change could apply to multiple invoices, customers... better to refetch everything.
+
+const INVOICE_LIST_SORTABLE_FIELD = ['clientName', 'costAmount'] as const
+type InvoiceListSortableField = typeof INVOICE_LIST_SORTABLE_FIELD[number]
+
+const isInvoiceListSortableFiled = (value: string): value is InvoiceListSortableField =>
+  (INVOICE_LIST_SORTABLE_FIELD as readonly string[]).includes(value)
+
+interface ListInvoicesResponse {
+  data: Invoice[]
+  total: number
+}
 
 interface ListInvoicesOptions {
-  name?: string
+  limit?: number
+  page?: number
+  direction?: 'asc' | 'desc'
+  sortBy?: InvoiceListSortableField
 }
 
-const listInvoices = async (options: ListInvoicesOptions): Promise<Invoice[]> => {
-  const { name } = options
+const listInvoices = async (opts: ListInvoicesOptions): Promise<ListInvoicesResponse> => {
+  const { limit = 10, page = 0, direction = 'asc', sortBy = undefined } = opts
+  // const clientsRef = collection(firestore, `invoices`)
+  // const q = query(clientsRef)
+  // const docs = await getDocs(q)
+  const data = mockInvoices as Invoice[]
+  const sortedData = sortBy ? sortData(data, direction, sortBy) : data
+  const slicedData = paginateData(sortedData, page, limit)
 
-  const filters: [string, WhereFilterOp, string][] = []
-
-  if (name) filters.push(['name', '==', name])
-
-  const clientsRef = collection(firestore, `invoices`)
-  const whereArray = filters.map(f => where(f[0], f[1], f[2]))
-  const q = query(clientsRef, ...whereArray)
-  const docs = await getDocs(q)
-
-  const invoices: Invoice[] = []
-
-  // Temporary mock data
-  const mockData: Invoice[] = [
-    {
-      invoiceId: '1',
-      invoiceNumber: '002',
-      created: new Date(),
-      sent: new Date(),
-      paid: new Date(),
-      clientName: 'Pepe',
-      clientAddress: 'some address',
-      services: [],
-      status: 'draft',
-      costAmount: '5 EUR',
-      applicableTaxRate: '',
-      totalAmount: '',
-    },
-  ]
-
-  docs.forEach(doc => {
-    const data = doc.data()
-    invoices.push({
-      invoiceId: doc.id,
-      invoiceNumber: '002',
-      created: new Date(),
-      sent: new Date(),
-      paid: new Date(),
-      clientName: 'Pepe',
-      clientAddress: 'some address',
-      services: [],
-      status: 'draft',
-      costAmount: '',
-      applicableTaxRate: '',
-      totalAmount: '',
-    })
-  })
-
-  return mockData // Put clients back.
+  return {
+    data: slicedData,
+    total: data.length,
+  }
 }
 
-export { listInvoices }
+export { listInvoices, isInvoiceListSortableFiled, INVOICE_LIST_SORTABLE_FIELD }
+export type { ListInvoicesResponse, ListInvoicesOptions, InvoiceListSortableField }

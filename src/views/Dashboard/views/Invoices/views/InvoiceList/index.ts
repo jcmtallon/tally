@@ -1,1 +1,1 @@
-export { InvoiceList } from './components/InvoiceList'
+export { InvoiceListPage as InvoiceList } from './components/InvoiceListPage'

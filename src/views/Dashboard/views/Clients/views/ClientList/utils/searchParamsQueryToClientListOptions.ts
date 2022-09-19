@@ -1,8 +1,7 @@
-import { ListClientsQueryOptions } from 'services'
 import { ClientListSearchParams } from '../hooks/useClientListSearchParams'
 
-function searchParamsQueryToClientListOptions(query: ClientListSearchParams): ListClientsQueryOptions {
-  const options: ListClientsQueryOptions = {}
+function searchParamsQueryToClientListOptions(query: ClientListSearchParams) {
+  const options: any = {}
 
   if (query.direction === 'desc') options.desc = true
 

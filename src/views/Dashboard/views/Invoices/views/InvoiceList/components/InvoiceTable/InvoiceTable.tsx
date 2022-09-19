@@ -3,16 +3,43 @@ import { createStylableComponent } from 'utils'
 import { Invoice } from 'services'
 import * as S from './InvoiceTable.styles'
 
-// TODO: extend container props?
+type SortDirection = 'asc' | 'desc'
+
 interface InvoiceTableProps extends HTMLAttributes<HTMLDivElement> {
   invoices?: Invoice[]
+  orderBy?: string
+  order?: SortDirection
 
   onRowClicked?: (clientId: Invoice['invoiceId']) => void
   onCheckboxClicked?: (clientId: Invoice['invoiceId']) => void
+  onSortChanged?: (orderBy: string | undefined, direction: SortDirection | undefined) => void
 }
 
 function InvoiceTable(props: InvoiceTableProps) {
-  const { invoices = [], onRowClicked, ...otherProps } = props
+  const {
+    invoices = [],
+    orderBy = undefined,
+    order = undefined,
+    onRowClicked,
+    onSortChanged,
+    ...otherProps
+  } = props
+
+  const handleRequestSort = (field: string) => {
+    const isSameField = orderBy === field
+
+    if (!isSameField) {
+      onSortChanged?.(field, 'asc')
+      return
+    }
+
+    if (order === 'desc') {
+      onSortChanged?.(undefined, undefined)
+      return
+    }
+
+    onSortChanged?.(field, 'desc')
+  }
 
   return (
     <S.TableContainer {...otherProps}>
@@ -25,21 +52,19 @@ function InvoiceTable(props: InvoiceTableProps) {
                 aria-label="some aria label"
                 checked={clients.length > 0 && selected.length === clients.length}
               />
-            </S.Cell>
+            </S.Cell> */}
             <S.SortableCell
-              active={orderBy === 'name'}
-              direction={orderBy === 'name' ? order : 'asc'}
-              onClick={() => handleSortClick('name')}>
-              Nombre
+              active={orderBy === 'clientName'}
+              direction={orderBy === 'clientName' ? order : undefined}
+              onClick={() => handleRequestSort('clientName')}>
+              Nombre del cliente
             </S.SortableCell>
             <S.SortableCell
-              active={orderBy === 'email'}
-              direction={orderBy === 'email' ? order : 'asc'}
-              onClick={() => handleSortClick('email')}>
-              E-mail
-            </S.SortableCell> */}
-            <S.Cell>Nombre del cliente</S.Cell>
-            <S.Cell>Coste</S.Cell>
+              active={orderBy === 'costAmount'}
+              direction={orderBy === 'costAmount' ? order : undefined}
+              onClick={() => handleRequestSort('costAmount')}>
+              Coste
+            </S.SortableCell>
             <S.Cell align="right">Status</S.Cell>
           </S.TableRow>
         </S.TableHead>
