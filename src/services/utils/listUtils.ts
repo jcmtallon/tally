@@ -25,6 +25,7 @@ function getComparator<Key extends keyof any>(
 }
 
 function sortData<T extends {}>(data: T[], direction: Direction, orderBy: string): T[] {
+  // Spread is important to prevent from sort to mutate the original data.
   return [...data].sort(getComparator(direction, orderBy))
 }
 

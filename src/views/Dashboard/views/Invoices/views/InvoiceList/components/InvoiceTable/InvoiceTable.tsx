@@ -1,18 +1,21 @@
 import React, { HTMLAttributes } from 'react'
 import { createStylableComponent } from 'utils'
-import { Invoice } from 'services'
+import { Invoice, InvoiceListSortableField } from 'services'
 import * as S from './InvoiceTable.styles'
 
 type SortDirection = 'asc' | 'desc'
 
 interface InvoiceTableProps extends HTMLAttributes<HTMLDivElement> {
   invoices?: Invoice[]
-  orderBy?: string
+  orderBy?: InvoiceListSortableField
   order?: SortDirection
 
   onRowClicked?: (clientId: Invoice['invoiceId']) => void
   onCheckboxClicked?: (clientId: Invoice['invoiceId']) => void
-  onSortChanged?: (orderBy: string | undefined, direction: SortDirection | undefined) => void
+  onSortChanged?: (
+    orderBy: InvoiceListSortableField | undefined,
+    direction: SortDirection | undefined,
+  ) => void
 }
 
 function InvoiceTable(props: InvoiceTableProps) {
@@ -25,7 +28,7 @@ function InvoiceTable(props: InvoiceTableProps) {
     ...otherProps
   } = props
 
-  const handleRequestSort = (field: string) => {
+  const handleRequestSort = (field: InvoiceListSortableField) => {
     const isSameField = orderBy === field
 
     if (!isSameField) {

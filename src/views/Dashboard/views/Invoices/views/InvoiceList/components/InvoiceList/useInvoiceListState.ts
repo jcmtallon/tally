@@ -3,13 +3,7 @@ import { useReducer } from 'react'
 import { InvoiceListSortableField, isInvoiceListSortableFiled } from 'services'
 import { isNumber } from 'utils'
 import { ClientListSearchParams } from './useInvoiceListSearchParams'
-
-type State = {
-  page: number
-  limit: number
-  orderBy: InvoiceListSortableField | undefined
-  direction: 'asc' | 'desc' | undefined
-}
+import { InvoiceListState as State } from './InvoiceList.types'
 
 const changeSearchParams = (params: ClientListSearchParams) => ({
   type: 'changeSearchParams' as const,
@@ -44,12 +38,14 @@ interface MustResetPageOpts {
   limit: number
   direction: 'asc' | 'desc' | undefined
   orderBy: InvoiceListSortableField | undefined
+  search: string
 }
 
 function mustResetPage(opts: MustResetPageOpts): boolean {
   if (opts.prevState.limit !== opts.limit) return true
   if (opts.prevState.direction !== opts.direction) return true
   if (opts.prevState.orderBy !== opts.orderBy) return true
+  if (opts.prevState.filters.search !== opts.search) return true
   return false
 }
 
@@ -61,18 +57,22 @@ function reducer(state: State, action: Action): State {
         const newLimit = getLimit(action.payload.limit)
         const newDirection = getDirection(action.payload.dir)
         const newOrderBy = getOrderBy(action.payload.sort)
+        const newSearch = action.payload.search ?? ''
 
+        // TODO(now): Change param into draft State, then move page to last one.
         const resetPage = mustResetPage({
           prevState: state,
           limit: newLimit,
           direction: newDirection,
           orderBy: newOrderBy,
+          search: newSearch,
         })
 
         draft.page = resetPage ? 0 : newPage
         draft.limit = newLimit
         draft.orderBy = newOrderBy
         draft.direction = newDirection
+        draft.filters.search = newSearch
       })
 
     default:
@@ -85,6 +85,9 @@ const initialState: State = {
   limit: 10,
   orderBy: undefined,
   direction: undefined,
+  filters: {
+    search: '',
+  },
 }
 
 function useInvoiceListState() {

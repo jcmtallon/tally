@@ -8,11 +8,20 @@ import { mockInvoices } from './mockInvoices'
 // TODO: refresh method for refreshing the list? Or different method to update only updated element...
 // but when a change could apply to multiple invoices, customers... better to refetch everything.
 
+// TODO: Variable for switching to MOCK_DATA
+
 const INVOICE_LIST_SORTABLE_FIELD = ['clientName', 'costAmount'] as const
 type InvoiceListSortableField = typeof INVOICE_LIST_SORTABLE_FIELD[number]
 
 const isInvoiceListSortableFiled = (value: string): value is InvoiceListSortableField =>
   (INVOICE_LIST_SORTABLE_FIELD as readonly string[]).includes(value)
+
+function filterBySearchText(data: Invoice[], search: string): Invoice[] {
+  if (search === '') return data
+
+  const regexp = new RegExp(search, 'i')
+  return data.filter(x => regexp.test(x.clientName))
+}
 
 interface ListInvoicesResponse {
   data: Invoice[]
@@ -24,15 +33,17 @@ interface ListInvoicesOptions {
   page?: number
   direction?: 'asc' | 'desc'
   sortBy?: InvoiceListSortableField
+  search?: string
 }
 
 const listInvoices = async (opts: ListInvoicesOptions): Promise<ListInvoicesResponse> => {
-  const { limit = 10, page = 0, direction = 'asc', sortBy = undefined } = opts
+  const { limit = 10, page = 0, direction = 'asc', sortBy = undefined, search = '' } = opts
   // const clientsRef = collection(firestore, `invoices`)
   // const q = query(clientsRef)
   // const docs = await getDocs(q)
   const data = mockInvoices as Invoice[]
-  const sortedData = sortBy ? sortData(data, direction, sortBy) : data
+  const filteredData = filterBySearchText(data, search)
+  const sortedData = sortBy ? sortData(filteredData, direction, sortBy) : filteredData
   const slicedData = paginateData(sortedData, page, limit)
 
   return {
