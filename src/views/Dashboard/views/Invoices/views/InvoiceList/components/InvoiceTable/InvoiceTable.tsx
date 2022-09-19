@@ -1,6 +1,7 @@
 import React, { HTMLAttributes } from 'react'
 import { createStylableComponent } from 'utils'
 import { Invoice, InvoiceListSortableField } from 'services'
+import { TableCellProps } from 'components'
 import * as S from './InvoiceTable.styles'
 
 interface Sorting {
@@ -36,6 +37,18 @@ function InvoiceTable(props: InvoiceTableProps) {
     onSortChanged?.({ orderBy: field, direction: 'desc' })
   }
 
+  interface HeadCell {
+    id: keyof Invoice
+    label: string
+    align?: TableCellProps['align']
+  }
+
+  const headCells: readonly HeadCell[] = [
+    { label: 'Nombre del cliente', id: 'clientName' },
+    { label: 'Coste', id: 'costAmount' },
+    { label: 'Estado', id: 'status', align: 'right' },
+  ]
+
   return (
     <S.TableContainer {...otherProps}>
       <S.Table stickyHeader aria-label="Invoices Table">
@@ -48,19 +61,16 @@ function InvoiceTable(props: InvoiceTableProps) {
                 checked={clients.length > 0 && selected.length === clients.length}
               />
             </S.Cell> */}
-            <S.SortableCell
-              active={sorting?.orderBy === 'clientName'}
-              direction={sorting?.orderBy === 'clientName' ? sorting.direction : undefined}
-              onClick={() => handleRequestSort('clientName')}>
-              Nombre del cliente
-            </S.SortableCell>
-            <S.SortableCell
-              active={sorting?.orderBy === 'costAmount'}
-              direction={sorting?.orderBy === 'costAmount' ? sorting.direction : undefined}
-              onClick={() => handleRequestSort('costAmount')}>
-              Coste
-            </S.SortableCell>
-            <S.Cell align="right">Status</S.Cell>
+            {headCells.map(head => (
+              <S.SortableCell
+                key={head.id}
+                align={head.align}
+                active={sorting?.orderBy === head.id}
+                direction={sorting?.orderBy === head.id ? sorting.direction : undefined}
+                onClick={() => handleRequestSort(head.id as InvoiceListSortableField)}>
+                {head.label}
+              </S.SortableCell>
+            ))}
           </S.TableRow>
         </S.TableHead>
         <S.TableBody>
