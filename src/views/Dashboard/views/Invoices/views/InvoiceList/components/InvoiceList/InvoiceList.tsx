@@ -16,7 +16,7 @@ function InvoiceList(props: InvoiceListProps) {
   const { searchParamsQuery, setPageParam, setLimitParam, setSortingParams, setFilterParam } =
     useInvoiceListSearchParams()
 
-  const [{ page, limit, orderBy, direction, filters }, dispatch] = useInvoiceListState()
+  const [{ page, limit, sorting, filters }, dispatch] = useInvoiceListState()
   const [invoices, setInvoices] = useState<Invoice[]>([])
   const [totalInvoices, setTotalInvoices] = useState<number>(0)
 
@@ -43,11 +43,8 @@ function InvoiceList(props: InvoiceListProps) {
     setLimitParam(value)
   }
 
-  const sortChangeHandler = (
-    orderBy: InvoiceListState['orderBy'],
-    direction: InvoiceListState['direction'],
-  ) => {
-    setSortingParams(orderBy, direction)
+  const sortChangeHandler = (sorting: InvoiceListState['sorting'] | undefined) => {
+    setSortingParams(sorting)
   }
 
   return (
@@ -57,8 +54,7 @@ function InvoiceList(props: InvoiceListProps) {
         invoices={invoices}
         onRowClicked={invoice => onShowInvoiceDetailsClicked?.(invoice)}
         onSortChanged={sortChangeHandler}
-        orderBy={orderBy}
-        order={direction}
+        sorting={sorting}
       />
       <S.Pagination
         page={page}

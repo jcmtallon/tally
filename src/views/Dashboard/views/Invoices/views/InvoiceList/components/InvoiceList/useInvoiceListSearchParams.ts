@@ -42,18 +42,14 @@ function useInvoiceListSearchParams() {
   )
 
   const setSortingParams = useCallback(
-    (orderBy: InvoiceListState['orderBy'], direction: InvoiceListState['direction']) => {
+    (sorting: InvoiceListState['sorting']) => {
       setSearchParams(params => {
-        if (orderBy) {
-          params.set(paramKey.sort, orderBy)
-        } else {
+        if (!sorting) {
           params.delete(paramKey.sort)
-        }
-
-        if (direction) {
-          params.set(paramKey.dir, direction)
-        } else {
           params.delete(paramKey.dir)
+        } else {
+          params.set(paramKey.sort, sorting.orderBy)
+          params.set(paramKey.dir, sorting.direction)
         }
 
         return params

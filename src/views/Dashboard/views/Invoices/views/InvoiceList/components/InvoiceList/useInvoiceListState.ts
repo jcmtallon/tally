@@ -1,6 +1,6 @@
 import { produce } from 'immer'
 import { useReducer } from 'react'
-import { InvoiceListSortableField, isInvoiceListSortableFiled } from 'services'
+import { isInvoiceListSortableFiled } from 'services'
 import { isNumber } from 'utils'
 import { ClientListSearchParams } from './useInvoiceListSearchParams'
 import { InvoiceListState as State } from './InvoiceList.types'
@@ -20,32 +20,21 @@ function getLimit(param: string | null) {
   return param !== null && isNumber(param) ? parseInt(param, 10) : 0
 }
 
-function getDirection(param: string | null) {
-  if (param === null) return undefined
-  if (param === 'asc') return 'asc'
-  if (param === 'desc') return 'desc'
-  return undefined
+function getSorting(orderBy: string | null, direction: string | null): State['sorting'] {
+  if (orderBy === null) return undefined
+  if (!isInvoiceListSortableFiled(orderBy)) return undefined
+
+  return {
+    orderBy,
+    direction: direction === 'desc' ? 'desc' : 'asc',
+  }
 }
 
-function getOrderBy(param: string | null): InvoiceListSortableField | undefined {
-  if (param === null) return undefined
-
-  return isInvoiceListSortableFiled(param) ? param : undefined
-}
-
-interface MustResetPageOpts {
-  prevState: State
-  limit: number
-  direction: 'asc' | 'desc' | undefined
-  orderBy: InvoiceListSortableField | undefined
-  search: string
-}
-
-function mustResetPage(opts: MustResetPageOpts): boolean {
-  if (opts.prevState.limit !== opts.limit) return true
-  if (opts.prevState.direction !== opts.direction) return true
-  if (opts.prevState.orderBy !== opts.orderBy) return true
-  if (opts.prevState.filters.search !== opts.search) return true
+function mustResetPage(state: State, draft: State): boolean {
+  if (state.limit !== draft.limit) return true
+  if (state.sorting?.direction !== draft.sorting?.direction) return true
+  if (state.sorting?.orderBy !== draft.sorting?.orderBy) return true
+  if (state.filters.search !== draft.filters.search) return true
   return false
 }
 
@@ -53,26 +42,12 @@ function reducer(state: State, action: Action): State {
   switch (action.type) {
     case 'changeSearchParams':
       return produce(state, draft => {
-        const newPage = getPage(action.payload.page)
-        const newLimit = getLimit(action.payload.limit)
-        const newDirection = getDirection(action.payload.dir)
-        const newOrderBy = getOrderBy(action.payload.sort)
-        const newSearch = action.payload.search ?? ''
+        draft.sorting = getSorting(action.payload.sort, action.payload.dir)
+        draft.limit = getLimit(action.payload.limit)
+        draft.filters.search = action.payload.search ?? ''
 
-        // TODO(now): Change param into draft State, then move page to last one.
-        const resetPage = mustResetPage({
-          prevState: state,
-          limit: newLimit,
-          direction: newDirection,
-          orderBy: newOrderBy,
-          search: newSearch,
-        })
-
-        draft.page = resetPage ? 0 : newPage
-        draft.limit = newLimit
-        draft.orderBy = newOrderBy
-        draft.direction = newDirection
-        draft.filters.search = newSearch
+        const resetPage = mustResetPage(state, draft)
+        draft.page = resetPage ? 0 : getPage(action.payload.page)
       })
 
     default:
@@ -83,8 +58,7 @@ function reducer(state: State, action: Action): State {
 const initialState: State = {
   page: 0,
   limit: 10,
-  orderBy: undefined,
-  direction: undefined,
+  sorting: undefined,
   filters: {
     search: '',
   },

@@ -7,9 +7,11 @@ function invoiceListSearchParamsToApiOptions(params: ClientListSearchParams): Li
   const options: ListInvoicesOptions = {}
 
   if (page !== null && isNumber(page)) options.page = parseInt(page, 10)
+
   if (limit !== null && isNumber(limit)) options.limit = parseInt(limit, 10)
 
   if (sort !== null && isInvoiceListSortableFiled(sort)) options.sortBy = sort
+
   if (dir === 'desc') options.direction = dir
 
   options.search = search ?? ''

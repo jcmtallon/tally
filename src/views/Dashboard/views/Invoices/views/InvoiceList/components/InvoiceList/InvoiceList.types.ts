@@ -3,8 +3,12 @@ import { InvoiceListSortableField } from 'services'
 type InvoiceListState = {
   page: number
   limit: number
-  orderBy: InvoiceListSortableField | undefined
-  direction: 'asc' | 'desc' | undefined
+  sorting:
+    | {
+        orderBy: InvoiceListSortableField
+        direction: 'asc' | 'desc'
+      }
+    | undefined
   filters: {
     search: string
   }

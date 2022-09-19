@@ -3,45 +3,37 @@ import { createStylableComponent } from 'utils'
 import { Invoice, InvoiceListSortableField } from 'services'
 import * as S from './InvoiceTable.styles'
 
-type SortDirection = 'asc' | 'desc'
+interface Sorting {
+  orderBy: InvoiceListSortableField
+  direction: 'asc' | 'desc'
+}
 
 interface InvoiceTableProps extends HTMLAttributes<HTMLDivElement> {
   invoices?: Invoice[]
-  orderBy?: InvoiceListSortableField
-  order?: SortDirection
+  sorting?: Sorting
 
   onRowClicked?: (clientId: Invoice['invoiceId']) => void
   onCheckboxClicked?: (clientId: Invoice['invoiceId']) => void
-  onSortChanged?: (
-    orderBy: InvoiceListSortableField | undefined,
-    direction: SortDirection | undefined,
-  ) => void
+  onSortChanged?: (sorting: Sorting | undefined) => void
 }
 
 function InvoiceTable(props: InvoiceTableProps) {
-  const {
-    invoices = [],
-    orderBy = undefined,
-    order = undefined,
-    onRowClicked,
-    onSortChanged,
-    ...otherProps
-  } = props
+  const { invoices = [], sorting, onRowClicked, onSortChanged, ...otherProps } = props
 
   const handleRequestSort = (field: InvoiceListSortableField) => {
-    const isSameField = orderBy === field
+    const isSameField = sorting?.orderBy === field
 
     if (!isSameField) {
-      onSortChanged?.(field, 'asc')
+      onSortChanged?.({ orderBy: field, direction: 'asc' })
       return
     }
 
-    if (order === 'desc') {
-      onSortChanged?.(undefined, undefined)
+    if (sorting?.direction === 'desc') {
+      onSortChanged?.(undefined)
       return
     }
 
-    onSortChanged?.(field, 'desc')
+    onSortChanged?.({ orderBy: field, direction: 'desc' })
   }
 
   return (
@@ -57,14 +49,14 @@ function InvoiceTable(props: InvoiceTableProps) {
               />
             </S.Cell> */}
             <S.SortableCell
-              active={orderBy === 'clientName'}
-              direction={orderBy === 'clientName' ? order : undefined}
+              active={sorting?.orderBy === 'clientName'}
+              direction={sorting?.orderBy === 'clientName' ? sorting.direction : undefined}
               onClick={() => handleRequestSort('clientName')}>
               Nombre del cliente
             </S.SortableCell>
             <S.SortableCell
-              active={orderBy === 'costAmount'}
-              direction={orderBy === 'costAmount' ? order : undefined}
+              active={sorting?.orderBy === 'costAmount'}
+              direction={sorting?.orderBy === 'costAmount' ? sorting.direction : undefined}
               onClick={() => handleRequestSort('costAmount')}>
               Coste
             </S.SortableCell>
