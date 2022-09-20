@@ -53,8 +53,10 @@ function InvoiceList(props: InvoiceListProps) {
 
   return (
     <S.Container {...otherProps}>
-      <S.SearchForm values={filters} onValuesChange={searchFormChangeHandler} />
+      <S.SearchForm id="invoicesSearchForm" values={filters} onValuesChange={searchFormChangeHandler} />
+      <S.Actions id="invoicesActions" selected={selected} />
       <S.Table
+        id="invoicesTable"
         invoices={invoices}
         sorting={sorting}
         selected={selected}
@@ -62,7 +64,9 @@ function InvoiceList(props: InvoiceListProps) {
         onSortChanged={sortChangeHandler}
         onSelectedChanged={selectedChangeHandler}
       />
+      <S.TotalCounter id="invoicesTotal">{`${totalInvoices} resultados`}</S.TotalCounter>
       <S.Pagination
+        id="invoicesPagination"
         page={page}
         rowCount={totalInvoices}
         rowsPerPage={limit}
