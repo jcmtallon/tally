@@ -1,6 +1,6 @@
 // import { collection, getDocs, query } from 'firebase/firestore/lite'
 // import { firestore } from '../../firestoreSetup'
-import { Invoice } from '../../types'
+import { Invoice, InvoiceStatus } from '../../types'
 import { paginateData, sortData } from '../../utils'
 import { mockInvoices } from './mockInvoices'
 
@@ -23,6 +23,12 @@ function filterBySearchText(data: Invoice[], search: string): Invoice[] {
   return data.filter(x => regexp.test(x.clientName))
 }
 
+function filterByStatus(data: Invoice[], status: InvoiceStatus | undefined): Invoice[] {
+  if (status === undefined) return data
+
+  return data.filter(x => x.status === status)
+}
+
 interface ListInvoicesResponse {
   data: Invoice[]
   total: number
@@ -34,16 +40,18 @@ interface ListInvoicesOptions {
   direction?: 'asc' | 'desc'
   sortBy?: InvoiceListSortableField
   search?: string
+  status?: InvoiceStatus
 }
 
 const listInvoices = async (opts: ListInvoicesOptions): Promise<ListInvoicesResponse> => {
-  const { limit = 10, page = 0, direction = 'asc', sortBy = undefined, search = '' } = opts
+  const { limit = 10, page = 0, direction = 'asc', sortBy = undefined, search = '', status } = opts
   // const clientsRef = collection(firestore, `invoices`)
   // const q = query(clientsRef)
   // const docs = await getDocs(q)
   const data = mockInvoices as Invoice[]
-  const filteredData = filterBySearchText(data, search)
-  const sortedData = sortBy ? sortData(filteredData, direction, sortBy) : filteredData
+  const filteredByStatusData = filterByStatus(data, status)
+  const filteredByTextData = filterBySearchText(filteredByStatusData, search)
+  const sortedData = sortBy ? sortData(filteredByTextData, direction, sortBy) : filteredByTextData
   const slicedData = paginateData(sortedData, page, limit)
 
   return {

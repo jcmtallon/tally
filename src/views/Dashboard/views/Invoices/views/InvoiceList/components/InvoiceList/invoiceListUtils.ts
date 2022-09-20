@@ -1,9 +1,9 @@
-import { isInvoiceListSortableFiled, ListInvoicesOptions } from 'services'
+import { isInvoiceListSortableFiled, isInvoiceStatus, ListInvoicesOptions } from 'services'
 import { isNumber } from 'utils'
 import { ClientListSearchParams } from './useInvoiceListSearchParams'
 
 function invoiceListSearchParamsToApiOptions(params: ClientListSearchParams): ListInvoicesOptions {
-  const { page, limit, dir, sort, search } = params
+  const { page, limit, dir, sort, search, status } = params
   const options: ListInvoicesOptions = {}
 
   if (page !== null && isNumber(page)) options.page = parseInt(page, 10)
@@ -13,6 +13,8 @@ function invoiceListSearchParamsToApiOptions(params: ClientListSearchParams): Li
   if (sort !== null && isInvoiceListSortableFiled(sort)) options.sortBy = sort
 
   if (dir === 'desc') options.direction = dir
+
+  if (status !== null && isInvoiceStatus(status)) options.status = status
 
   options.search = search ?? ''
 

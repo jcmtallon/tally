@@ -1,6 +1,6 @@
 import { produce } from 'immer'
 import { useReducer } from 'react'
-import { isInvoiceListSortableFiled } from 'services'
+import { isInvoiceListSortableFiled, isInvoiceStatus } from 'services'
 import { isNumber } from 'utils'
 import { ClientListSearchParams } from './useInvoiceListSearchParams'
 import { InvoiceListState as State } from './InvoiceList.types'
@@ -35,11 +35,19 @@ function getSorting(orderBy: string | null, direction: string | null): State['so
   }
 }
 
+function getStatus(status: string | null): State['filters']['status'] | undefined {
+  if (status === null) return undefined
+  if (!isInvoiceStatus(status)) return undefined
+
+  return status
+}
+
 function mustResetPage(state: State, draft: State): boolean {
   if (state.limit !== draft.limit) return true
   if (state.sorting?.direction !== draft.sorting?.direction) return true
   if (state.sorting?.orderBy !== draft.sorting?.orderBy) return true
   if (state.filters.search !== draft.filters.search) return true
+  if (state.filters.status !== draft.filters.status) return true
   return false
 }
 
@@ -49,6 +57,7 @@ function reducer(state: State, action: Action): State {
       return produce(state, draft => {
         draft.sorting = getSorting(action.payload.sort, action.payload.dir)
         draft.limit = getLimit(action.payload.limit)
+        draft.filters.status = getStatus(action.payload.status)
         draft.filters.search = action.payload.search ?? ''
 
         const resetPage = mustResetPage(state, draft)
@@ -74,6 +83,7 @@ const initialState: State = {
   sorting: undefined,
   filters: {
     search: '',
+    status: undefined,
   },
 }
 

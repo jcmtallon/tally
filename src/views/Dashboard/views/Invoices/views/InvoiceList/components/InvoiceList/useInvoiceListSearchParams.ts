@@ -8,6 +8,7 @@ type ClientListSearchParams = {
   sort: string | null
   dir: string | null
   search: string | null
+  status: string | null
 }
 
 const paramKey: Record<keyof ClientListSearchParams, keyof ClientListSearchParams> = {
@@ -16,6 +17,7 @@ const paramKey: Record<keyof ClientListSearchParams, keyof ClientListSearchParam
   sort: 'sort',
   dir: 'dir',
   search: 'search',
+  status: 'status',
 }
 
 function useInvoiceListSearchParams() {
@@ -66,6 +68,13 @@ function useInvoiceListSearchParams() {
         } else {
           params.delete(paramKey.search)
         }
+
+        if (values.status) {
+          params.set(paramKey.status, values.status)
+        } else {
+          params.delete(paramKey.status)
+        }
+
         return params
       })
     },
@@ -79,6 +88,7 @@ function useInvoiceListSearchParams() {
       limit: searchParams.get(paramKey.limit),
       dir: searchParams.get(paramKey.dir),
       search: searchParams.get(paramKey.search),
+      status: searchParams.get(paramKey.status),
     }
   }, [searchParams])
 

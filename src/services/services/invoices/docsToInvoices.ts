@@ -15,7 +15,7 @@ function docToInvoice(doc: QueryDocumentSnapshot<DocumentData>): Invoice {
     clientName: 'Pepe',
     clientAddress: 'some address',
     services: [],
-    status: 'draft',
+    status: 'DRAFT',
     costAmount: '',
     applicableTaxRate: '',
     totalAmount: '',

@@ -1,4 +1,5 @@
 import { InvoiceServiceEntry } from './InvoiceServiceEntry'
+import { InvoiceStatus } from './InvoiceStatus'
 
 interface Invoice {
   invoiceId: string
@@ -9,7 +10,7 @@ interface Invoice {
   clientName: string
   clientAddress: string
   services: InvoiceServiceEntry[]
-  status: 'draft' | 'sent' | 'paid' | 'cancelled'
+  status: InvoiceStatus
   costAmount: string
   applicableTaxRate: string
   totalAmount: string

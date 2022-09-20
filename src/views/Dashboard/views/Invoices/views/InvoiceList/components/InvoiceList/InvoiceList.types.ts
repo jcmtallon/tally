@@ -1,4 +1,4 @@
-import { InvoiceListSortableField } from 'services'
+import { InvoiceListSortableField, InvoiceStatus } from 'services'
 
 type InvoiceListState = {
   selected: string[]
@@ -12,6 +12,7 @@ type InvoiceListState = {
     | undefined
   filters: {
     search: string
+    status: InvoiceStatus | undefined
   }
 }
 
