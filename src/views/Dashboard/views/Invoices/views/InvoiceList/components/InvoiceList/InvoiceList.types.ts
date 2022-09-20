@@ -1,6 +1,7 @@
 import { InvoiceListSortableField } from 'services'
 
 type InvoiceListState = {
+  selected: string[]
   page: number
   limit: number
   sorting:

@@ -10,7 +10,12 @@ const changeSearchParams = (params: ClientListSearchParams) => ({
   payload: params,
 })
 
-type Action = ReturnType<typeof changeSearchParams>
+const changeSelected = (selected: string[]) => ({
+  type: 'changeSelected' as const,
+  payload: { selected },
+})
+
+type Action = ReturnType<typeof changeSearchParams | typeof changeSelected>
 
 function getPage(param: string | null): number {
   return param !== null && isNumber(param) ? parseInt(param, 10) : 0
@@ -48,7 +53,14 @@ function reducer(state: State, action: Action): State {
 
         const resetPage = mustResetPage(state, draft)
         draft.page = resetPage ? 0 : getPage(action.payload.page)
+        draft.selected = []
       })
+
+    case 'changeSelected': {
+      return produce(state, draft => {
+        draft.selected = action.payload.selected
+      })
+    }
 
     default:
       return state
@@ -56,6 +68,7 @@ function reducer(state: State, action: Action): State {
 }
 
 const initialState: State = {
+  selected: [],
   page: 0,
   limit: 10,
   sorting: undefined,

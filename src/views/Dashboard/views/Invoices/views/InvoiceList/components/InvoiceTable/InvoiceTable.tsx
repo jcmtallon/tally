@@ -12,14 +12,23 @@ interface Sorting {
 interface InvoiceTableProps extends HTMLAttributes<HTMLDivElement> {
   invoices?: Invoice[]
   sorting?: Sorting
+  selected?: string[]
 
   onRowClicked?: (clientId: Invoice['invoiceId']) => void
-  onCheckboxClicked?: (clientId: Invoice['invoiceId']) => void
   onSortChanged?: (sorting: Sorting | undefined) => void
+  onSelectedChanged?: (selected: string[]) => void
 }
 
 function InvoiceTable(props: InvoiceTableProps) {
-  const { invoices = [], sorting, onRowClicked, onSortChanged, ...otherProps } = props
+  const {
+    invoices = [],
+    selected = [],
+    sorting,
+    onRowClicked,
+    onSortChanged,
+    onSelectedChanged,
+    ...otherProps
+  } = props
 
   const handleRequestSort = (field: InvoiceListSortableField) => {
     const isSameField = sorting?.orderBy === field
@@ -35,6 +44,34 @@ function InvoiceTable(props: InvoiceTableProps) {
     }
 
     onSortChanged?.({ orderBy: field, direction: 'desc' })
+  }
+
+  const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.checked) {
+      const newSelected = invoices.map(n => n.invoiceId)
+      onSelectedChanged?.(newSelected)
+      return
+    }
+    onSelectedChanged?.([])
+  }
+
+  const isSelected = (name: string) => selected.indexOf(name) !== -1
+
+  const handleCheckboxChange = (name: string) => {
+    const selectedIndex = selected.indexOf(name)
+    let newSelected: string[] = []
+
+    if (selectedIndex === -1) {
+      newSelected = newSelected.concat(selected, name)
+    } else if (selectedIndex === 0) {
+      newSelected = newSelected.concat(selected.slice(1))
+    } else if (selectedIndex === selected.length - 1) {
+      newSelected = newSelected.concat(selected.slice(0, -1))
+    } else if (selectedIndex > 0) {
+      newSelected = newSelected.concat(selected.slice(0, selectedIndex), selected.slice(selectedIndex + 1))
+    }
+
+    onSelectedChanged?.(newSelected)
   }
 
   interface HeadCell {
@@ -54,13 +91,13 @@ function InvoiceTable(props: InvoiceTableProps) {
       <S.Table stickyHeader aria-label="Invoices Table">
         <S.TableHead>
           <S.TableRow>
-            {/* <S.Cell align="center">
+            <S.Cell align="center">
               <S.Checkbox
                 onChange={handleSelectAllClick}
-                aria-label="some aria label"
-                checked={clients.length > 0 && selected.length === clients.length}
+                aria-label="Seleccionar todas las facturas"
+                checked={invoices.length > 0 && selected.length === invoices.length}
               />
-            </S.Cell> */}
+            </S.Cell>
             {headCells.map(head => (
               <S.SortableCell
                 key={head.id}
@@ -74,26 +111,21 @@ function InvoiceTable(props: InvoiceTableProps) {
           </S.TableRow>
         </S.TableHead>
         <S.TableBody>
-          {invoices.map(invoice => {
-            // const isItemSelected = isSelected(client.clientId)
-            // const labelId = `enhanced-table-checkbox-${index}`
-
-            return (
-              <S.TableRow key={invoice.invoiceId} onClick={() => onRowClicked?.(invoice.invoiceId)}>
-                {/* <S.Cell align="center">
-                  <S.Checkbox
-                    aria-labelledby={labelId}
-                    checked={isItemSelected}
-                    onChange={() => handleCheckboxChange(client.clientId)}
-                    onClick={e => e.stopPropagation()}
-                  />
-                </S.Cell> */}
-                <S.Cell>{invoice.clientName}</S.Cell>
-                <S.Cell>{invoice.costAmount}</S.Cell>
-                <S.Cell align="right">{invoice.status}</S.Cell>
-              </S.TableRow>
-            )
-          })}
+          {invoices.map((invoice, index) => (
+            <S.TableRow key={invoice.invoiceId} onClick={() => onRowClicked?.(invoice.invoiceId)}>
+              <S.Cell align="center">
+                <S.Checkbox
+                  aria-labelledby={`table-checkbox-${index}`}
+                  checked={isSelected(invoice.invoiceId)}
+                  onChange={() => handleCheckboxChange(invoice.invoiceId)}
+                  onClick={e => e.stopPropagation()}
+                />
+              </S.Cell>
+              <S.Cell>{invoice.clientName}</S.Cell>
+              <S.Cell>{invoice.costAmount}</S.Cell>
+              <S.Cell align="right">{invoice.status}</S.Cell>
+            </S.TableRow>
+          ))}
         </S.TableBody>
       </S.Table>
     </S.TableContainer>

@@ -16,7 +16,7 @@ function InvoiceList(props: InvoiceListProps) {
   const { searchParamsQuery, setPageParam, setLimitParam, setSortingParams, setFilterParam } =
     useInvoiceListSearchParams()
 
-  const [{ page, limit, sorting, filters }, dispatch] = useInvoiceListState()
+  const [{ page, limit, sorting, filters, selected }, dispatch] = useInvoiceListState()
   const [invoices, setInvoices] = useState<Invoice[]>([])
   const [totalInvoices, setTotalInvoices] = useState<number>(0)
 
@@ -47,14 +47,20 @@ function InvoiceList(props: InvoiceListProps) {
     setSortingParams(sorting)
   }
 
+  const selectedChangeHandler = (selected: string[]) => {
+    dispatch({ type: 'changeSelected', payload: { selected } })
+  }
+
   return (
     <S.Container {...otherProps}>
       <S.SearchForm values={filters} onValuesChange={searchFormChangeHandler} />
       <S.Table
         invoices={invoices}
+        sorting={sorting}
+        selected={selected}
         onRowClicked={invoice => onShowInvoiceDetailsClicked?.(invoice)}
         onSortChanged={sortChangeHandler}
-        sorting={sorting}
+        onSelectedChanged={selectedChangeHandler}
       />
       <S.Pagination
         page={page}
