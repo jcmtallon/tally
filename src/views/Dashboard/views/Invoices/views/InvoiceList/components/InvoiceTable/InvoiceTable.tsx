@@ -1,7 +1,8 @@
-import React, { HTMLAttributes } from 'react'
+import React, { HTMLAttributes, useMemo } from 'react'
 import { createStylableComponent } from 'utils'
-import { Invoice, InvoiceListSortableField } from 'services'
+import { Invoice } from 'services'
 import { TableCellProps } from 'components'
+import { InvoiceListSortableField, isInvoiceListSortableFiled } from '../InvoiceList'
 import * as S from './InvoiceTable.styles'
 
 interface Sorting {
@@ -75,23 +76,38 @@ function InvoiceTable(props: InvoiceTableProps) {
   }
 
   interface HeadCell {
-    id: keyof Invoice
+    id: keyof Invoice | 'revenue'
     label: string
     align?: TableCellProps['align']
+    width?: string
+    sortable?: boolean
   }
 
-  const headCells: readonly HeadCell[] = [
-    { label: 'Nombre del cliente', id: 'clientName' },
-    { label: 'Coste', id: 'costAmount' },
-    { label: 'Estado', id: 'status', align: 'right' },
-  ]
+  // Crear enhanced TableHead component. Pass this object from parent Table component.
+  const headCells: readonly HeadCell[] = useMemo(
+    () => [
+      {
+        label: 'Número',
+        id: 'invoiceNumber',
+        width: '100px',
+        sortable: isInvoiceListSortableFiled('invoiceNumber'),
+      },
+      { label: 'Nombre del cliente', id: 'clientName', sortable: isInvoiceListSortableFiled('clientName') },
+      { label: 'Cargo', id: 'costAmount', sortable: isInvoiceListSortableFiled('costAmount') },
+      { label: 'Ganancia', id: 'revenue', sortable: isInvoiceListSortableFiled('revenue') },
+      { label: 'Borrador', id: 'draft', sortable: isInvoiceListSortableFiled('draft') },
+      { label: 'Creada', id: 'created', sortable: isInvoiceListSortableFiled('created') },
+      { label: 'Estado', id: 'status', align: 'right', sortable: isInvoiceListSortableFiled('status') },
+    ],
+    [],
+  )
 
   return (
     <S.TableContainer {...otherProps}>
       <S.Table stickyHeader aria-label="Invoices Table">
         <S.TableHead>
           <S.TableRow>
-            <S.Cell align="center">
+            <S.Cell align="center" width="48px">
               <S.Checkbox
                 onChange={handleSelectAllClick}
                 aria-label="Seleccionar todas las facturas"
@@ -100,8 +116,10 @@ function InvoiceTable(props: InvoiceTableProps) {
             </S.Cell>
             {headCells.map(head => (
               <S.SortableCell
+                width={head.width}
                 key={head.id}
                 align={head.align}
+                hideSortIcon={!head.sortable}
                 active={sorting?.orderBy === head.id}
                 direction={sorting?.orderBy === head.id ? sorting.direction : undefined}
                 onClick={() => handleRequestSort(head.id as InvoiceListSortableField)}>
@@ -121,8 +139,17 @@ function InvoiceTable(props: InvoiceTableProps) {
                   onClick={e => e.stopPropagation()}
                 />
               </S.Cell>
-              <S.Cell>{invoice.clientName}</S.Cell>
-              <S.Cell>{invoice.costAmount}</S.Cell>
+              <S.Cell>{invoice.invoiceNumber}</S.Cell>
+              <S.Cell>
+                <S.ClientNameWrapper>
+                  <S.ClientName>{invoice.clientName}</S.ClientName>
+                  <S.ClientMail>{invoice.clientEmail}</S.ClientMail>
+                </S.ClientNameWrapper>
+              </S.Cell>
+              <S.Cell>{invoice.totalAmount}</S.Cell>
+              <S.Cell>+60€</S.Cell>
+              <S.Cell>{invoice.draft && 'B'}</S.Cell>
+              <S.Cell>{invoice.created && invoice.created.toLocaleString()}</S.Cell>
               <S.Cell align="right">{invoice.status}</S.Cell>
             </S.TableRow>
           ))}

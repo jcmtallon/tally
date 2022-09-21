@@ -7,6 +7,7 @@ interface Invoice {
   created: Date
   sent: Date
   paid: Date
+  clientEmail: string
   clientName: string
   clientAddress: string
   services: InvoiceServiceEntry[]
@@ -14,6 +15,7 @@ interface Invoice {
   costAmount: string
   applicableTaxRate: string
   totalAmount: string
+  draft?: boolean
 }
 
 export type { Invoice }

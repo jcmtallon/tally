@@ -1,9 +1,9 @@
 import { produce } from 'immer'
 import { useReducer } from 'react'
-import { isInvoiceListSortableFiled, isInvoiceStatus } from 'services'
+import { isInvoiceStatus } from 'services'
 import { isNumber } from 'utils'
 import { ClientListSearchParams } from './useInvoiceListSearchParams'
-import { InvoiceListState as State } from './InvoiceList.types'
+import { InvoiceListState as State, isInvoiceListSortableFiled } from './InvoiceList.types'
 
 const changeSearchParams = (params: ClientListSearchParams) => ({
   type: 'changeSearchParams' as const,

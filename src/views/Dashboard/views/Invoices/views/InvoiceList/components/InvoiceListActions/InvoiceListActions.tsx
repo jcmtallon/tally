@@ -22,8 +22,8 @@ function InvoiceListActions(props: InvoiceListActionsProps) {
   return (
     <S.Container {...otherProps}>
       <S.Metrics>
-        <span>Cargos</span>
-        <span>Ganancias</span>
+        <span>Cargos 100€</span>
+        <span>Ganancias 100€</span>
       </S.Metrics>
       <S.Actions>
         {selected.length > 0 && <span>{`${selected.length} seleccionados`}</span>}

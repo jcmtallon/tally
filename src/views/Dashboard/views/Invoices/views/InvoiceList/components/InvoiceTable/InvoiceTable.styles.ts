@@ -10,6 +10,7 @@ import {
   TableSortableCell,
   TablePagination,
 } from 'components'
+import { fg, typo } from 'theme'
 
 const Container = styled.div`
   width: 100%;
@@ -24,10 +25,27 @@ const Table = styled(BaseTable)``
 const TableHead = styled(BaseTableHead)``
 const TableBody = styled(BaseTableBody)``
 const TableRow = styled(BaseTableRow)``
-const Cell = styled(BaseTableCell)``
-const SortableCell = styled(TableSortableCell)``
+
+const Cell = styled(BaseTableCell)<{ width?: string }>`
+  width: ${({ width }) => width || 'auto'};
+`
+
+const SortableCell = styled(TableSortableCell)<{ width?: string }>`
+  width: ${({ width }) => width || 'auto'};
+`
 
 const Checkbox = styled(BaseCheckbox)``
+
+const ClientNameWrapper = styled.div``
+
+const ClientName = styled.div`
+  ${typo(t => t.body.xs.strong)};
+`
+
+const ClientMail = styled.div`
+  ${typo(t => t.body.xs)};
+  ${fg(f => f.neutral.muted)};
+`
 
 const Pagination = styled(TablePagination)`
   padding: 10px 0px;
@@ -37,6 +55,9 @@ export {
   Cell,
   Checkbox,
   Container,
+  ClientName,
+  ClientMail,
+  ClientNameWrapper,
   Pagination,
   SortableCell,
   Table,

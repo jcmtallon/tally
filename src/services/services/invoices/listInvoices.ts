@@ -10,12 +10,6 @@ import { mockInvoices } from './mockInvoices'
 
 // TODO: Variable for switching to MOCK_DATA
 
-const INVOICE_LIST_SORTABLE_FIELD = ['clientName', 'costAmount'] as const
-type InvoiceListSortableField = typeof INVOICE_LIST_SORTABLE_FIELD[number]
-
-const isInvoiceListSortableFiled = (value: string): value is InvoiceListSortableField =>
-  (INVOICE_LIST_SORTABLE_FIELD as readonly string[]).includes(value)
-
 function filterBySearchText(data: Invoice[], search: string): Invoice[] {
   if (search === '') return data
 
@@ -38,7 +32,7 @@ interface ListInvoicesOptions {
   limit?: number
   page?: number
   direction?: 'asc' | 'desc'
-  sortBy?: InvoiceListSortableField
+  sortBy?: string
   search?: string
   status?: InvoiceStatus
 }
@@ -60,5 +54,5 @@ const listInvoices = async (opts: ListInvoicesOptions): Promise<ListInvoicesResp
   }
 }
 
-export { listInvoices, isInvoiceListSortableFiled, INVOICE_LIST_SORTABLE_FIELD }
-export type { ListInvoicesResponse, ListInvoicesOptions, InvoiceListSortableField }
+export { listInvoices }
+export type { ListInvoicesResponse, ListInvoicesOptions }

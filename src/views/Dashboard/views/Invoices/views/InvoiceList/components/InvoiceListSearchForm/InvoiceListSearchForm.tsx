@@ -30,7 +30,7 @@ function InvoiceListSearchForm(props: InvoiceListSearchFormProps) {
           value={values.status ?? ''}
           options={[
             { value: '', label: '' },
-            { value: 'DRAFT', label: 'Pendiente' },
+            { value: 'PENDING', label: 'Pendiente' },
             { value: 'SENT', label: 'Enviado' },
             { value: 'PAID', label: 'Pagado' },
             { value: 'CANCELLED', label: 'Cancelado' },

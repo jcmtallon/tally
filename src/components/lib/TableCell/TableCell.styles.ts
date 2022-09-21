@@ -43,7 +43,7 @@ const HeadCell = styled.th`
 
 const BodyCell = styled.td`
   ${typo(t => t.body.md)};
-  ${fg(f => f.neutral.muted)};
+  ${fg(f => f.neutral.default)};
 `
 
 const FootCell = styled.td``
