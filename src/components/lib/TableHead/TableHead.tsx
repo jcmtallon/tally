@@ -17,5 +17,3 @@ const ForwardRefTableHead = React.forwardRef(TableHead)
 
 export { ForwardRefTableHead as TableHead }
 export type { TableHeadProps }
-
-// TODO: Create EnhancedTableHead with sorting props

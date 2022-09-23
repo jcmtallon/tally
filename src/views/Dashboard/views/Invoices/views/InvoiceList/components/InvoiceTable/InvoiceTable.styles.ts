@@ -4,11 +4,11 @@ import {
   Table as BaseTable,
   TableCell as BaseTableCell,
   TableContainer as BaseTableContainer,
-  TableHead as BaseTableHead,
   TableRow as BaseTableRow,
   TableBody as BaseTableBody,
   TableSortableCell,
   TablePagination,
+  EnhanceTableHead,
 } from 'components'
 import { fg, typo } from 'theme'
 
@@ -22,7 +22,9 @@ const TableContainer = styled(BaseTableContainer)`
 `
 
 const Table = styled(BaseTable)``
-const TableHead = styled(BaseTableHead)``
+
+const TableHead = styled(EnhanceTableHead)``
+
 const TableBody = styled(BaseTableBody)``
 const TableRow = styled(BaseTableRow)``
 

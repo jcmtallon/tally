@@ -21,7 +21,7 @@ type InvoiceListState = {
   limit: number
   sorting:
     | {
-        orderBy: InvoiceListSortableField
+        orderBy: string
         direction: 'asc' | 'desc'
       }
     | undefined
