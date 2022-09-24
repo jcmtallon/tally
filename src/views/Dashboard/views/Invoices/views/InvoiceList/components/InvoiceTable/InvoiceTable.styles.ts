@@ -1,20 +1,15 @@
 import styled from 'styled-components'
 import {
-  Checkbox as BaseCheckbox,
   Table as BaseTable,
   TableCell as BaseTableCell,
   TableContainer as BaseTableContainer,
   TableRow as BaseTableRow,
   TableBody as BaseTableBody,
-  TableSortableCell,
+  TableRowCheckbox,
   TablePagination,
-  EnhanceTableHead,
+  EnhanceTableHead as BaseEnhanceTableHead,
 } from 'components'
 import { fg, typo } from 'theme'
-
-const Container = styled.div`
-  width: 100%;
-`
 
 const TableContainer = styled(BaseTableContainer)`
   max-height: 600px;
@@ -22,21 +17,11 @@ const TableContainer = styled(BaseTableContainer)`
 `
 
 const Table = styled(BaseTable)``
-
-const TableHead = styled(EnhanceTableHead)``
-
+const EnhancedTableHead = styled(BaseEnhanceTableHead)``
 const TableBody = styled(BaseTableBody)``
 const TableRow = styled(BaseTableRow)``
-
-const Cell = styled(BaseTableCell)<{ width?: string }>`
-  width: ${({ width }) => width || 'auto'};
-`
-
-const SortableCell = styled(TableSortableCell)<{ width?: string }>`
-  width: ${({ width }) => width || 'auto'};
-`
-
-const Checkbox = styled(BaseCheckbox)``
+const Cell = styled(BaseTableCell)``
+const EnhancedCheckbox = styled(TableRowCheckbox)``
 
 const ClientNameWrapper = styled.div``
 
@@ -55,16 +40,14 @@ const Pagination = styled(TablePagination)`
 
 export {
   Cell,
-  Checkbox,
-  Container,
+  EnhancedCheckbox,
   ClientName,
   ClientMail,
   ClientNameWrapper,
   Pagination,
-  SortableCell,
   Table,
   TableBody,
   TableContainer,
-  TableHead,
+  EnhancedTableHead,
   TableRow,
 }

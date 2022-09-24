@@ -1,20 +1,15 @@
 import React, { HTMLAttributes, useMemo } from 'react'
 import { createStylableComponent } from 'utils'
 import { Invoice } from 'services'
-import { EnhanceTableHeadCell } from 'components'
+import { EnhanceTableHeadCell, TableSorting as Sorting } from 'components'
 import { Merge } from 'type-fest'
 import { isInvoiceListSortableFiled } from '../InvoiceList'
 import * as S from './InvoiceTable.styles'
 
-interface Sorting {
-  orderBy: string
-  direction: 'asc' | 'desc'
-}
-
 interface InvoiceTableProps extends HTMLAttributes<HTMLDivElement> {
   invoices?: Invoice[]
   sorting?: Sorting
-  selected?: string[]
+  selected?: Invoice['invoiceId'][]
 
   onRowClicked?: (clientId: Invoice['invoiceId']) => void
   onSortChanged?: (sorting: Sorting | undefined) => void
@@ -31,25 +26,6 @@ function InvoiceTable(props: InvoiceTableProps) {
     onSelectedChanged,
     ...otherProps
   } = props
-
-  const isSelected = (name: string) => selected.indexOf(name) !== -1
-
-  const handleCheckboxChange = (name: string) => {
-    const selectedIndex = selected.indexOf(name)
-    let newSelected: string[] = []
-
-    if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, name)
-    } else if (selectedIndex === 0) {
-      newSelected = newSelected.concat(selected.slice(1))
-    } else if (selectedIndex === selected.length - 1) {
-      newSelected = newSelected.concat(selected.slice(0, -1))
-    } else if (selectedIndex > 0) {
-      newSelected = newSelected.concat(selected.slice(0, selectedIndex), selected.slice(selectedIndex + 1))
-    }
-
-    onSelectedChanged?.(newSelected)
-  }
 
   type TableHeadCell = Merge<EnhanceTableHeadCell, { id: keyof Invoice | 'revenue' }>
   const headCells: readonly TableHeadCell[] = useMemo(
@@ -73,7 +49,7 @@ function InvoiceTable(props: InvoiceTableProps) {
   return (
     <S.TableContainer {...otherProps}>
       <S.Table stickyHeader aria-label="Invoices Table">
-        <S.TableHead
+        <S.EnhancedTableHead
           cells={headCells}
           rowIds={allRowIds}
           sorting={sorting}
@@ -85,10 +61,11 @@ function InvoiceTable(props: InvoiceTableProps) {
           {invoices.map((invoice, index) => (
             <S.TableRow key={invoice.invoiceId} onClick={() => onRowClicked?.(invoice.invoiceId)}>
               <S.Cell align="center">
-                <S.Checkbox
+                <S.EnhancedCheckbox
+                  rowId={invoice.invoiceId}
+                  selectedRowIds={selected}
                   aria-labelledby={`table-checkbox-${index}`}
-                  checked={isSelected(invoice.invoiceId)}
-                  onChange={() => handleCheckboxChange(invoice.invoiceId)}
+                  onSelectedChanged={onSelectedChanged}
                   onClick={e => e.stopPropagation()}
                 />
               </S.Cell>

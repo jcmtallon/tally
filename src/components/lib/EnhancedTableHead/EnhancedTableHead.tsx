@@ -113,4 +113,4 @@ function EnhanceTableHead(props: EnhanceTableHeadProps, ref: Ref<HTMLTableSectio
 const ForwardRefEnhanceTableHead = React.forwardRef(EnhanceTableHead)
 
 export { ForwardRefEnhanceTableHead as EnhanceTableHead }
-export type { EnhanceTableHeadProps, EnhanceTableHeadCell }
+export type { EnhanceTableHeadProps, EnhanceTableHeadCell, Sorting as TableSorting }
