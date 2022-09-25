@@ -1,11 +1,10 @@
 import { produce } from 'immer'
 import { useReducer } from 'react'
-import { isInvoiceStatus } from 'services'
 import { isNumber } from 'utils'
-import { InvoiceListSearchParams } from './useInvoiceListSearchParams'
-import { InvoiceListState as State, isInvoiceListSortableFiled } from './InvoiceList.types'
+import { ClientListSearchParams } from './useClientListSearchParams'
+import { ClientListState as State, isClientListSortableFiled } from './clientList.types'
 
-const changeSearchParams = (params: InvoiceListSearchParams) => ({
+const changeSearchParams = (params: ClientListSearchParams) => ({
   type: 'changeSearchParams' as const,
   payload: params,
 })
@@ -31,7 +30,7 @@ function getLimit(param: string | null) {
 
 function getSorting(orderBy: string | null, direction: string | null): State['sorting'] {
   if (orderBy === null) return undefined
-  if (!isInvoiceListSortableFiled(orderBy)) return undefined
+  if (!isClientListSortableFiled(orderBy)) return undefined
 
   return {
     orderBy,
@@ -39,19 +38,11 @@ function getSorting(orderBy: string | null, direction: string | null): State['so
   }
 }
 
-function getStatus(status: string | null): State['filters']['status'] | undefined {
-  if (status === null) return undefined
-  if (!isInvoiceStatus(status)) return undefined
-
-  return status
-}
-
 function mustResetPage(state: State, draft: State): boolean {
   if (state.limit !== draft.limit) return true
   if (state.sorting?.direction !== draft.sorting?.direction) return true
   if (state.sorting?.orderBy !== draft.sorting?.orderBy) return true
   if (state.filters.search !== draft.filters.search) return true
-  if (state.filters.status !== draft.filters.status) return true
   return false
 }
 
@@ -62,7 +53,6 @@ const initialState: State = {
   sorting: undefined,
   filters: {
     search: '',
-    status: undefined,
   },
 }
 
@@ -72,7 +62,6 @@ function reducer(state: State, action: Action): State {
       return produce(state, draft => {
         draft.sorting = getSorting(action.payload.sort, action.payload.dir)
         draft.limit = getLimit(action.payload.limit)
-        draft.filters.status = getStatus(action.payload.status)
         draft.filters.search = action.payload.search ?? ''
 
         const resetPage = mustResetPage(state, draft)
@@ -95,9 +84,9 @@ function reducer(state: State, action: Action): State {
   }
 }
 
-function useInvoiceListState() {
+function useClientListState() {
   const [state, dispatch] = useReducer(reducer, initialState)
   return [state, dispatch] as const
 }
 
-export { useInvoiceListState }
+export { useClientListState }

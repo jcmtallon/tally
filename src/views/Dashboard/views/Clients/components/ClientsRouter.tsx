@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, Routes, Navigate, useNavigate } from 'react-router-dom'
+import { Route, Routes, Navigate, useNavigate, Outlet } from 'react-router-dom'
 import { SlidePanelRoute } from 'components'
 import { ClientList } from '../views/ClientList'
 import { ClientDetails } from '../views/ClientDetails'
@@ -13,10 +13,13 @@ function ClientsRouter() {
       <Route
         path="/"
         element={
-          <ClientList
-            onCreateClientButtonClicked={() => navigate(`/dashboard/clients/create`)}
-            onShowClientDetailsClicked={clientId => navigate(`/dashboard/clients/${clientId}`)}
-          />
+          <>
+            <ClientList
+              onCreateClientButtonClicked={() => navigate(`/dashboard/clients/create`)}
+              onShowClientDetailsClicked={clientId => navigate(`/dashboard/clients/${clientId}`)}
+            />
+            <Outlet />
+          </>
         }>
         <Route
           path="create"

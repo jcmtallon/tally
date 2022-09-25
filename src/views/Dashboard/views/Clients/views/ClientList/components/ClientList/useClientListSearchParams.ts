@@ -1,8 +1,8 @@
 import { useCallback, useMemo } from 'react'
 import { useSearchParams } from 'react-router-dom'
-import { InvoiceListState } from './InvoiceList.types'
+import { ClientListState } from './clientList.types'
 
-type InvoiceListSearchParams = {
+type ClientListSearchParams = {
   page: string | null
   limit: string | null
   sort: string | null
@@ -11,7 +11,7 @@ type InvoiceListSearchParams = {
   status: string | null
 }
 
-const paramKey: Record<keyof InvoiceListSearchParams, keyof InvoiceListSearchParams> = {
+const paramKey: Record<keyof ClientListSearchParams, keyof ClientListSearchParams> = {
   page: 'page',
   limit: 'limit',
   sort: 'sort',
@@ -20,11 +20,11 @@ const paramKey: Record<keyof InvoiceListSearchParams, keyof InvoiceListSearchPar
   status: 'status',
 }
 
-function useInvoiceListSearchParams() {
+function useClientListSearchParams() {
   const [searchParams, setSearchParams] = useSearchParams()
 
   const setPageParam = useCallback(
-    (page: InvoiceListState['page']) => {
+    (page: ClientListState['page']) => {
       setSearchParams(params => {
         params.set(paramKey.page, page.toString())
         return params
@@ -34,7 +34,7 @@ function useInvoiceListSearchParams() {
   )
 
   const setLimitParam = useCallback(
-    (value: InvoiceListState['limit']) => {
+    (value: ClientListState['limit']) => {
       setSearchParams(params => {
         params.set(paramKey.limit, value.toString())
         return params
@@ -44,7 +44,7 @@ function useInvoiceListSearchParams() {
   )
 
   const setSortingParams = useCallback(
-    (sorting: InvoiceListState['sorting']) => {
+    (sorting: ClientListState['sorting']) => {
       setSearchParams(params => {
         if (!sorting) {
           params.delete(paramKey.sort)
@@ -61,18 +61,12 @@ function useInvoiceListSearchParams() {
   )
 
   const setFilterParam = useCallback(
-    (values: InvoiceListState['filters']) => {
+    (values: ClientListState['filters']) => {
       setSearchParams(params => {
         if (values.search) {
           params.set(paramKey.search, values.search)
         } else {
           params.delete(paramKey.search)
-        }
-
-        if (values.status) {
-          params.set(paramKey.status, values.status)
-        } else {
-          params.delete(paramKey.status)
         }
 
         return params
@@ -81,7 +75,7 @@ function useInvoiceListSearchParams() {
     [setSearchParams],
   )
 
-  const searchParamsQuery: InvoiceListSearchParams = useMemo(() => {
+  const searchParamsQuery: ClientListSearchParams = useMemo(() => {
     return {
       sort: searchParams.get(paramKey.sort),
       page: searchParams.get(paramKey.page),
@@ -101,5 +95,5 @@ function useInvoiceListSearchParams() {
   } as const
 }
 
-export { useInvoiceListSearchParams }
-export type { InvoiceListSearchParams }
+export { useClientListSearchParams }
+export type { ClientListSearchParams }

@@ -6,7 +6,6 @@ import {
   TableRow as BaseTableRow,
   TableBody as BaseTableBody,
   TableRowCheckbox,
-  TablePagination,
   EnhanceTableHead as BaseEnhanceTableHead,
 } from 'components'
 import { fg, typo } from 'theme'
@@ -34,17 +33,12 @@ const ClientMail = styled.div`
   ${fg(f => f.neutral.muted)};
 `
 
-const Pagination = styled(TablePagination)`
-  padding: 10px 0px;
-`
-
 export {
   Cell,
   EnhancedCheckbox,
   ClientName,
   ClientMail,
   ClientNameWrapper,
-  Pagination,
   Table,
   TableBody,
   TableContainer,

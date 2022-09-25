@@ -28,21 +28,23 @@ function InvoiceTable(props: InvoiceTableProps) {
   } = props
 
   type TableHeadCell = Merge<EnhanceTableHeadCell, { id: keyof Invoice | 'revenue' }>
-  const headCells: readonly TableHeadCell[] = useMemo(
-    () =>
-      [
-        { label: 'Número', id: 'invoiceNumber', width: '100px' },
-        { label: 'Nombre del cliente', id: 'clientName' },
-        { label: 'Cargo', id: 'costAmount', width: '50px' },
-        { label: 'Ganancia', id: 'revenue', width: '50px' },
-        { label: 'Borr.', id: 'draft', width: '50px' },
-        { label: 'Creada', id: 'created', width: '180px' },
-        { label: 'Estado', id: 'status', align: 'right', width: '10px' },
-      ].map(cell => {
-        return { ...cell, sortable: isInvoiceListSortableFiled(cell.id) } as TableHeadCell // Shrug
-      }),
-    [],
-  )
+  const headCells: readonly TableHeadCell[] = useMemo(() => {
+    const cells: TableHeadCell[] = [
+      { label: 'Número', id: 'invoiceNumber', width: '100px' },
+      { label: 'Nombre del cliente', id: 'clientName' },
+      { label: 'Cargo', id: 'costAmount', width: '50px' },
+      { label: 'Ganancia', id: 'revenue', width: '50px' },
+      { label: 'Borr.', id: 'draft', width: '50px' },
+      { label: 'Creada', id: 'created', width: '180px' },
+      { label: 'Estado', id: 'status', align: 'right', width: '120px' },
+    ]
+
+    return cells.map(cell => {
+      // eslint-disable-next-line no-param-reassign -- Shrug
+      cell.sortable = isInvoiceListSortableFiled(cell.id)
+      return cell
+    })
+  }, [])
 
   const allRowIds = useMemo(() => invoices.map(n => n.invoiceId), [invoices])
 

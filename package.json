@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@tanstack/react-table": "^8.5.13",
     "assert": "^2.0.0",
     "firebase": "^9.9.1",
     "formik": "^2.2.9",

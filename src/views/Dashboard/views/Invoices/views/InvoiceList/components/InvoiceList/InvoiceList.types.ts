@@ -1,3 +1,4 @@
+import { TableSorting } from 'components'
 import { InvoiceStatus } from 'services'
 
 // TODO: make so these array values are typed also as Invoice keys.
@@ -19,12 +20,7 @@ type InvoiceListState = {
   selected: string[]
   page: number
   limit: number
-  sorting:
-    | {
-        orderBy: string
-        direction: 'asc' | 'desc'
-      }
-    | undefined
+  sorting: TableSorting | undefined
   filters: {
     search: string
     status: InvoiceStatus | undefined

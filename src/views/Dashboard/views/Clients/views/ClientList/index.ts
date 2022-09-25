@@ -1,1 +1,1 @@
-export { ClientList } from './components/ClientList'
+export { ClientListPage as ClientList } from './components/ClientListPage'

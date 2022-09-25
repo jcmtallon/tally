@@ -1,18 +1,13 @@
 import styled from 'styled-components'
 import {
-  Checkbox as BaseCheckbox,
   Table as BaseTable,
   TableCell as BaseTableCell,
   TableContainer as BaseTableContainer,
-  TableHead as BaseTableHead,
   TableRow as BaseTableRow,
   TableBody as BaseTableBody,
-  TableSortableCell,
+  TableRowCheckbox,
+  EnhanceTableHead as BaseEnhanceTableHead,
 } from 'components'
-
-const Container = styled.div`
-  width: 100%;
-`
 
 const TableContainer = styled(BaseTableContainer)`
   max-height: 600px;
@@ -20,12 +15,10 @@ const TableContainer = styled(BaseTableContainer)`
 `
 
 const Table = styled(BaseTable)``
-const TableHead = styled(BaseTableHead)``
+const EnhancedTableHead = styled(BaseEnhanceTableHead)``
 const TableBody = styled(BaseTableBody)``
 const TableRow = styled(BaseTableRow)``
 const Cell = styled(BaseTableCell)``
-const SortableCell = styled(TableSortableCell)``
+const EnhancedCheckbox = styled(TableRowCheckbox)``
 
-const Checkbox = styled(BaseCheckbox)``
-
-export { Cell, Checkbox, Container, SortableCell, Table, TableBody, TableContainer, TableHead, TableRow }
+export { Cell, EnhancedCheckbox, Table, TableBody, TableContainer, EnhancedTableHead, TableRow }
