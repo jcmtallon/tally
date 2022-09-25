@@ -93,18 +93,23 @@ function EnhanceTableHead(props: EnhanceTableHeadProps, ref: Ref<HTMLTableSectio
             />
           )}
         </S.Cell>
-        {cells.map(head => (
-          <S.SortableCell
-            width={head.width}
-            key={head.id}
-            align={head.align}
-            hideSortIcon={!head.sortable}
-            active={sorting?.orderBy === head.id}
-            direction={sorting?.orderBy === head.id ? sorting.direction : undefined}
-            onClick={() => handleRequestSort(head.id)}>
-            {head.label}
-          </S.SortableCell>
-        ))}
+        {cells.map(head =>
+          head.sortable ? (
+            <S.SortableCell
+              width={head.width}
+              key={head.id}
+              align={head.align}
+              active={sorting?.orderBy === head.id}
+              direction={sorting?.orderBy === head.id ? sorting.direction : undefined}
+              onClick={() => handleRequestSort(head.id)}>
+              {head.label}
+            </S.SortableCell>
+          ) : (
+            <S.Cell width={head.width} key={head.id} align={head.align}>
+              {head.label}
+            </S.Cell>
+          ),
+        )}
       </S.Row>
     </S.Head>
   )
