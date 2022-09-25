@@ -15,7 +15,7 @@ interface ClientListProps extends HTMLAttributes<HTMLDivElement> {
 function ClientList(props: ClientListProps) {
   const { onShowClientDetailsClicked, ...otherProps } = props
 
-  const { searchParamsQuery, setPageParam, setLimitParam, setSortingParams, setFilterParam } =
+  const { clientListSearchParams, setPageParam, setLimitParam, setSortingParams, setFilterParam } =
     useClientListSearchParams()
 
   const [{ page, limit, sorting, filters, selected }, dispatch] = useClientListState()
@@ -24,14 +24,14 @@ function ClientList(props: ClientListProps) {
 
   useEffect(() => {
     const fetchData = async () => {
-      dispatch({ type: 'changeSearchParams', payload: searchParamsQuery })
-      const response = await listClients(paramsToApiOpts(searchParamsQuery))
+      dispatch({ type: 'changeSearchParams', payload: clientListSearchParams })
+      const response = await listClients(paramsToApiOpts(clientListSearchParams))
       setClients(response.data)
       setTotalClients(response.total)
     }
 
     fetchData()
-  }, [searchParamsQuery, dispatch])
+  }, [clientListSearchParams, dispatch])
 
   const searchFormChangeHandler = (filters: ClientListState['filters']) => {
     setFilterParam(filters)

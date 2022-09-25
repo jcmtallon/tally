@@ -1,64 +1,19 @@
 import { useCallback, useMemo } from 'react'
-import { useSearchParams } from 'react-router-dom'
+import { ListSearchParams, useListSearchParams } from 'hooks'
 import { ClientListState } from './clientList.types'
 
-type ClientListSearchParams = {
-  page: string | null
-  limit: string | null
-  sort: string | null
-  dir: string | null
+interface ClientListSearchParams extends ListSearchParams {
   search: string | null
   status: string | null
 }
 
-const paramKey: Record<keyof ClientListSearchParams, keyof ClientListSearchParams> = {
-  page: 'page',
-  limit: 'limit',
-  sort: 'sort',
-  dir: 'dir',
+const paramKey = {
   search: 'search',
   status: 'status',
 }
 
 function useClientListSearchParams() {
-  const [searchParams, setSearchParams] = useSearchParams()
-
-  const setPageParam = useCallback(
-    (page: ClientListState['page']) => {
-      setSearchParams(params => {
-        params.set(paramKey.page, page.toString())
-        return params
-      })
-    },
-    [setSearchParams],
-  )
-
-  const setLimitParam = useCallback(
-    (value: ClientListState['limit']) => {
-      setSearchParams(params => {
-        params.set(paramKey.limit, value.toString())
-        return params
-      })
-    },
-    [setSearchParams],
-  )
-
-  const setSortingParams = useCallback(
-    (sorting: ClientListState['sorting']) => {
-      setSearchParams(params => {
-        if (!sorting) {
-          params.delete(paramKey.sort)
-          params.delete(paramKey.dir)
-        } else {
-          params.set(paramKey.sort, sorting.orderBy)
-          params.set(paramKey.dir, sorting.direction)
-        }
-
-        return params
-      })
-    },
-    [setSearchParams],
-  )
+  const { listSearchParams, searchParams, setSearchParams, ...other } = useListSearchParams()
 
   const setFilterParam = useCallback(
     (values: ClientListState['filters']) => {
@@ -75,23 +30,18 @@ function useClientListSearchParams() {
     [setSearchParams],
   )
 
-  const searchParamsQuery: ClientListSearchParams = useMemo(() => {
+  const clientListSearchParams: ClientListSearchParams = useMemo(() => {
     return {
-      sort: searchParams.get(paramKey.sort),
-      page: searchParams.get(paramKey.page),
-      limit: searchParams.get(paramKey.limit),
-      dir: searchParams.get(paramKey.dir),
       search: searchParams.get(paramKey.search),
       status: searchParams.get(paramKey.status),
+      ...listSearchParams,
     }
-  }, [searchParams])
+  }, [searchParams, listSearchParams])
 
   return {
-    searchParamsQuery,
-    setLimitParam,
-    setPageParam,
-    setSortingParams,
+    clientListSearchParams,
     setFilterParam,
+    ...other,
   } as const
 }
 
