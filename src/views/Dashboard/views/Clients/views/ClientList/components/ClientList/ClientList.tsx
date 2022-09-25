@@ -24,12 +24,12 @@ function ClientList(props: ClientListProps) {
 
   useEffect(() => {
     const fetchData = async () => {
-      dispatch({ type: 'changeSearchParams', payload: clientListSearchParams })
       const response = await listClients(paramsToApiOpts(clientListSearchParams))
-      setClients(response.data)
       setTotalClients(response.total)
+      setClients(response.data)
     }
 
+    dispatch({ type: 'changeSearchParams', payload: clientListSearchParams })
     fetchData()
   }, [clientListSearchParams, dispatch])
 

@@ -39,8 +39,12 @@ async function listClients(opts: ListClientsOptions): Promise<ListClientsRespons
   const sortedData = sortBy ? sortData(filteredByTextData, direction, sortBy) : filteredByTextData
   const slicedData = paginateData(sortedData, page, limit)
 
+  await new Promise(resolve => {
+    setTimeout(resolve, 50)
+  })
+
   return {
-    total: data.length,
+    total: filteredByTextData.length,
     data: slicedData,
   }
 }

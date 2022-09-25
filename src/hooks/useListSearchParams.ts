@@ -33,6 +33,7 @@ function useListSearchParams() {
     (value: number) => {
       setSearchParams(params => {
         params.set(paramKey.limit, value.toString())
+        params.set(paramKey.page, '0')
         return params
       })
     },
@@ -49,6 +50,8 @@ function useListSearchParams() {
           params.set(paramKey.sort, sorting.orderBy)
           params.set(paramKey.dir, sorting.direction)
         }
+
+        params.set(paramKey.page, '0')
 
         return params
       })

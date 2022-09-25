@@ -50,7 +50,7 @@ const listInvoices = async (opts: ListInvoicesOptions): Promise<ListInvoicesResp
 
   return {
     data: slicedData,
-    total: data.length,
+    total: filteredByTextData.length,
   }
 }
 

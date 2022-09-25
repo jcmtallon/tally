@@ -8,11 +8,8 @@ function clientListSearchParamsToApiOptions(params: ClientListSearchParams): Lis
   const options: ListClientsOptions = {}
 
   if (page !== null && isNumber(page)) options.page = parseInt(page, 10)
-
   if (limit !== null && isNumber(limit)) options.limit = parseInt(limit, 10)
-
   if (sort !== null && isClientListSortableFiled(sort)) options.sortBy = sort
-
   if (dir === 'desc') options.direction = dir
 
   options.search = search ?? ''

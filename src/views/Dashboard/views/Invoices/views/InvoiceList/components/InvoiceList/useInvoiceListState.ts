@@ -26,7 +26,7 @@ function getPage(param: string | null): number {
 }
 
 function getLimit(param: string | null) {
-  return param !== null && isNumber(param) ? parseInt(param, 10) : 0
+  return param !== null && isNumber(param) ? parseInt(param, 10) : 10
 }
 
 function getSorting(orderBy: string | null, direction: string | null): State['sorting'] {

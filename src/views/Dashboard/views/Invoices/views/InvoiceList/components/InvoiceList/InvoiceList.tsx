@@ -22,12 +22,12 @@ function InvoiceList(props: InvoiceListProps) {
 
   useEffect(() => {
     const fetchData = async () => {
-      dispatch({ type: 'changeSearchParams', payload: searchParamsQuery })
       const response = await listInvoices(paramsToApiOpts(searchParamsQuery))
       setInvoices(response.data)
       setTotalInvoices(response.total)
     }
 
+    dispatch({ type: 'changeSearchParams', payload: searchParamsQuery })
     fetchData()
   }, [searchParamsQuery, dispatch])
 

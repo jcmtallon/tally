@@ -2,7 +2,6 @@ import { produce } from 'immer'
 import { TableSorting } from 'components'
 import { useReducer } from 'react'
 import { isNumber } from 'utils'
-import { isEqual } from 'lodash'
 
 const changeSelected = (selected: string[]) => ({
   type: 'changeSelected' as const,
@@ -26,7 +25,6 @@ type State = {
   page: number
   limit: number
   sorting: TableSorting | undefined
-  filters: {}
 }
 
 const initialState: State = {
@@ -34,17 +32,16 @@ const initialState: State = {
   page: 0,
   limit: 10,
   sorting: undefined,
-  filters: {},
 }
 
 type Action = ReturnType<typeof changeSelected | typeof changeSearchParams>
 
 function getPage(param: string | null): number {
-  return param !== null && isNumber(param) ? parseInt(param, 10) : 0
+  return param !== null && isNumber(param) ? parseInt(param, 10) : initialState.page
 }
 
 function getLimit(param: string | null) {
-  return param !== null && isNumber(param) ? parseInt(param, 10) : 0
+  return param !== null && isNumber(param) ? parseInt(param, 10) : initialState.limit
 }
 
 function getSorting(orderBy: string | null, direction: string | null): State['sorting'] {
@@ -60,7 +57,6 @@ function mustResetPage(state: State, draft: State): boolean {
   if (state.limit !== draft.limit) return true
   if (state.sorting?.direction !== draft.sorting?.direction) return true
   if (state.sorting?.orderBy !== draft.sorting?.orderBy) return true
-  if (!isEqual(state.filters, draft.filters)) return true
   return false
 }
 
@@ -93,4 +89,5 @@ function useListStateReducer() {
   return [state, dispatch] as const
 }
 
-export { useListStateReducer }
+export { useListStateReducer, initialState as listInitialState, reducer as listStateReducer }
+export type { State as ListState }

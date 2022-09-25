@@ -37,6 +37,7 @@ function useInvoiceListSearchParams() {
     (value: InvoiceListState['limit']) => {
       setSearchParams(params => {
         params.set(paramKey.limit, value.toString())
+        params.delete(paramKey.page)
         return params
       })
     },
@@ -53,6 +54,8 @@ function useInvoiceListSearchParams() {
           params.set(paramKey.sort, sorting.orderBy)
           params.set(paramKey.dir, sorting.direction)
         }
+
+        params.delete(paramKey.page)
 
         return params
       })
@@ -74,6 +77,8 @@ function useInvoiceListSearchParams() {
         } else {
           params.delete(paramKey.status)
         }
+
+        params.delete(paramKey.page)
 
         return params
       })

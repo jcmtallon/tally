@@ -24,6 +24,8 @@ function useClientListSearchParams() {
           params.delete(paramKey.search)
         }
 
+        params.set('page', '0')
+
         return params
       })
     },
