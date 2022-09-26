@@ -1,5 +1,5 @@
 import { produce } from 'immer'
-import { TableSorting } from 'components'
+import { TableSorting, TABLE_ROWS_PER_PAGE_OPTIONS } from 'components'
 import { useReducer } from 'react'
 import { isNumber } from 'utils'
 
@@ -41,7 +41,9 @@ function getPage(param: string | null): number {
 }
 
 function getLimit(param: string | null) {
-  return param !== null && isNumber(param) ? parseInt(param, 10) : initialState.limit
+  return param !== null && isNumber(param) && TABLE_ROWS_PER_PAGE_OPTIONS.includes(parseInt(param, 10))
+    ? parseInt(param, 10)
+    : initialState.limit
 }
 
 function getSorting(orderBy: string | null, direction: string | null): State['sorting'] {

@@ -53,6 +53,8 @@ function ClientList(props: ClientListProps) {
     dispatch({ type: 'changeSelected', payload: { selected } })
   }
 
+  console.log('limit', limit)
+
   return (
     <S.Container {...otherProps}>
       <S.SearchForm id="clientsSearchForm" values={filters} onValuesChange={searchFormChangeHandler} />

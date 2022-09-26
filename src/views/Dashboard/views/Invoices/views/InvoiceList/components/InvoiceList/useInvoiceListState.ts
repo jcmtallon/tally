@@ -1,9 +1,9 @@
 import { produce } from 'immer'
 import { useReducer } from 'react'
 import { isInvoiceStatus } from 'services'
-import { isNumber } from 'utils'
+import { listInitialState, listStateReducer } from 'hooks'
 import { InvoiceListSearchParams } from './useInvoiceListSearchParams'
-import { InvoiceListState as State, isInvoiceListSortableFiled } from './InvoiceList.types'
+import { InvoiceListState as State } from './InvoiceList.types'
 
 const changeSearchParams = (params: InvoiceListSearchParams) => ({
   type: 'changeSearchParams' as const,
@@ -21,22 +21,12 @@ const resetFilters = () => ({
 
 type Action = ReturnType<typeof changeSearchParams | typeof changeSelected | typeof resetFilters>
 
-function getPage(param: string | null): number {
-  return param !== null && isNumber(param) ? parseInt(param, 10) : 0
-}
-
-function getLimit(param: string | null) {
-  return param !== null && isNumber(param) ? parseInt(param, 10) : 10
-}
-
-function getSorting(orderBy: string | null, direction: string | null): State['sorting'] {
-  if (orderBy === null) return undefined
-  if (!isInvoiceListSortableFiled(orderBy)) return undefined
-
-  return {
-    orderBy,
-    direction: direction === 'desc' ? 'desc' : 'asc',
-  }
+const initialState: State = {
+  ...listInitialState,
+  filters: {
+    search: '',
+    status: undefined,
+  },
 }
 
 function getStatus(status: string | null): State['filters']['status'] | undefined {
@@ -46,38 +36,27 @@ function getStatus(status: string | null): State['filters']['status'] | undefine
   return status
 }
 
-function mustResetPage(state: State, draft: State): boolean {
-  if (state.limit !== draft.limit) return true
-  if (state.sorting?.direction !== draft.sorting?.direction) return true
-  if (state.sorting?.orderBy !== draft.sorting?.orderBy) return true
-  if (state.filters.search !== draft.filters.search) return true
-  if (state.filters.status !== draft.filters.status) return true
-  return false
-}
+function mustResetPage(state: State['filters'], draft: State['filters']): boolean {
+  if (state.search !== draft.search) return true
+  if (state.status !== draft.status) return true
 
-const initialState: State = {
-  selected: [],
-  page: 0,
-  limit: 10,
-  sorting: undefined,
-  filters: {
-    search: '',
-    status: undefined,
-  },
+  return false
 }
 
 function reducer(state: State, action: Action): State {
   switch (action.type) {
     case 'changeSearchParams':
       return produce(state, draft => {
-        draft.sorting = getSorting(action.payload.sort, action.payload.dir)
-        draft.limit = getLimit(action.payload.limit)
-        draft.filters.status = getStatus(action.payload.status)
-        draft.filters.search = action.payload.search ?? ''
+        const listState = listStateReducer(state, action)
 
-        const resetPage = mustResetPage(state, draft)
-        draft.page = resetPage ? 0 : getPage(action.payload.page)
-        draft.selected = []
+        draft.limit = listState.limit
+        draft.sorting = listState.sorting
+        draft.selected = listState.selected
+
+        draft.filters.search = action.payload.search ?? ''
+        draft.filters.status = getStatus(action.payload.status)
+
+        draft.page = mustResetPage(state.filters, draft.filters) ? 0 : listState.page
       })
 
     case 'changeSelected': {

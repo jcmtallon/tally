@@ -4,12 +4,10 @@ import { ClientListState } from './clientList.types'
 
 interface ClientListSearchParams extends ListSearchParams {
   search: string | null
-  status: string | null
 }
 
 const paramKey = {
   search: 'search',
-  status: 'status',
 }
 
 function useClientListSearchParams() {
@@ -35,7 +33,6 @@ function useClientListSearchParams() {
   const clientListSearchParams: ClientListSearchParams = useMemo(() => {
     return {
       search: searchParams.get(paramKey.search),
-      status: searchParams.get(paramKey.status),
       ...listSearchParams,
     }
   }, [searchParams, listSearchParams])

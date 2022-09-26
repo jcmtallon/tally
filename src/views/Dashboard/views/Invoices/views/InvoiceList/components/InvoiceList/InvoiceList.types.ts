@@ -1,4 +1,4 @@
-import { TableSorting } from 'components'
+import { ListState } from 'hooks'
 import { InvoiceStatus } from 'services'
 
 // TODO: make so these array values are typed also as Invoice keys.
@@ -16,11 +16,7 @@ type InvoiceListSortableField = typeof INVOICE_LIST_SORTABLE_FIELD[number]
 const isInvoiceListSortableFiled = (value: string): value is InvoiceListSortableField =>
   (INVOICE_LIST_SORTABLE_FIELD as readonly string[]).includes(value)
 
-type InvoiceListState = {
-  selected: string[]
-  page: number
-  limit: number
-  sorting: TableSorting | undefined
+interface InvoiceListState extends ListState {
   filters: {
     search: string
     status: InvoiceStatus | undefined

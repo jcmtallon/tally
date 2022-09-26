@@ -7,13 +7,13 @@ import { invoiceListSearchParamsToApiOptions as paramsToApiOpts } from './invoic
 import { InvoiceListState } from './InvoiceList.types'
 
 interface InvoiceListProps extends HTMLAttributes<HTMLDivElement> {
-  onShowInvoiceDetailsClicked?: (clientId: string) => void
+  onShowInvoiceDetailsClicked?: (invoiceId: string) => void
 }
 
 function InvoiceList(props: InvoiceListProps) {
   const { onShowInvoiceDetailsClicked, ...otherProps } = props
 
-  const { searchParamsQuery, setPageParam, setLimitParam, setSortingParams, setFilterParam } =
+  const { invoiceListSearchParams, setPageParam, setLimitParam, setSortingParams, setFilterParam } =
     useInvoiceListSearchParams()
 
   const [{ page, limit, sorting, filters, selected }, dispatch] = useInvoiceListState()
@@ -22,14 +22,14 @@ function InvoiceList(props: InvoiceListProps) {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await listInvoices(paramsToApiOpts(searchParamsQuery))
+      const response = await listInvoices(paramsToApiOpts(invoiceListSearchParams))
       setInvoices(response.data)
       setTotalInvoices(response.total)
     }
 
-    dispatch({ type: 'changeSearchParams', payload: searchParamsQuery })
+    dispatch({ type: 'changeSearchParams', payload: invoiceListSearchParams })
     fetchData()
-  }, [searchParamsQuery, dispatch])
+  }, [invoiceListSearchParams, dispatch])
 
   const searchFormChangeHandler = (filters: InvoiceListState['filters']) => {
     setFilterParam(filters)

@@ -72,7 +72,7 @@ function TablePagination(props: TablePaginationProps, ref: Ref<HTMLDivElement>) 
     }
   }, [rowCount, page, rowsPerPage])
 
-  // TODO: improve on this
+  // TODO: use proper Select component.
   const selectOptions = rowsPerPageOptions.map(opt => ({ value: opt, label: opt.toString() }))
 
   const getLabelDisplayedRowsTo = (): number => {
@@ -86,14 +86,19 @@ function TablePagination(props: TablePaginationProps, ref: Ref<HTMLDivElement>) 
         <S.RowsPerPageContainer>
           {rowsPerPageOptions.length > 1 && <S.RowsPerPageLabel>{rowsPerPageSelectLabel}</S.RowsPerPageLabel>}
           {rowsPerPageOptions.length > 1 && (
-            <S.RowsPerPageSelect onChange={onRowsPerPageChange} options={selectOptions} {...SelectProps} />
+            <S.RowsPerPageSelect
+              onChange={onRowsPerPageChange}
+              options={selectOptions}
+              value={rowsPerPage}
+              {...SelectProps}
+            />
           )}
         </S.RowsPerPageContainer>
         <S.DisplayedRowsLabel>
           {labelDisplayedRows({
             from: rowCount === 0 ? 0 : page * rowsPerPage + 1,
             to: getLabelDisplayedRowsTo(),
-            count: rowCount === -1 ? -1 : rowCount, // TODO: What?
+            count: rowCount === -1 ? -1 : rowCount,
           })}
         </S.DisplayedRowsLabel>
         <S.Actions
