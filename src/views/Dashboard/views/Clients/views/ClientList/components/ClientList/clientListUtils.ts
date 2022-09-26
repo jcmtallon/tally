@@ -1,18 +1,19 @@
 import { ListClientsOptions } from 'services'
-import { isNumber } from 'utils'
-import { isClientListSortableFiled } from './clientList.types'
-import { ClientListSearchParams } from './useClientListSearchParams'
+import { ClientListState, isClientListSortableFiled } from './clientList.types'
 
-function clientListSearchParamsToApiOptions(params: ClientListSearchParams): ListClientsOptions {
-  const { page, limit, dir, sort, search } = params
+function clientListSearchParamsToApiOptions(params: ClientListState): ListClientsOptions {
+  const { page, limit, filters, sorting } = params
   const options: ListClientsOptions = {}
 
-  if (page !== null && isNumber(page)) options.page = parseInt(page, 10)
-  if (limit !== null && isNumber(limit)) options.limit = parseInt(limit, 10)
-  if (sort !== null && isClientListSortableFiled(sort)) options.sortBy = sort
-  if (dir === 'desc') options.direction = dir
+  options.page = page
+  options.limit = limit
 
-  options.search = search ?? ''
+  if (sorting?.orderBy !== undefined && isClientListSortableFiled(sorting.orderBy))
+    options.sortBy = sorting.orderBy
+
+  if (sorting?.direction === 'desc') options.direction = sorting.direction
+
+  options.search = filters.search ?? ''
 
   return options
 }

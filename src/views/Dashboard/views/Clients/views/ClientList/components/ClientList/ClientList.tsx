@@ -18,20 +18,25 @@ function ClientList(props: ClientListProps) {
   const { clientListSearchParams, setPageParam, setLimitParam, setSortingParams, setFilterParam } =
     useClientListSearchParams()
 
-  const [{ page, limit, sorting, filters, selected }, dispatch] = useClientListState()
+  const [listState, dispatch] = useClientListState()
   const [clients, setClients] = useState<Client[]>([])
   const [totalClients, setTotalClients] = useState<number>(0)
 
   useEffect(() => {
+    dispatch({ type: 'changeSearchParams', payload: clientListSearchParams })
+  }, [clientListSearchParams, dispatch])
+
+  useEffect(() => {
     const fetchData = async () => {
-      const response = await listClients(paramsToApiOpts(clientListSearchParams))
+      const response = await listClients(paramsToApiOpts(listState))
       setTotalClients(response.total)
       setClients(response.data)
     }
 
-    dispatch({ type: 'changeSearchParams', payload: clientListSearchParams })
     fetchData()
-  }, [clientListSearchParams, dispatch])
+  }, [listState])
+
+  const { page, limit, sorting, filters, selected } = listState
 
   const searchFormChangeHandler = (filters: ClientListState['filters']) => {
     setFilterParam(filters)

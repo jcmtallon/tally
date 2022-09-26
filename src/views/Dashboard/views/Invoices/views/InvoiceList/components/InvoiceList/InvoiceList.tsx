@@ -16,20 +16,25 @@ function InvoiceList(props: InvoiceListProps) {
   const { invoiceListSearchParams, setPageParam, setLimitParam, setSortingParams, setFilterParam } =
     useInvoiceListSearchParams()
 
-  const [{ page, limit, sorting, filters, selected }, dispatch] = useInvoiceListState()
+  const [listState, dispatch] = useInvoiceListState()
   const [invoices, setInvoices] = useState<Invoice[]>([])
   const [totalInvoices, setTotalInvoices] = useState<number>(0)
 
   useEffect(() => {
+    dispatch({ type: 'changeSearchParams', payload: invoiceListSearchParams })
+  }, [invoiceListSearchParams, dispatch])
+
+  useEffect(() => {
     const fetchData = async () => {
-      const response = await listInvoices(paramsToApiOpts(invoiceListSearchParams))
+      const response = await listInvoices(paramsToApiOpts(listState))
       setInvoices(response.data)
       setTotalInvoices(response.total)
     }
 
-    dispatch({ type: 'changeSearchParams', payload: invoiceListSearchParams })
     fetchData()
-  }, [invoiceListSearchParams, dispatch])
+  }, [listState])
+
+  const { page, limit, sorting, filters, selected } = listState
 
   const searchFormChangeHandler = (filters: InvoiceListState['filters']) => {
     setFilterParam(filters)
