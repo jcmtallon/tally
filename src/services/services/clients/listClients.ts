@@ -1,12 +1,16 @@
+import { collection, getDocs, query } from 'firebase/firestore/lite'
 import { paginateData, sortData } from 'services/utils'
+import { firestore } from '../../firestoreSetup'
 import { mockClients } from './mockClients'
 import { Client } from '../../types'
+import { docsToClients } from './docToClient'
 
-// TODO: cache data.
 // TODO: refresh method for refreshing the list? Or different method to update only updated element...
 // but when a change could apply to multiple invoices, customers... better to refetch everything.
 
-// TODO: Variable for switching to MOCK_DATA
+const USE_CLIENT_MOCK_DATA = false
+
+let data: Client[] | undefined
 
 interface ListClientsOptions {
   limit?: number
@@ -28,20 +32,28 @@ function filterBySearchText(data: Client[], search: string): Client[] {
   return data.filter(x => regexp.test(x.name))
 }
 
+async function getClientData(): Promise<Client[]> {
+  if (USE_CLIENT_MOCK_DATA) return mockClients as Client[]
+
+  if (!data) {
+    const clientsRef = collection(firestore, `clients`)
+    const q = query(clientsRef)
+    const docs = await getDocs(q)
+    data = docsToClients(docs)
+  }
+
+  // TODO: add proper error handling
+
+  return data || []
+}
+
 async function listClients(opts: ListClientsOptions): Promise<ListClientsResponse> {
   const { limit = 10, page = 0, direction = 'asc', sortBy = undefined, search = '' } = opts
-  // const clientsRef = collection(firestore, `clients`)
-  // const q = query(clientsRef)
-  // const docs = await getDocs(q)
 
-  const data = mockClients as Client[]
-  const filteredByTextData = filterBySearchText(data, search)
+  const clients = await getClientData()
+  const filteredByTextData = filterBySearchText(clients, search)
   const sortedData = sortBy ? sortData(filteredByTextData, direction, sortBy) : filteredByTextData
   const slicedData = paginateData(sortedData, page, limit)
-
-  await new Promise(resolve => {
-    setTimeout(resolve, 50)
-  })
 
   return {
     total: filteredByTextData.length,

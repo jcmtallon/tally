@@ -57,9 +57,8 @@ function useClientFormConfig(config: Partial<ClientFormConfig> = {}): ClientForm
 
   return {
     validationSchema,
-    onSubmit: values => {
-      // Temp implementation
-      apiClients.add({
+    onSubmit: async values => {
+      await apiClients.add({
         name: values.name,
         email: values.mail,
         phone: values.phone,

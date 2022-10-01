@@ -2,6 +2,7 @@ import { TableSorting } from 'components'
 import React, { HTMLAttributes, useEffect, useState } from 'react'
 import { Client } from 'services'
 import { listClients } from 'services/services/clients/listClients'
+import { useValueRef } from 'hooks'
 import { useClientListSearchParams } from './useClientListSearchParams'
 import * as S from './ClientList.styles'
 import { useClientListState } from './useClientListState'
@@ -19,22 +20,30 @@ function ClientList(props: ClientListProps) {
     useClientListSearchParams()
 
   const [listState, dispatch] = useClientListState()
-  const [clients, setClients] = useState<Client[]>([])
+  const [clients, setClients] = useState<Client[] | undefined>(undefined)
   const [totalClients, setTotalClients] = useState<number>(0)
+
+  const [isFetching, setIsFetching] = useState(false)
+  const isFetchingRef = useValueRef(isFetching)
 
   useEffect(() => {
     dispatch({ type: 'changeSearchParams', payload: clientListSearchParams })
   }, [clientListSearchParams, dispatch])
 
+  // TODO: fetching changing too often
+  // TODO: going to create, removes filters.
+
   useEffect(() => {
     const fetchData = async () => {
+      setIsFetching(true)
       const response = await listClients(paramsToApiOpts(listState))
       setTotalClients(response.total)
       setClients(response.data)
+      setIsFetching(false)
     }
 
-    fetchData()
-  }, [listState])
+    if (isFetchingRef.current === false) fetchData()
+  }, [listState, isFetchingRef])
 
   const { page, limit, sorting, filters, selected } = listState
 
@@ -58,7 +67,8 @@ function ClientList(props: ClientListProps) {
     dispatch({ type: 'changeSelected', payload: { selected } })
   }
 
-  console.log('limit', limit)
+  // TODO: improve on this experience.
+  if (isFetching && clients === undefined) return <div>Loading!</div>
 
   return (
     <S.Container {...otherProps}>
