@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Field as BaseField, Input } from 'components'
+import { DebounceInput, Field as BaseField } from 'components'
 
 const Container = styled.div`
   display: flex;
@@ -8,8 +8,8 @@ const Container = styled.div`
 
 const Field = styled(BaseField).attrs({ rounded: true })``
 
-const SearchInput = styled(Input)`
+const DebounceSearchInput = styled(DebounceInput)`
   min-width: 600px;
 `
 
-export { Container, Field, SearchInput }
+export { Container, Field, DebounceSearchInput }

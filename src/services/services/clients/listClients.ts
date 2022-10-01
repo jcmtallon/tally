@@ -35,12 +35,12 @@ function filterBySearchText(data: Client[], search: string): Client[] {
 async function getClientData(): Promise<Client[]> {
   if (USE_CLIENT_MOCK_DATA) return mockClients as Client[]
 
-  if (!data) {
-    const clientsRef = collection(firestore, `clients`)
-    const q = query(clientsRef)
-    const docs = await getDocs(q)
-    data = docsToClients(docs)
-  }
+  // if (!data) {
+  const clientsRef = collection(firestore, `clients`)
+  const q = query(clientsRef)
+  const docs = await getDocs(q)
+  data = docsToClients(docs)
+  // }
 
   // TODO: add proper error handling
 

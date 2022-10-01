@@ -1,6 +1,5 @@
 import React, { HTMLAttributes } from 'react'
 import { createStylableComponent } from 'utils'
-// import { InvoiceListState } from '../InvoiceList'
 import * as S from './ClientListSearchForm.styles'
 
 // type FormValues = InvoiceListState['filters']
@@ -20,10 +19,10 @@ function ClientListSearchForm(props: ClientListSearchFormProps) {
   return (
     <S.Container {...otherProps}>
       <S.Field label="Nombre o teléfono">
-        <S.SearchInput
+        <S.DebounceSearchInput
           placeholder="Name"
           value={values.search}
-          onChange={e => onValuesChange?.({ ...values, search: e.target.value })}
+          onChange={val => onValuesChange?.({ ...values, search: val })}
         />
       </S.Field>
     </S.Container>

@@ -1,6 +1,7 @@
 export * from './lib/AppErrorBoundary'
 export * from './lib/Button'
 export * from './lib/Checkbox'
+export * from './lib/DebounceInput'
 export * from './lib/EnhancedTableHead'
 export * from './lib/Field'
 export * from './lib/icons'
