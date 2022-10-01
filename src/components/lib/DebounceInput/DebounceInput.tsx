@@ -21,8 +21,8 @@ function DebounceInput(props: DebounceInputProps) {
   const debouncedValue = useDebounce(innerValue, debounce)
 
   useEffect(() => {
-    onChange?.(debouncedValue)
-  }, [debouncedValue, onChange])
+    if (debouncedValue !== value) onChange?.(debouncedValue)
+  }, [debouncedValue, onChange, value])
 
   const handleChange: ChangeEventHandler<HTMLInputElement> = useCallback(e => {
     setInnerValue(e.target.value)
