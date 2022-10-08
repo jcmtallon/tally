@@ -29,7 +29,7 @@ function filterBySearchText(data: Client[], search: string): Client[] {
   if (search === '') return data
 
   const regexp = new RegExp(search, 'i')
-  return data.filter(x => regexp.test(x.name))
+  return data.filter(x => regexp.test(x.name) || regexp.test(x.email) || regexp.test(x.phone))
 }
 
 async function getClientData(): Promise<Client[]> {
