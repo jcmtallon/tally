@@ -1,3 +1,4 @@
+import { ISODate } from 'types'
 import { Address } from '../Address/Address'
 
 interface Client {
@@ -8,6 +9,7 @@ interface Client {
   email: string
   notes: string
   address?: Address
+  created: ISODate
 }
 
 export type { Client }

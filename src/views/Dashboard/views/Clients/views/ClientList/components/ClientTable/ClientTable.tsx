@@ -27,14 +27,15 @@ function ClientTable(props: ClientTableProps) {
     ...otherProps
   } = props
 
-  type TableHeadCell = Merge<EnhanceTableHeadCell, { id: keyof Client | 'revenue' }>
+  // TODO(now): created??
+  type TableHeadCell = Merge<EnhanceTableHeadCell, { id: keyof Client | 'revenue' | 'invoices' | 'created' }>
   const headCells: readonly TableHeadCell[] = useMemo(() => {
     const cells: TableHeadCell[] = [
-      { label: 'Nombre', id: 'name' },
+      { label: 'Nombre / Razón', id: 'name' },
       { label: 'E-mail', id: 'email' },
       { label: 'Teléfono', id: 'phone' },
-      { label: 'ID', id: 'clientId' },
-      { label: 'Notas', id: 'notes' },
+      { label: 'Facturas', id: 'invoices' },
+      { label: 'Añadido', id: 'created' },
     ]
 
     return cells.map(cell => {
@@ -72,8 +73,8 @@ function ClientTable(props: ClientTableProps) {
               <S.Cell>{client.name}</S.Cell>
               <S.Cell>{client.email}</S.Cell>
               <S.Cell>{client.phone}</S.Cell>
-              <S.Cell>{client.clientId}</S.Cell>
-              <S.Cell>{client.notes}</S.Cell>
+              <S.Cell>1</S.Cell>
+              <S.Cell>{client.created}</S.Cell>
             </S.TableRow>
           ))}
         </S.TableBody>
