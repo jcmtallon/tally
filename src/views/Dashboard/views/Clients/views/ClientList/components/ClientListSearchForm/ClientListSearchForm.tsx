@@ -1,4 +1,5 @@
-import React, { HTMLAttributes } from 'react'
+import { Input } from 'components'
+import React, { HTMLAttributes, useCallback } from 'react'
 import { createStylableComponent } from 'utils'
 import * as S from './ClientListSearchForm.styles'
 
@@ -18,13 +19,22 @@ function ClientListSearchForm(props: ClientListSearchFormProps) {
 
   return (
     <S.Container {...otherProps}>
-      <S.Field label="Nombre o teléfono">
+      <S.Field label="Filtrar">
+        {/* <Input
+          placeholder="Busca por nombre, teléfono o correo electrónico"
+          value={values.search}
+          onChange={e => onValuesChange?.({ ...values, search: e.target.value })}
+        /> */}
         <S.DebounceSearchInput
-          placeholder="Name"
+          placeholder="Busca por nombre, teléfono o correo electrónico"
           value={values.search}
           onChange={val => onValuesChange?.({ ...values, search: val })}
         />
       </S.Field>
+      {values.search !== '' && (
+        // TODO: Display erase button inside search field.
+        <S.Button onClick={() => onValuesChange?.({ ...values, search: '' })}>x</S.Button>
+      )}
     </S.Container>
   )
 }

@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { typo, fg } from 'theme'
 
-const LabelWrapper = styled.div<{ withOffset: boolean; focused: boolean }>`
+const LabelWrapper = styled.div<{ withOffset: boolean }>`
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -10,12 +10,8 @@ const LabelWrapper = styled.div<{ withOffset: boolean; focused: boolean }>`
   padding-left: ${props => (props.withOffset ? '15px' : '0px')};
   padding-bottom: 1px;
 
-  ${props => fg(f => (props.focused ? f.primary.default : f.neutral.muted))};
   ${typo(t => t.body.sm)};
-
-  &:focus-within {
-    color: blue;
-  }
+  color: inherit;
 `
 
 const Label = styled.label`
@@ -51,6 +47,12 @@ const Error = styled.div<{ withOffset: boolean }>`
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
+
+  ${fg(f => f.neutral.muted)};
+
+  :focus-within {
+    ${fg(f => f.primary.default)};
+  }
 `
 
 export { Content, Label, Wrapper, LabelWrapper, Error, OptionalIndicator }

@@ -1,4 +1,4 @@
-import { useDebounce } from 'hooks'
+import { useDebounce, useImmutableCallback, useValueRef } from 'hooks'
 import React, { ChangeEventHandler, useCallback, useEffect, useState } from 'react'
 import { Merge } from 'type-fest'
 import { createStylableComponent } from 'utils'
@@ -9,7 +9,6 @@ type DebounceInputProps = Merge<
   InputProps,
   {
     debounce?: number
-
     onChange?: (value: string) => void
   }
 >
@@ -20,15 +19,22 @@ function DebounceInput(props: DebounceInputProps) {
   const [innerValue, setInnerValue] = useState<string>(value ? value.toString() : '')
   const debouncedValue = useDebounce(innerValue, debounce)
 
+  const onChangeRef = useImmutableCallback(onChange)
+  const onValueRef = useValueRef(value)
+
   useEffect(() => {
-    if (debouncedValue !== value) onChange?.(debouncedValue)
-  }, [debouncedValue, onChange, value])
+    if (debouncedValue !== onValueRef.current) onChangeRef?.(debouncedValue)
+  }, [debouncedValue, onChangeRef, onValueRef])
+
+  useEffect(() => {
+    setInnerValue(value ? value.toString() : '')
+  }, [value])
 
   const handleChange: ChangeEventHandler<HTMLInputElement> = useCallback(e => {
     setInnerValue(e.target.value)
   }, [])
 
-  return <S.Input onChange={handleChange} {...otherProps} />
+  return <S.Input onChange={handleChange} value={innerValue} {...otherProps} />
 }
 
 const StylableDebounceInput = createStylableComponent(S, DebounceInput)

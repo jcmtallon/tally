@@ -13,7 +13,6 @@ interface FieldProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 function Field(props: FieldProps) {
-  const [focused, setFocused] = useState(false) // Use focus-within strategy instead.
   const { children, error, rounded = false, id: providedId, required, label, ...otherProps } = props
   const id = useMemo(() => providedId ?? uniqueId('input-'), [providedId])
 
@@ -50,14 +49,6 @@ function Field(props: FieldProps) {
         'aria-invalid': hasError ? true : undefined,
         'aria-errormessage': hasError ? errorId : undefined,
         ...child.props,
-        onBlur: (e: unknown) => {
-          setFocused(false)
-          child.props?.onBlur?.(e)
-        },
-        onFocus: (e: unknown) => {
-          setFocused(true)
-          child.props?.onFocus?.(e)
-        },
       }
 
       return React.cloneElement(child, enhancedProps)
@@ -72,7 +63,6 @@ function Field(props: FieldProps) {
       // When using title, the 'group' role is assigned automatically to the element.
       // To avoid creating confusion when using a screen reader, we explicitly set the role as none.
       role="none"
-      focused={focused}
       withOffset={rounded}>
       <S.Label ref={labelRef} htmlFor={inputId}>
         {label}
