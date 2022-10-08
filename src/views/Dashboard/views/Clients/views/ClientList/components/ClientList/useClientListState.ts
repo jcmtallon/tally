@@ -22,6 +22,10 @@ type Action = ReturnType<typeof changeSearchParams | typeof changeSelected | typ
 
 const initialState: State = {
   ...listInitialState,
+  sorting: {
+    direction: 'desc',
+    orderBy: 'created',
+  },
   filters: {
     search: '',
   },
@@ -40,7 +44,7 @@ function reducer(state: State, action: Action): State {
         const listState = listStateReducer(state, action)
 
         draft.limit = listState.limit
-        draft.sorting = listState.sorting
+        draft.sorting = listState.sorting ?? initialState.sorting
         draft.selected = listState.selected
 
         draft.filters.search = action.payload.search ?? ''

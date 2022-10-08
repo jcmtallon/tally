@@ -1,6 +1,6 @@
 import { ListState } from 'hooks'
 
-const CLIENT_LIST_SORTABLE_FIELD = ['name', 'email'] as const
+const CLIENT_LIST_SORTABLE_FIELD = ['name', 'email', 'created'] as const
 type ClientListSortableField = typeof CLIENT_LIST_SORTABLE_FIELD[number]
 
 const isClientListSortableFiled = (value: string): value is ClientListSortableField =>
