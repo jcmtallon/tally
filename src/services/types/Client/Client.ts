@@ -9,6 +9,7 @@ interface Client {
   email: string
   notes: string
   address?: Address
+  invoicesCount: number
   created: ISODate
 }
 

@@ -73,7 +73,7 @@ function ClientTable(props: ClientTableProps) {
               <S.Cell>{client.name}</S.Cell>
               <S.Cell>{client.email}</S.Cell>
               <S.Cell>{client.phone}</S.Cell>
-              <S.Cell>1</S.Cell>
+              <S.Cell>{client.invoicesCount}</S.Cell>
               <S.Cell>{client.created}</S.Cell>
             </S.TableRow>
           ))}

@@ -14,6 +14,7 @@ const addClient = async (client: AddClientRequest) => {
     email: client.email || '',
     notes: client.notes || '',
     phone: client.phone || '',
+    invoices: 0,
     created: Timestamp.fromDate(new Date()),
   })
 }

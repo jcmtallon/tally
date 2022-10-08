@@ -11,6 +11,7 @@ function docToClient(doc: QueryDocumentSnapshot<DocumentData>): Client {
     email: data.email,
     phone: data.phone,
     notes: data.notes,
+    invoicesCount: data.invoicesCount ?? 0,
     created: data.created ? data.created.toDate().toISOString() : '',
   }
 }
