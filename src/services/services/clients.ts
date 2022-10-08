@@ -1,5 +1,5 @@
 import { addClient } from './clients/addClient'
-import { listClients, ListClientsOptions } from './clients/listClients'
+import { listClients } from './clients/listClients'
 import { getClient } from './clients/getClient'
 
 const clients = {
@@ -9,4 +9,3 @@ const clients = {
 }
 
 export { clients }
-export type { ListClientsOptions }

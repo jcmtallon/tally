@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { Route, Routes, Navigate, useNavigate, Outlet, useLocation } from 'react-router-dom'
 import { SlidePanelRoute } from 'components'
+import { Client, clients as clientsApi } from 'services'
 import { ClientList } from '../views/ClientList'
 import { ClientDetails } from '../views/ClientDetails'
 import { ClientCreation } from '../views/ClientCreation'
@@ -9,7 +10,21 @@ function ClientsRouter() {
   const navigate = useNavigate()
   const { search } = useLocation()
 
-  // TODO: show row selected
+  const [clients, setClients] = useState<Client[] | undefined>(undefined)
+
+  const fetchClientData = useCallback(async () => {
+    const response = await clientsApi.list()
+    setClients(response)
+  }, [])
+
+  useEffect(() => {
+    fetchClientData()
+  }, [fetchClientData])
+
+  const onClientCreatedHandle = useCallback(() => {
+    navigate(`/dashboard/clients`)
+    fetchClientData()
+  }, [navigate, fetchClientData])
 
   return (
     <Routes>
@@ -18,6 +33,7 @@ function ClientsRouter() {
         element={
           <>
             <ClientList
+              clients={clients}
               onCreateClientButtonClicked={() => navigate(`/dashboard/clients/create${search}`)}
               onShowClientDetailsClicked={clientId => navigate(`/dashboard/clients/${clientId}`)}
             />
@@ -28,7 +44,7 @@ function ClientsRouter() {
           path="create"
           element={
             <SlidePanelRoute parentRouteUrl={`/dashboard/clients${search}`}>
-              <ClientCreation onClientCreated={() => navigate(`/dashboard/clients`)} />
+              <ClientCreation onClientCreated={onClientCreatedHandle} />
             </SlidePanelRoute>
           }
         />

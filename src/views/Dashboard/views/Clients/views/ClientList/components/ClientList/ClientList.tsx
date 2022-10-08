@@ -1,49 +1,29 @@
 import { TableSorting } from 'components'
-import React, { HTMLAttributes, useEffect, useState } from 'react'
+import React, { HTMLAttributes, useEffect, useMemo } from 'react'
 import { Client } from 'services'
-import { listClients } from 'services/services/clients/listClients'
-import { useValueRef } from 'hooks'
 import { useClientListSearchParams } from './useClientListSearchParams'
 import * as S from './ClientList.styles'
 import { useClientListState } from './useClientListState'
-import { clientListSearchParamsToApiOptions as paramsToApiOpts } from './clientListUtils'
+import { filterClientData, getCurrentPageClients } from './clientListUtils'
 import { ClientListState } from './clientList.types'
 
 interface ClientListProps extends HTMLAttributes<HTMLDivElement> {
+  clients: Client[]
+
   onShowClientDetailsClicked?: (clientId: string) => void
 }
 
 function ClientList(props: ClientListProps) {
-  const { onShowClientDetailsClicked, ...otherProps } = props
+  const { clients, onShowClientDetailsClicked, ...otherProps } = props
 
   const { clientListSearchParams, setPageParam, setLimitParam, setSortingParams, setFilterParam } =
     useClientListSearchParams()
 
   const [listState, dispatch] = useClientListState()
-  const [clients, setClients] = useState<Client[] | undefined>(undefined)
-  const [totalClients, setTotalClients] = useState<number>(0)
-
-  const [isFetching, setIsFetching] = useState(false)
-  const isFetchingRef = useValueRef(isFetching)
 
   useEffect(() => {
     dispatch({ type: 'changeSearchParams', payload: clientListSearchParams })
   }, [clientListSearchParams, dispatch])
-
-  // TODO: fetching changing too often
-  // TODO: going to create, removes filters.
-
-  useEffect(() => {
-    const fetchData = async () => {
-      setIsFetching(true)
-      const response = await listClients(paramsToApiOpts(listState))
-      setTotalClients(response.total)
-      setClients(response.data)
-      setIsFetching(false)
-    }
-
-    if (isFetchingRef.current === false) fetchData()
-  }, [listState, isFetchingRef])
 
   const { page, limit, sorting, filters, selected } = listState
 
@@ -67,8 +47,17 @@ function ClientList(props: ClientListProps) {
     dispatch({ type: 'changeSelected', payload: { selected } })
   }
 
-  // TODO: improve on this experience.
-  if (isFetching && clients === undefined) return <div>Loading!</div>
+  const filteredClients = useMemo(
+    () => filterClientData(clients, { search: listState.filters.search }),
+    [clients, listState.filters.search],
+  )
+
+  const currentPageClients = useMemo(
+    () => getCurrentPageClients(filteredClients, { ...listState }),
+    [filteredClients, listState],
+  )
+
+  const totalClients = useMemo(() => filteredClients.length, [filteredClients])
 
   return (
     <S.Container {...otherProps}>
@@ -76,7 +65,7 @@ function ClientList(props: ClientListProps) {
       <S.Actions id="clientsActions" selected={selected} />
       <S.Table
         id="clientsTable"
-        clients={clients}
+        clients={currentPageClients}
         sorting={sorting}
         selected={selected}
         onRowClicked={invoice => onShowClientDetailsClicked?.(invoice)}
