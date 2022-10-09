@@ -25,7 +25,7 @@ function Table(props: TableProps, ref: Ref<HTMLTableElement>) {
 
   return (
     <TableContextProvider value={table}>
-      <S.Table ref={ref} {...otherProps} />
+      <S.Table ref={ref} isSticky={stickyHeader} {...otherProps} />
     </TableContextProvider>
   )
 }

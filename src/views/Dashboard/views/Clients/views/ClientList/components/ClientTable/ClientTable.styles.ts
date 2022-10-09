@@ -10,7 +10,7 @@ import {
 } from 'components'
 
 const TableContainer = styled(BaseTableContainer)`
-  max-height: 600px;
+  max-height: 700px;
   border-radius: 12px;
 `
 
