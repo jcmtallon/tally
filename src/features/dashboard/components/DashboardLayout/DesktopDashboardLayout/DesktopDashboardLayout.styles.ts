@@ -1,5 +1,7 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { canvas, pickColor } from 'theme'
+import { SideNavLink } from '../../SideNav/SideNavLink'
+import { SideNavSectionHeader } from '../../SideNav/SideNavSectionHeader'
 
 const Layout = styled.div`
   background-color: ${pickColor(c => c.specific.canvas)};
@@ -13,11 +15,42 @@ const Layout = styled.div`
 `
 
 const SideNav = styled.div<{ isCollapsed?: boolean }>`
-  ${canvas()}
+  padding: 16px 8px;
   grid-area: sidenav;
+  ${canvas()}
 
-  // TODO: this solution is temp:
-  width: ${props => (props.isCollapsed ? 'unset' : '200px')};
+  ${SideNavLink.S.NavLink} {
+    margin-bottom: 8px;
+  }
+
+  ${SideNavLink.S.Label} {
+    transition: all 100ms ease-in-out;
+    width: 160px;
+    opacity: 1;
+
+    ${({ isCollapsed }) =>
+      isCollapsed &&
+      css`
+        margin: 0;
+        padding: 0;
+        width: 0;
+        opacity: 0;
+        overflow: hidden;
+      `}
+  }
+
+  ${SideNavSectionHeader.S.Wrapper} {
+    transition: opacity 100ms ease-in-out;
+    opacity: 1;
+
+    ${({ isCollapsed }) =>
+      isCollapsed &&
+      css`
+        opacity: 0;
+        width: 0;
+        overflow: hidden;
+      `}
+  }
 `
 
 const Content = styled.div`

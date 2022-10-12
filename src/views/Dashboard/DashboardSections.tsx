@@ -1,12 +1,12 @@
 import React from 'react'
 import { createDashboardSection } from 'features/dashboard'
-import { IconRunner } from 'components'
+import { IconPeople, IconGear, IconBars, IconInvoice } from 'components'
 
 const dashboardSections = [
   createDashboardSection('invoices', {
     label: 'Invoices',
     desc: 'Some desc',
-    icon: <IconRunner />,
+    icon: <IconInvoice />,
     to: 'invoices',
     mobileStatus: 'ENABLED',
     desktopStatus: 'ENABLED',
@@ -17,7 +17,7 @@ const dashboardSections = [
   createDashboardSection('clients', {
     label: 'Clients',
     desc: 'Some desc',
-    icon: <IconRunner />,
+    icon: <IconPeople />,
     to: 'clients',
     mobileStatus: 'ENABLED',
     desktopStatus: 'ENABLED',
@@ -28,7 +28,7 @@ const dashboardSections = [
   createDashboardSection('metrics', {
     label: 'Metrics',
     desc: 'Some desc',
-    icon: <IconRunner />,
+    icon: <IconBars />,
     to: 'metrics',
     mobileStatus: 'ENABLED',
     desktopStatus: 'ENABLED',
@@ -39,7 +39,7 @@ const dashboardSections = [
   createDashboardSection('settings', {
     label: 'Settings',
     desc: 'Some desc',
-    icon: <IconRunner />,
+    icon: <IconGear />,
     to: 'settings',
     mobileStatus: 'ENABLED',
     desktopStatus: 'ENABLED',

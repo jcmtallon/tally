@@ -190,10 +190,6 @@ const GlobalStyles = createGlobalStyle`
     font-family: inherit;
   }
 
-  a {
-    outline: none !important;
-  }
-
   // Very drastic measure for hiding all intrusive lastpass icons in the form
   // fields. Find a more elegant, generic and selective solution for achieving the same thing.
   [data-lastpass-icon-root]{

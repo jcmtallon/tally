@@ -56,7 +56,7 @@ const colorTokensLight: ColorTokens = {
     highlight: {
       emphasis: '#60748C',
       default: '#F6F6F8',
-      muted: '',
+      muted: '#F8F9FC',
     },
     success: {
       emphasis: '#64CB8E',
