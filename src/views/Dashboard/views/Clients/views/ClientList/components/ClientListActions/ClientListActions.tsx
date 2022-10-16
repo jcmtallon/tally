@@ -22,8 +22,10 @@ function ClientListActions(props: ClientListActionsProps) {
   return (
     <S.Container {...otherProps}>
       <S.Actions>
-        {selected.length > 0 && <span>{`${selected.length} seleccionados`}</span>}
-        <S.Button>Borrar</S.Button>
+        {selected.length > 0 && (
+          <S.SelectedLabelWrapper>{`${selected.length} seleccionados`}</S.SelectedLabelWrapper>
+        )}
+        {selected.length > 0 && <S.Button>Borrar</S.Button>}
       </S.Actions>
     </S.Container>
   )

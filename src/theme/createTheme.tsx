@@ -12,6 +12,7 @@ interface CreateThemeOptions {
   typography?: Record<string, FlattenFontType | Record<string, FlattenFontType>>
   shadow?: Record<string, Shadow>
   borderRadius?: Record<string, RadiusValue>
+  transition?: Record<string, string>
 
   // Also admits setting other theme properties and without any restrictions in the types of their values:
   [key: string]: unknown
@@ -23,6 +24,7 @@ type AugmentedTheme<Options extends CreateThemeOptions> = {
   typography: Theme['typography'] & Options['typography']
   shadow: Theme['shadow'] & Options['shadow']
   borderRadius: Theme['borderRadius'] & Options['borderRadius']
+  transition: Theme['transition'] & Options['transition']
   colorMode: Theme['colorMode']
 } & Omit<Options, 'colors' | 'palette' | 'typography' | 'shadow' | 'borderRadius' | 'zIndex'>
 
@@ -34,7 +36,7 @@ function createTheme<T extends CreateThemeOptions>(
   themeOptions: T,
   themeMode?: ColorMode,
 ): AugmentedTheme<T> {
-  const { colors, palette, typography, shadow, borderRadius, zIndex, ...rest } = themeOptions
+  const { colors, palette, typography, shadow, borderRadius, zIndex, transition, ...rest } = themeOptions
 
   const defaultTheme = getTheme(themeMode || COLOR_MODE.light)
 
@@ -44,6 +46,7 @@ function createTheme<T extends CreateThemeOptions>(
     typography: { ...defaultTheme.typography, ...typography },
     shadow: { ...defaultTheme.shadow, ...shadow },
     borderRadius: { ...defaultTheme.borderRadius, ...borderRadius },
+    transition: { ...defaultTheme.transition, ...transition },
     colorMode: themeMode || COLOR_MODE.light,
     ...rest,
   } as unknown as AugmentedTheme<T>

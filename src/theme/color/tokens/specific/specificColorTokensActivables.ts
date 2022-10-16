@@ -1,5 +1,10 @@
 import { ColorValue } from '../../palettes/paletteTypes'
 
+// TODO: highlight button colors
+// TODO: delete button in select label
+// TODO: Table container with shadow
+// TODO: Table navigation
+
 type ActivableColors = 'primary' | 'neutral'
 
 interface ActivableStateColors {

@@ -3,6 +3,7 @@ import { colorTokens, colorPalettes } from './color'
 import { ColorMode } from './colorMode'
 import { shadows } from './shadows/shadows'
 import { Theme } from './themeTypes'
+import { transitions } from './transitions/transitions'
 import { flattenTypography } from './typography'
 
 function getTheme(mode: ColorMode = 'light'): Theme {
@@ -13,6 +14,7 @@ function getTheme(mode: ColorMode = 'light'): Theme {
     typography: flattenTypography,
     shadow: shadows[mode],
     borderRadius,
+    transition: transitions,
   }
 }
 

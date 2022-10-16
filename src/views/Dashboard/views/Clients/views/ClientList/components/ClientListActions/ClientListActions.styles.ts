@@ -11,8 +11,11 @@ const Actions = styled.div`
   justify-content: end;
   column-gap: 10px;
   align-items: center;
+  min-height: 40px;
 `
+
+const SelectedLabelWrapper = styled.div``
 
 const Button = styled(BaseButton).attrs({ color: 'highlight', size: 'regular' })``
 
-export { Container, Actions, Button }
+export { Container, Actions, Button, SelectedLabelWrapper }

@@ -1,4 +1,4 @@
-import React, { HTMLAttributes } from 'react'
+import React, { HTMLAttributes, useMemo } from 'react'
 import { createStylableComponent } from 'utils'
 import * as S from './ClientListSearchForm.styles'
 
@@ -16,6 +16,8 @@ interface ClientListSearchFormProps extends HTMLAttributes<HTMLDivElement> {
 function ClientListSearchForm(props: ClientListSearchFormProps) {
   const { values, onValuesChange, ...otherProps } = props
 
+  const disableClear = useMemo(() => values.search === '', [values.search])
+
   return (
     <S.Container {...otherProps}>
       <S.Field label="Filtrar">
@@ -24,11 +26,12 @@ function ClientListSearchForm(props: ClientListSearchFormProps) {
           value={values.search}
           onChange={val => onValuesChange?.({ ...values, search: val })}
           endAdornment={
-            values.search !== '' ? (
-              <S.IconButton onClick={() => onValuesChange?.({ ...values, search: '' })}>
-                <S.XMarkIcon />
-              </S.IconButton>
-            ) : undefined
+            <S.IconButton
+              disabled={disableClear}
+              show={!disableClear}
+              onClick={() => onValuesChange?.({ ...values, search: '' })}>
+              <S.XMarkIcon />
+            </S.IconButton>
           }
         />
       </S.Field>
