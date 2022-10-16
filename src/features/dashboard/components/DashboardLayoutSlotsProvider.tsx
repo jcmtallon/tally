@@ -2,13 +2,13 @@ import React, { createContext, ReactNode, useContext, useMemo } from 'react'
 
 interface DashboardLayoutSlotsContextValue {
   sideNav: ReactNode
-  // controls: ReactNode
+  controls: ReactNode
   // bottomNav: ReactNode
 }
 
 const dashboardLayoutSlotsContext = createContext<DashboardLayoutSlotsContextValue>({
   sideNav: null,
-  // controls: null,
+  controls: null,
   // bottomNav: null,
 })
 
@@ -26,11 +26,12 @@ function DashboardLayoutSlotsProvider(props: DashboardLayoutSlotsProviderProps) 
 
   const value = useMemo<DashboardLayoutSlotsContextValue>(
     () => ({
+      controls: providedSlots.controls ?? slots.controls,
       sideNav: providedSlots.sideNav ?? slots.sideNav,
       //   controls: providedSlots.controls ?? slots.controls,
       //   bottomNav: providedSlots.bottomNav ?? slots.bottomNav,
     }),
-    [slots, providedSlots.sideNav],
+    [slots, providedSlots.sideNav, providedSlots.controls],
   )
 
   return <dashboardLayoutSlotsContext.Provider value={value}>{children}</dashboardLayoutSlotsContext.Provider>

@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-import { canvas, pickColor } from 'theme'
+import { bg, canvas, pickColor } from 'theme'
 import { SideNavLink } from '../../SideNav/SideNavLink'
 import { SideNavSectionHeader } from '../../SideNav/SideNavSectionHeader'
 
@@ -8,10 +8,19 @@ const Layout = styled.div`
 
   display: grid;
   grid-template-columns: min-content auto;
-  grid-template-areas: 'sidenav content';
+  grid-template-rows: 52px 1fr;
+  grid-template-areas:
+    'controls controls'
+    'sidenav content';
 
   height: 100%;
   overflow: hidden;
+`
+
+const Controls = styled.div`
+  grid-area: controls;
+  display: flex;
+  background-color: green;
 `
 
 const SideNav = styled.div<{ isCollapsed?: boolean }>`
@@ -25,7 +34,7 @@ const SideNav = styled.div<{ isCollapsed?: boolean }>`
 
   ${SideNavLink.S.Label} {
     transition: all 100ms ease-in-out;
-    width: 160px;
+    width: 100px;
     opacity: 1;
 
     ${({ isCollapsed }) =>
@@ -54,10 +63,14 @@ const SideNav = styled.div<{ isCollapsed?: boolean }>`
 `
 
 const Content = styled.div`
+  ${bg(b => b.neutral.default)};
+
+  display: flex;
+  flex-direction: column;
+  grid-area: content;
+
   //TODO: Prevent the scroll from affecting the container width
   overflow-y: auto;
-  background-color: #f3f4f9;
-  grid-area: content;
 `
 
-export { Layout, Content, SideNav }
+export { Layout, Content, SideNav, Controls }

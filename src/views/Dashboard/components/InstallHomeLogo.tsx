@@ -6,7 +6,15 @@ interface InstallHomeLogoProps extends HTMLAttributes<HTMLDivElement> {}
 
 function InstallHomeLogo(props: InstallHomeLogoProps) {
   const { ...otherProps } = props
-  return <>INSTALL HOME</>
+  return (
+    <S.Wrapper {...otherProps}>
+      <S.Icon />
+      <S.TextWrapper>
+        <S.Title>Install Home</S.Title>
+        <S.Subtitle>Fontantería</S.Subtitle>
+      </S.TextWrapper>
+    </S.Wrapper>
+  )
 }
 
 const StylableInstallHomeLogo = createStylableComponent(S, InstallHomeLogo)
