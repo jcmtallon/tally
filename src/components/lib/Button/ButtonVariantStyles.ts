@@ -9,19 +9,33 @@ function isEmphasisColorButton(color: ButtonColor): boolean {
 
 function getSolidStyles(color: ButtonColor, theme: Theme): Css {
   const buttonColors = getButtonColors(theme)
-  const { quiet } = buttonColors[color].solid
+  const { quiet, hover, active } = buttonColors[color].solid
 
   return css`
     color: ${quiet.fg};
     background-color: ${quiet.bg};
     border-color: ${quiet.stroke};
 
+    &:hover {
+      color: ${hover.fg};
+      background-color: ${hover.bg};
+      border-color: ${hover.stroke};
+    }
+
+    &:active {
+      color: ${active.fg};
+      background-color: ${active.bg};
+      border-color: ${active.stroke};
+    }
+
     &:focus-visible {
       --outline-offset: ${isEmphasisColorButton(color) ? '1px' : '-2px'};
     }
 
     &:disabled {
-      opacity: 0.3;
+      color: ${theme.colors.specific.disabledText};
+      background-color: ${theme.colors.specific.activable.primary.disable};
+      border-color: ${theme.colors.specific.activable.primary.disable};
     }
   `
 }

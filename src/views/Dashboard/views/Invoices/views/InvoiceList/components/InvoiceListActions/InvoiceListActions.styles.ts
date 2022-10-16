@@ -22,6 +22,6 @@ const Actions = styled.div`
   align-items: center;
 `
 
-const Button = styled(BaseButton).attrs({ color: 'highlight', size: 'medium' })``
+const Button = styled(BaseButton).attrs({ color: 'highlight', size: 'regular' })``
 
 export { Container, Metrics, Actions, Button }

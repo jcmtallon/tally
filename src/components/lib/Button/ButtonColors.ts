@@ -5,15 +5,17 @@ type ColorSet = Record<'fg' | 'bg' | 'stroke', string>
 type ButtonColors = Record<ButtonVariant, Record<'quiet' | 'hover' | 'active', ColorSet>>
 
 function getPrimaryButtonColors(theme: Theme): ButtonColors {
+  const fg = theme.colors.fg.neutral.onEmphasis
+
+  const { quiet } = theme.colors.specific.activable.primary
+  const { hover } = theme.colors.specific.activable.primary
+  const { active } = theme.colors.specific.activable.primary
+
   return {
     solid: {
-      quiet: {
-        bg: theme.colors.bg.primary.emphasis,
-        fg: theme.colors.fg.neutral.onEmphasis,
-        stroke: theme.colors.bg.primary.emphasis,
-      },
-      hover: { bg: '', fg: '', stroke: '' },
-      active: { bg: '', fg: '', stroke: '' },
+      quiet: { bg: quiet, fg, stroke: quiet },
+      hover: { bg: hover, fg, stroke: hover },
+      active: { bg: active, fg, stroke: active },
     },
   }
 }

@@ -1,7 +1,7 @@
 import React from 'react'
 
-interface IconFirstPageProps {
-  className?: string
+interface IconFirstPageProps extends React.SVGProps<SVGSVGElement> {
+  title?: string
 }
 
 function IconFirstPage(props: IconFirstPageProps) {
@@ -15,9 +15,11 @@ function IconFirstPage(props: IconFirstPageProps) {
       viewBox="0 0 24 24"
       height="1em"
       width="1em"
+      aria-hidden
       role="img"
-      xmlns="http://www.w3.org/2000/svg">
-      <title>First Page</title>
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}>
+      {props.title && <title>{props.title}</title>}
       <path d="m16.293 17.707 1.414-1.414L13.414 12l4.293-4.293-1.414-1.414L10.586 12zM7 6h2v12H7z" />
     </svg>
   )

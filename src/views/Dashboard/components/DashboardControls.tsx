@@ -9,7 +9,7 @@ function DashboardControls(props: DashboardControlsProps) {
   return (
     <S.Wrapper {...otherProps}>
       <S.Logo />
-      <div>Controls</div>
+      <S.SessionControls>Cerrar sesión</S.SessionControls>
     </S.Wrapper>
   )
 }

@@ -66,12 +66,12 @@ const typography: Typography = {
     md: {
       regular: {
         fontSize: '0.875rem', // 14px
-        lineHeight: 1.71, // 24px | 1.5rem
+        lineHeight: 1.42, // 20px | 1.25rem
         fontWeight: 400, // regular
       },
       strong: {
         fontSize: '0.875rem', // 14px
-        lineHeight: 1.71, // 24px | 1.5rem
+        lineHeight: 1.42, // 20px | 1.25rem
         fontWeight: 700, // bold
       },
     },

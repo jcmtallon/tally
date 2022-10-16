@@ -34,7 +34,7 @@ const SideNav = styled.div<{ isCollapsed?: boolean }>`
 
   ${SideNavLink.S.Label} {
     transition: all 100ms ease-in-out;
-    width: 100px;
+    width: 120px;
     opacity: 1;
 
     ${({ isCollapsed }) =>

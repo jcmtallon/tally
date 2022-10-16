@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
 import { fg, typo } from 'theme'
-import { Button } from 'components'
+import { Button, IconPlusSm, IconBox as BaseIconBox, IconPeople } from 'components'
 import { ClientList as BaseClientList } from '../ClientList'
 
 const Container = styled.div`
@@ -16,22 +16,31 @@ const ContentSection = css`
 
 const TopRow = styled.div`
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  padding: 20px 10px;
+  padding: 20px 10px 10px;
 
   ${ContentSection}
 `
 const Header = styled.h1`
+  display: flex;
+  align-items: center;
   font-weight: bold;
   padding: 10px;
-  ${fg(f => f.neutral.muted)};
+  ${fg(f => f.neutral.default)};
   ${typo(t => t.header.h4)};
 `
 
-const CreateClientButton = styled(Button).attrs({ size: 'large' })``
+const IconBox = styled(BaseIconBox)``
+
+const ClientIcon = styled(IconPeople)``
+
+const CreateClientButton = styled(Button).attrs({ size: 'regular' })``
 
 const ClientList = styled(BaseClientList)`
   ${ContentSection}
 `
 
-export { Container, TopRow, Header, CreateClientButton, ClientList }
+const PlusIcon = styled(IconPlusSm)``
+
+export { Container, TopRow, Header, CreateClientButton, ClientIcon, ClientList, PlusIcon, IconBox }

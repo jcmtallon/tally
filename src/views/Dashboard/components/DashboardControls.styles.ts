@@ -14,4 +14,9 @@ const Wrapper = styled.div`
 
 const Logo = styled(InstallHomeLogo)``
 
-export { Wrapper, Logo }
+const SessionControls = styled.div`
+  display: flex;
+  align-items: center;
+`
+
+export { Wrapper, Logo, SessionControls }

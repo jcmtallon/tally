@@ -18,6 +18,7 @@ const NavLink = styled.a`
 
   align-items: center;
   padding: 6px 14px;
+  user-select: none;
 
   :hover {
     ${fg(f => f.neutral.muted)};
