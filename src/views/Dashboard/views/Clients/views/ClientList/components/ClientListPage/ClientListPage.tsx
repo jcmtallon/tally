@@ -16,15 +16,7 @@ function ClientListPage(props: ClientListPageProps) {
   return (
     <DashboardLayout>
       <S.Container {...otherProps}>
-        <S.TopRow>
-          <S.Header>
-            <S.IconBox icon={<S.ClientIcon />} />
-            <span>Clientes</span>
-          </S.Header>
-          <S.CreateClientButton startIcon={<S.PlusIcon />} onClick={onCreateClientButtonClicked}>
-            Crear Cliente
-          </S.CreateClientButton>
-        </S.TopRow>
+        <S.TopRow onCreateClientButtonClicked={onCreateClientButtonClicked} />
         {/* TODO: Loading spinner */}
         {clients && (
           <S.ClientList clients={clients} onShowClientDetailsClicked={onShowClientDetailsClicked} />

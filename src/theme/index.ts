@@ -3,6 +3,7 @@ export { typo } from './typography'
 export { GlobalStyles } from './GlobalStyles'
 export { getTheme } from './theme'
 export { fg, bg, canvas, pickCanvas, stroke, pickColor } from './color'
+export { radius } from './borderRadius/borderRadius'
 
 export type { Theme } from './themeTypes'
 // TODO: remove this testing export

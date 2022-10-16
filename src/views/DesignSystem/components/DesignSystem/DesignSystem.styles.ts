@@ -1,5 +1,10 @@
 import styled from 'styled-components'
 
+const Header = styled.h1`
+  padding-top: 64px;
+  padding-bottom: 8px;
+`
+
 const H1 = styled.div`
   ${props => props.theme.typography.header.h1}
 `
@@ -50,4 +55,10 @@ const Xxs = styled.div`
   ${props => props.theme.typography.body.xxs}
 `
 
-export { H1, H2, H3, H4, H5, H6, H7, Lg, Base, BaseStrong, Md, Sm, Xs, Xxs }
+const IconsWrapper = styled.div`
+  display: flex;
+  column-gap: 16px;
+  font-size: 2rem;
+`
+
+export { H1, H2, H3, H4, H5, H6, H7, Lg, Base, BaseStrong, Md, Sm, Xs, Xxs, IconsWrapper, Header }

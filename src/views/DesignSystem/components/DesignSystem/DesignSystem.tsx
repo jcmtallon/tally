@@ -1,3 +1,18 @@
+import {
+  IconBars,
+  IconChevronLeft,
+  IconChevronRight,
+  IconFirstPage,
+  IconGear,
+  IconInvoice,
+  IconLastPage,
+  IconPeople,
+  IconPlus,
+  IconPlusSm,
+  IconSortArrowDown,
+  IconTools,
+  IconXMark,
+} from 'components'
 import React from 'react'
 import { getTheme } from 'theme'
 import * as S from './DesignSystem.styles'
@@ -7,7 +22,7 @@ const theme = getTheme()
 function DesignSystem() {
   return (
     <div>
-      <h1>Typography</h1>
+      <S.Header>Typography</S.Header>
       <S.H1>Typography (H1)</S.H1>
       <S.H2>Typography (H2)</S.H2>
       <S.H3>Typography (H3)</S.H3>
@@ -22,7 +37,24 @@ function DesignSystem() {
       <S.Xs>Typography (xs)</S.Xs>
       <S.Xxs>Typography (xxs)</S.Xxs>
 
-      <h1>Tokens</h1>
+      <S.Header>ICONS</S.Header>
+      <S.IconsWrapper>
+        <IconBars />
+        <IconChevronLeft />
+        <IconChevronRight />
+        <IconFirstPage />
+        <IconGear />
+        <IconInvoice />
+        <IconLastPage />
+        <IconPeople />
+        <IconPlus />
+        <IconPlusSm />
+        <IconSortArrowDown />
+        <IconTools />
+        <IconXMark />
+      </S.IconsWrapper>
+
+      <S.Header>Tokens</S.Header>
       <h2>FG</h2>
       <div style={{ backgroundColor: theme.colors.fg.neutral.onEmphasis }}>neutral.onEmphasis</div>
       <div style={{ backgroundColor: theme.colors.fg.neutral.default }}>neutral.default</div>

@@ -1,6 +1,6 @@
 import { ColorValue } from '../../palettes/paletteTypes'
 
-type ActivableColors = 'primary'
+type ActivableColors = 'primary' | 'neutral'
 
 interface ActivableStateColors {
   /** Default state color. When the element is neither hovered, active, disabled, etc. */
@@ -31,9 +31,17 @@ const activableColorTokensLight: ActivableColorTokens = {
     quiet: '#0F6FDE',
     hover: '#0C5CB8',
     active: '#084B98',
-    disable: '#E1E1E1',
+    disable: '#e4e9ee',
     hoverMuted: '',
     activeMuted: '',
+  },
+  neutral: {
+    quiet: '',
+    hover: '',
+    active: '',
+    disable: '',
+    hoverMuted: '#F8F9FC',
+    activeMuted: '#f3f9fe',
   },
 }
 
@@ -45,6 +53,14 @@ const activableColorTokensDark: ActivableColorTokens = {
     disable: '#E1E1E1',
     hoverMuted: '',
     activeMuted: '',
+  },
+  neutral: {
+    quiet: '',
+    hover: '',
+    active: '',
+    disable: '',
+    hoverMuted: '#F8F9FC',
+    activeMuted: '#f3f9fe',
   },
 }
 

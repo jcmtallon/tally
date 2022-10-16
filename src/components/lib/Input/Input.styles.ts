@@ -1,27 +1,50 @@
 import styled from 'styled-components'
-import { pickColor, typo, fg } from 'theme'
+import { pickColor, typo, fg, canvas } from 'theme'
 
-const Input = styled.input<{ showError: Boolean; rounded: Boolean }>`
-  ${typo(t => t.body.md)};
-  ${fg(f => f.neutral.default)};
-
-  border: 1px solid
-    ${props => pickColor(c => (props.showError ? c.stroke.danger.default : c.stroke.neutral.default))};
-  border-radius: ${props => (props.rounded ? '40px' : '6px')};
-  padding: 6px 15px;
+const Wrapper = styled.div<{ showError: Boolean; rounded: Boolean }>`
+  display: inline-flex;
+  align-items: center;
+  position: relative;
 
   width: 100%; // TODO: reconsider this behavior
 
+  border-radius: ${props => (props.rounded ? '40px' : '6px')};
+  ${canvas()};
+
+  border: 1px solid
+    ${props => pickColor(c => (props.showError ? c.stroke.danger.default : c.stroke.neutral.default))};
+
+  :focus-within {
+    outline: 1px solid ${pickColor(c => c.stroke.primary.default)};
+    border-color: ${pickColor(c => c.stroke.primary.default)};
+  }
+`
+
+const Input = styled.input`
+  ${typo(t => t.body.md)};
+  ${fg(f => f.neutral.default)};
+  background-color: transparent;
+
+  padding: 6px 15px;
+  width: 100%; // TODO: reconsider this behavior
   min-height: 40px;
+
+  border: none;
 
   &::placeholder {
     ${fg(f => f.neutral.mutedPlus)};
   }
 
   &:focus-visible {
-    --outline-offset: -1px;
-    border-color: ${pickColor(c => c.stroke.primary.default)};
+    outline: none;
   }
 `
 
-export { Input }
+const EndAdornmentWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  padding: 0px 12px;
+`
+
+export { Input, Wrapper, EndAdornmentWrapper }

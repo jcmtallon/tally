@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { DebounceInput, Field as BaseField, Button as BaseButton } from 'components'
+import { DebounceInput, Field as BaseField, IconButton as BaseIconButton, IconXMark } from 'components'
 
 const Container = styled.div`
   display: flex;
@@ -7,14 +7,17 @@ const Container = styled.div`
   align-items: flex-end;
 `
 
-const Field = styled(BaseField).attrs({ rounded: true })``
-
-const DebounceSearchInput = styled(DebounceInput)`
+const Field = styled(BaseField).attrs({ rounded: true })`
   min-width: 600px;
 `
 
-const Button = styled(BaseButton).attrs({ color: 'highlight' })`
-  height: 40px;
+const DebounceSearchInput = styled(DebounceInput)``
+
+const IconButton = styled(BaseIconButton).attrs({ variant: 'ghost', size: 'small', color: 'neutral' })`
+  // So the focus outline looks rounded.
+  border-radius: 20px;
 `
 
-export { Container, Field, DebounceSearchInput, Button }
+const XMarkIcon = styled(IconXMark)``
+
+export { Container, Field, DebounceSearchInput, IconButton, XMarkIcon }

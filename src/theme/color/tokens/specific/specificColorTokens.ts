@@ -16,13 +16,13 @@ interface SpecificColorTokens {
 const specificTokensLight: SpecificColorTokens = {
   canvas: colorPaletteLight.white,
   activable: activableColorTokensLight,
-  disabledText: '#A4A4A4',
+  disabledText: '#8DA3B9',
 }
 
 const specificTokensDark: SpecificColorTokens = {
   canvas: colorPaletteDark.grey[85],
   activable: activableColorTokensDark,
-  disabledText: '#A4A4A4',
+  disabledText: '#8DA3B9',
 }
 
 export { specificTokensLight, specificTokensDark }

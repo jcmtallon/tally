@@ -13,6 +13,7 @@ const colorTokensLight: ColorTokens = {
     },
     primary: {
       onEmphasis: '',
+      // emphasis: #24292E ??
       default: '#0F6FDE',
       muted: '#309AED',
       mutedPlus: '#47A6EF',

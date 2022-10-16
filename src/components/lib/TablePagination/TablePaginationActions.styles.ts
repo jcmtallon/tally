@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Button } from '../Button'
+import { IconButton as BaseIconButton } from '../IconButton'
 import { IconChevronLeft, IconChevronRight, IconFirstPage, IconLastPage } from '../icons'
 
 const Container = styled.div`
@@ -7,7 +7,7 @@ const Container = styled.div`
   column-gap: 5px;
 `
 
-const IconButton = styled(Button)``
+const IconButton = styled(BaseIconButton)``
 
 const FirstPageIcon = styled(IconFirstPage)``
 const LastPageIcon = styled(IconLastPage)``
