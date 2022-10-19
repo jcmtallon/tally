@@ -62,7 +62,7 @@ function ClientList(props: ClientListProps) {
   return (
     <S.Container {...otherProps}>
       <S.SearchForm id="clientsSearchForm" values={filters} onValuesChange={searchFormChangeHandler} />
-      <S.Actions id="clientsActions" selected={selected} />
+      <S.Actions id="clientsActions" selected={selected} onResetSelection={() => selectedChangeHandler([])} />
       <S.Table
         id="clientsTable"
         clients={currentPageClients}

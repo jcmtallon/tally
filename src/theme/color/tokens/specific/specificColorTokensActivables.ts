@@ -5,7 +5,7 @@ import { ColorValue } from '../../palettes/paletteTypes'
 // TODO: Table container with shadow
 // TODO: Table navigation
 
-type ActivableColors = 'primary' | 'neutral'
+type ActivableColors = 'primary' | 'neutral' | 'highlight'
 
 interface ActivableStateColors {
   /** Default state color. When the element is neither hovered, active, disabled, etc. */
@@ -41,11 +41,19 @@ const activableColorTokensLight: ActivableColorTokens = {
     activeMuted: '',
   },
   neutral: {
+    quiet: '#8299B1',
+    hover: '#6489B1',
+    active: '#557392',
+    disable: '',
+    hoverMuted: '#F8F9FC',
+    activeMuted: '#f3f9fe',
+  },
+  highlight: {
     quiet: '',
     hover: '',
     active: '',
     disable: '',
-    hoverMuted: '#F8F9FC',
+    hoverMuted: '#F7FBFE',
     activeMuted: '#f3f9fe',
   },
 }
@@ -65,6 +73,14 @@ const activableColorTokensDark: ActivableColorTokens = {
     active: '',
     disable: '',
     hoverMuted: '#F8F9FC',
+    activeMuted: '#f3f9fe',
+  },
+  highlight: {
+    quiet: '',
+    hover: '',
+    active: '',
+    disable: '',
+    hoverMuted: '#F7FBFE',
     activeMuted: '#f3f9fe',
   },
 }

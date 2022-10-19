@@ -6,10 +6,7 @@ type ButtonColors = Record<ButtonVariant, Record<'quiet' | 'hover' | 'active', C
 
 function getPrimaryButtonColors(theme: Theme): ButtonColors {
   const fg = theme.colors.fg.neutral.onEmphasis
-
-  const { quiet } = theme.colors.specific.activable.primary
-  const { hover } = theme.colors.specific.activable.primary
-  const { active } = theme.colors.specific.activable.primary
+  const { quiet, hover, active } = theme.colors.specific.activable.primary
 
   return {
     solid: {
@@ -27,19 +24,15 @@ function getPrimaryButtonColors(theme: Theme): ButtonColors {
 
 function getNeutralButtonColors(theme: Theme): ButtonColors {
   const fg = theme.colors.fg.neutral.default
+  const stroke = theme.colors.stroke.neutral.emphasis
 
-  const { hoverMuted } = theme.colors.specific.activable.neutral
-  const { activeMuted } = theme.colors.specific.activable.neutral
+  const { quiet, hoverMuted, activeMuted } = theme.colors.specific.activable.neutral
 
   const activeFg = theme.colors.fg.primary.muted
 
   return {
     solid: {
-      quiet: {
-        bg: theme.colors.bg.neutral.default,
-        fg,
-        stroke: theme.colors.stroke.neutral.emphasis,
-      },
+      quiet: { bg: quiet, fg, stroke },
       hover: { bg: '', fg: '', stroke: '' },
       active: { bg: '', fg: '', stroke: '' },
     },
@@ -52,15 +45,18 @@ function getNeutralButtonColors(theme: Theme): ButtonColors {
 }
 
 function getHighlightButtonColors(theme: Theme): ButtonColors {
+  const bg = theme.colors.specific.canvas
+  const fg = theme.colors.fg.neutral.default
+  const stroke = theme.colors.stroke.neutral.default
+  const strokeHighlight = theme.colors.stroke.primary.default
+
+  const { hoverMuted, activeMuted } = theme.colors.specific.activable.highlight
+
   return {
     solid: {
-      quiet: {
-        bg: theme.colors.specific.canvas,
-        fg: theme.colors.fg.neutral.default,
-        stroke: theme.colors.stroke.neutral.default,
-      },
-      hover: { bg: '', fg: '', stroke: '' },
-      active: { bg: '', fg: '', stroke: '' },
+      quiet: { bg, fg, stroke },
+      hover: { bg: hoverMuted, fg, stroke: strokeHighlight },
+      active: { bg: activeMuted, fg, stroke: strokeHighlight },
     },
     ghost: {
       quiet: { bg: '', fg: '', stroke: '' },

@@ -11,7 +11,7 @@ interface ClientListActionsProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 function ClientListActions(props: ClientListActionsProps) {
-  const { selected, onPDFGenerated, onClientDeleted, ...otherProps } = props
+  const { selected, onPDFGenerated, onClientDeleted, onResetSelection, ...otherProps } = props
 
   // If deleted, back in list: reset selection = refetch.
   // If not deleted: show toast error. No refetch, no reset selection
@@ -23,7 +23,10 @@ function ClientListActions(props: ClientListActionsProps) {
     <S.Container {...otherProps}>
       <S.Actions>
         {selected.length > 0 && (
-          <S.SelectedLabelWrapper>{`${selected.length} seleccionados`}</S.SelectedLabelWrapper>
+          <S.SelectedLabelWrapper>
+            <S.CloseIcon tabIndex={0} role="button" onClick={onResetSelection} />
+            <span>{`${selected.length} seleccionados`}</span>
+          </S.SelectedLabelWrapper>
         )}
         {selected.length > 0 && <S.Button>Borrar</S.Button>}
       </S.Actions>

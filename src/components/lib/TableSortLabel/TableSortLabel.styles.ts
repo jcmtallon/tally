@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-import { fg } from 'theme'
+import { fg, pickColor, radius } from 'theme'
 import { IconSortArrowDown } from '../icons'
 
 const Span = styled.span<{ active: boolean }>`
@@ -9,8 +9,12 @@ const Span = styled.span<{ active: boolean }>`
   justify-content: flex-start;
   align-items: center;
 
+  ${radius(r => r.xs)};
+
   :focus-visible {
-    color: blue;
+    ${fg(f => f.primary.default)};
+    outline: 2px solid ${pickColor(c => c.stroke.primary.default)};
+    outline-offset: 4px;
   }
 
   :hover {
