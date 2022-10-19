@@ -1,6 +1,6 @@
 import { produce } from 'immer'
 import { useReducer } from 'react'
-import { listInitialState, listStateReducer } from 'hooks'
+import { listInitialState, listStateReducer, mapConfigToListInitialState } from 'hooks'
 import { ClientListState as State } from './clientList.types'
 import { ClientListSearchParams } from './useClientListSearchParams'
 
@@ -22,10 +22,6 @@ type Action = ReturnType<typeof changeSearchParams | typeof changeSelected | typ
 
 const initialState: State = {
   ...listInitialState,
-  sorting: {
-    direction: 'desc',
-    orderBy: 'created',
-  },
   filters: {
     search: '',
   },
@@ -38,6 +34,8 @@ function mustResetPage(state: State['filters'], draft: State['filters']): boolea
 }
 
 function reducer(state: State, action: Action): State {
+  console.log('reducer')
+
   switch (action.type) {
     case 'changeSearchParams':
       return produce(state, draft => {
@@ -66,8 +64,23 @@ function reducer(state: State, action: Action): State {
   }
 }
 
-function useClientListState() {
-  const [state, dispatch] = useReducer(reducer, initialState)
+function mapConfigToInitialState(config?: ClientListSearchParams): State {
+  if (!config) return initialState
+
+  const baseState = mapConfigToListInitialState(config)
+
+  console.log('baseState')
+
+  return {
+    ...baseState,
+    filters: {
+      search: config.search ?? initialState.filters.search,
+    },
+  }
+}
+
+function useClientListState(config?: ClientListSearchParams) {
+  const [state, dispatch] = useReducer(reducer, config, mapConfigToInitialState)
   return [state, dispatch] as const
 }
 

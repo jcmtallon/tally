@@ -86,10 +86,26 @@ function reducer(state: State, action: Action): State {
   }
 }
 
-function useListStateReducer() {
-  const [state, dispatch] = useReducer(reducer, initialState)
+function mapConfigToInitialState(config?: ListSearchParams): State {
+  if (!config) return initialState
+
+  return {
+    ...initialState,
+    page: config.page ? getPage(config.page) : initialState.page,
+    limit: config.limit ? getLimit(config.limit) : initialState.limit,
+    sorting: getSorting(config.sort, config.dir),
+  }
+}
+
+function useListStateReducer(config?: ListSearchParams) {
+  const [state, dispatch] = useReducer(reducer, config, mapConfigToInitialState)
   return [state, dispatch] as const
 }
 
-export { useListStateReducer, initialState as listInitialState, reducer as listStateReducer }
+export {
+  useListStateReducer,
+  initialState as listInitialState,
+  reducer as listStateReducer,
+  mapConfigToInitialState as mapConfigToListInitialState,
+}
 export type { State as ListState }

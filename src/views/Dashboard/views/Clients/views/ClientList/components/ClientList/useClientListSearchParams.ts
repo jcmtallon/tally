@@ -32,8 +32,11 @@ function useClientListSearchParams() {
 
   const clientListSearchParams: ClientListSearchParams = useMemo(() => {
     return {
-      search: searchParams.get(paramKey.search),
-      ...listSearchParams,
+      dir: listSearchParams.dir ?? 'desc',
+      limit: listSearchParams.limit ?? '10',
+      page: listSearchParams.page ?? '0',
+      search: searchParams.get(paramKey.search) ?? '',
+      sort: listSearchParams.sort ?? 'created',
     }
   }, [searchParams, listSearchParams])
 

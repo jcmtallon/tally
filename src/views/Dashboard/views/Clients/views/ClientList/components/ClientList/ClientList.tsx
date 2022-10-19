@@ -19,7 +19,7 @@ function ClientList(props: ClientListProps) {
   const { clientListSearchParams, setPageParam, setLimitParam, setSortingParams, setFilterParam } =
     useClientListSearchParams()
 
-  const [listState, dispatch] = useClientListState()
+  const [listState, dispatch] = useClientListState(clientListSearchParams)
 
   useEffect(() => {
     dispatch({ type: 'changeSearchParams', payload: clientListSearchParams })
