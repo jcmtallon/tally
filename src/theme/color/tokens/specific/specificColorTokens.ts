@@ -11,17 +11,20 @@ interface SpecificColorTokens {
   canvas: ColorValue
   activable: ActivableColorTokens
   disabledText: ColorValue
+  focusOutline: ColorValue
 }
 
 const specificTokensLight: SpecificColorTokens = {
   canvas: colorPaletteLight.white,
   activable: activableColorTokensLight,
+  focusOutline: '#0F6FDE',
   disabledText: '#8DA3B9',
 }
 
 const specificTokensDark: SpecificColorTokens = {
   canvas: colorPaletteDark.grey[85],
   activable: activableColorTokensDark,
+  focusOutline: '#0F6FDE',
   disabledText: '#8DA3B9',
 }
 

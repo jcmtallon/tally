@@ -9,12 +9,12 @@ const Container = styled.div`
 `
 
 const ContentSection = css`
-  max-width: 1200px;
+  max-width: 1600px;
   width: 100%;
 `
 
 const TopRow = styled(ClientListTopRow)`
-  padding: 20px 10px 10px;
+  padding: 20px 20px 10px;
 
   ${ContentSection}
 `

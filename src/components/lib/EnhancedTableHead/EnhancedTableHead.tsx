@@ -84,7 +84,7 @@ function EnhanceTableHead(props: EnhanceTableHeadProps, ref: Ref<HTMLTableSectio
   return (
     <S.Head {...otherProps} ref={ref}>
       <S.Row>
-        <S.Cell align="center" width="48px">
+        <S.Cell padding="checkbox" align="center" width="44px">
           {!hideCheckbox && (
             <S.Checkbox
               onChange={e => onSelectedChanged?.(e.target.checked ? rowIds : [])}

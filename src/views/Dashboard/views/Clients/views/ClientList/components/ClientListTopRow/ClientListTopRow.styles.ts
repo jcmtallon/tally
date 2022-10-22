@@ -8,6 +8,7 @@ const Wrapper = styled.div`
   justify-content: space-between;
 `
 const Header = styled.h1`
+  user-select: none;
   display: flex;
   align-items: center;
   font-weight: bold;

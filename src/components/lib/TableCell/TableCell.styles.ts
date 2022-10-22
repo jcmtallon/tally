@@ -1,28 +1,33 @@
 import styled, { css } from 'styled-components'
-import { pickColor, fg, typo, canvas } from 'theme'
+import { pickColor, fg, typo } from 'theme'
 import { TableSize } from '../Table'
+import { TableCellPaddingVariant } from './TableCell.types'
 
-function calculatePadding(size: TableSize, padding: 'none' | 'inherit'): string {
-  const sizePadding: Record<TableSize, string> = {
-    small: '6px 16px',
-    medium: '16px',
+function calculatePadding(size: TableSize, padding: TableCellPaddingVariant): string {
+  const sizePadding: Record<TableCellPaddingVariant, Record<TableSize, string>> = {
+    none: {
+      small: '0px',
+      medium: '0px',
+    },
+    inherit: {
+      small: '6px 16px',
+      medium: '12px 16px',
+    },
+    checkbox: {
+      small: '',
+      medium: '12px 12px',
+    },
   }
 
-  const paddingSetting: Record<'none' | 'inherit', string> = {
-    none: '0px',
-    inherit: sizePadding[size],
-  }
-
-  return paddingSetting[padding]
+  return sizePadding[padding][size]
 }
 
 const Cell = styled.td<{
   size: TableSize
-  padding: 'none' | 'inherit'
+  padding: TableCellPaddingVariant
   stickyHeader: boolean
   textAlign: 'center' | 'inherit' | 'left' | 'right' | 'justify'
 }>`
-  ${canvas()};
   border-bottom: 1px solid ${pickColor(s => s.stroke.neutral.muted)};
   text-align: ${props => props.textAlign};
   padding: ${({ size, padding }) => calculatePadding(size, padding)};

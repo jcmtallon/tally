@@ -49,7 +49,8 @@ const SideNav = styled.div<{ isCollapsed?: boolean }>`
   }
 
   ${SideNavSectionHeader.S.Wrapper} {
-    transition: opacity 100ms ease-in-out;
+    transition: all 100ms ease-in-out;
+    width: 120px;
     opacity: 1;
 
     ${({ isCollapsed }) =>

@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { radius } from 'theme'
 import {
   Table as BaseTable,
   TableCell as BaseTableCell,
@@ -8,10 +9,12 @@ import {
   TableRowCheckbox,
   EnhanceTableHead as BaseEnhanceTableHead,
 } from 'components'
+import { shadow } from 'theme/shadows/shadows'
 
 const TableContainer = styled(BaseTableContainer)`
   max-height: 700px;
-  border-radius: 12px;
+  ${radius(r => r.md)};
+  ${shadow(s => s.medium)};
 `
 
 const Table = styled(BaseTable)``

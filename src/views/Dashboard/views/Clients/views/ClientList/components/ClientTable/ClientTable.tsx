@@ -60,16 +60,18 @@ function ClientTable(props: ClientTableProps) {
         />
         <S.TableBody>
           {clients.map((client, index) => (
-            <S.TableRow key={client.clientId} onClick={() => onRowClicked?.(client.clientId)}>
-              <S.Cell align="center">
-                <S.EnhancedCheckbox
-                  rowId={client.clientId}
-                  selectedRowIds={selected}
-                  aria-labelledby={`table-checkbox-${index}`}
-                  onSelectedChanged={onSelectedChanged}
-                  onClick={e => e.stopPropagation()}
-                />
-              </S.Cell>
+            <S.TableRow
+              hover
+              selected={selected.indexOf(client.clientId) !== -1}
+              key={client.clientId}
+              onClick={() => onRowClicked?.(client.clientId)}>
+              <S.EnhancedCheckbox
+                rowId={client.clientId}
+                selectedRowIds={selected}
+                aria-labelledby={`table-checkbox-${index}`}
+                onSelectedChanged={onSelectedChanged}
+              />
+
               <S.Cell>{client.name}</S.Cell>
               <S.Cell>{client.email}</S.Cell>
               <S.Cell>{client.phone}</S.Cell>

@@ -11,7 +11,8 @@ interface Shadows {
 
 const lightModeShadows: Shadows = {
   small: `0 16px 48px 0 ${transparentize(0.92, 'black')}`,
-  medium: `0 8px 24px 0 ${transparentize(0.92, 'black')}`,
+  medium: `rgb(95 116 141 / 3%) 0px 2px 1px -1px, rgb(95 116 141 / 4%) 0px 1px 1px 0px,
+  rgb(95 116 141 / 8%) 0px 1px 3px 0px;`,
   large: `0 16px 48px 0 ${transparentize(0.84, 'black')}`,
 }
 

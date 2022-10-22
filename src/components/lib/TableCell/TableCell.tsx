@@ -2,6 +2,7 @@ import React, { Ref } from 'react'
 import { Merge } from 'type-fest'
 import { TableCellVariant, TableSize, useTableContext, useTableSectionContext } from '../Table'
 import * as S from './TableCell.styles'
+import { TableCellPaddingVariant } from './TableCell.types'
 
 type TableCellProps = Merge<
   React.InputHTMLAttributes<HTMLTableCellElement>,
@@ -16,7 +17,7 @@ type TableCellProps = Merge<
     size?: TableSize
 
     /** Sets padding applied for specific cases. Defaults to padding applied by 'size' props. */
-    padding?: 'none' | 'inherit' // TODO: add checkbox option
+    padding?: TableCellPaddingVariant
 
     /** Set aria-sort direction. */
     sortDirection?: 'asc' | 'desc'

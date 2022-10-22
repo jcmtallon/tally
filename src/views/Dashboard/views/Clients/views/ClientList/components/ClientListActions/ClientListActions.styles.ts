@@ -32,6 +32,10 @@ const CloseIcon = styled(IconXmarkCircle)`
   :active {
     color: ${pickColor(c => c.specific.activable.neutral.active)};
   }
+
+  :focus:not(:focus-visible) {
+    outline: none;
+  }
 `
 
 export { Container, Actions, Button, SelectedLabelWrapper, CloseIcon }

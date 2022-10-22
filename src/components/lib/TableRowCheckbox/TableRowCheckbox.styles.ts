@@ -1,6 +1,6 @@
 import styled from 'styled-components'
-import { Checkbox as BaseCheckbox } from '../Checkbox'
+import { CheckboxTableCell } from '../CheckboxTableCell'
 
-const Checkbox = styled(BaseCheckbox)``
+const CheckboxCell = styled(CheckboxTableCell)``
 
-export { Checkbox }
+export { CheckboxCell }

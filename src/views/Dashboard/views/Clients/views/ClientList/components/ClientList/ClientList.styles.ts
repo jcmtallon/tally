@@ -7,7 +7,7 @@ import { ClientTable } from '../ClientTable'
 
 const Container = styled.div`
   display: grid;
-  padding: 10px;
+  padding: 10px 20px;
   gap: 10px;
 
   grid-template-columns: repeat(4, minmax(0, 1fr));

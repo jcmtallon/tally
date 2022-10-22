@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { MouseEventHandler } from 'react'
 import { createStylableComponent } from 'utils'
 import { Merge } from 'type-fest'
 import * as S from './TableRowCheckbox.styles'
-import { CheckboxProps } from '../Checkbox'
+import { CheckboxTableCellProps } from '../CheckboxTableCell'
 
 type TableRowCheckboxProps = Merge<
-  Omit<CheckboxProps, 'onChange' | 'checked'>,
+  Omit<CheckboxTableCellProps, 'checked'>,
   {
     rowId: string
     selectedRowIds: string[]
@@ -36,9 +36,12 @@ function TableRowCheckbox(props: TableRowCheckboxProps) {
 
   const isSelected = (name: string) => selected.indexOf(name) !== -1
 
-  return (
-    <S.Checkbox {...otherProps} checked={isSelected(rowId)} onChange={() => handleCheckboxChange(rowId)} />
-  )
+  const handleOnClick: MouseEventHandler<HTMLTableCellElement> = e => {
+    e.stopPropagation()
+    handleCheckboxChange(rowId)
+  }
+
+  return <S.CheckboxCell {...otherProps} checked={isSelected(rowId)} onClick={handleOnClick} />
 }
 
 const StylableTableRowCheckbox = createStylableComponent(S, TableRowCheckbox)
