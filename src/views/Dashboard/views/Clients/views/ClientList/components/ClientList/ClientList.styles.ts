@@ -1,8 +1,8 @@
 import { TablePagination } from 'components'
 import styled from 'styled-components'
-import { fg, typo } from 'theme'
 import { ClientListActions } from '../ClientListActions'
 import { ClientListSearchForm } from '../ClientListSearchForm'
+import { ClientListTotalCount } from '../ClientListTotalCount'
 import { ClientTable } from '../ClientTable'
 
 const Container = styled.div`
@@ -44,9 +44,8 @@ const Actions = styled(ClientListActions)``
 
 const Table = styled(ClientTable)``
 
-const TotalCounter = styled.div`
-  ${fg(f => f.neutral.muted)};
-  ${typo(t => t.body.base)};
+const TotalCounter = styled(ClientListTotalCount)`
+  padding-left: 18px;
 `
 
 const Pagination = styled(TablePagination)``

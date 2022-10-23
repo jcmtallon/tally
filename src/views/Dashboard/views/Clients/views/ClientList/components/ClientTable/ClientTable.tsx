@@ -76,8 +76,8 @@ function ClientTable(props: ClientTableProps) {
               <S.Cell padding="chip">
                 <S.ClientName clientName={client.name} clientType={client.clientType || 'individual'} />
               </S.Cell>
-              <S.Cell>{client.email}</S.Cell>
-              <S.Cell>{client.phone}</S.Cell>
+              <S.Cell>{client.email || '-'}</S.Cell>
+              <S.Cell>{client.phone || '-'}</S.Cell>
               <S.Cell align="right">
                 <S.InvoiceCount count={client.invoicesCount} />
               </S.Cell>

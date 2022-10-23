@@ -1,4 +1,6 @@
+import { ActivityIndicator } from 'components'
 import styled, { css } from 'styled-components'
+import { fg } from 'theme'
 import { ClientList as BaseClientList } from '../ClientList'
 import { ClientListTopRow } from '../ClientListTopRow/ClientListTopRow'
 
@@ -6,6 +8,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: 100%;
 `
 
 const ContentSection = css`
@@ -19,8 +22,12 @@ const TopRow = styled(ClientListTopRow)`
   ${ContentSection}
 `
 
+const Backdrop = styled(ActivityIndicator)`
+  ${fg(f => f.primary.default)};
+`
+
 const ClientList = styled(BaseClientList)`
   ${ContentSection}
 `
 
-export { Container, TopRow, ClientList }
+export { Container, TopRow, ClientList, Backdrop }

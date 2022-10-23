@@ -1,3 +1,4 @@
+export * from './lib/ActivityIndicator'
 export * from './lib/AppErrorBoundary'
 export * from './lib/Button'
 export * from './lib/Checkbox'

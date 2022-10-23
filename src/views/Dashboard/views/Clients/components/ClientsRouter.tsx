@@ -11,10 +11,12 @@ function ClientsRouter() {
   const { search } = useLocation()
 
   const [clients, setClients] = useState<Client[] | undefined>(undefined)
+  const [fetching, setFetching] = useState(true)
 
   const fetchClientData = useCallback(async () => {
     const response = await clientsApi.list()
     setClients(response)
+    setFetching(false)
   }, [])
 
   useEffect(() => {
@@ -34,6 +36,7 @@ function ClientsRouter() {
           <>
             <ClientList
               clients={clients}
+              fetching={fetching}
               onCreateClientButtonClicked={() => navigate(`/dashboard/clients/create${search}`)}
               onShowClientDetailsClicked={clientId => navigate(`/dashboard/clients/${clientId}`)}
             />

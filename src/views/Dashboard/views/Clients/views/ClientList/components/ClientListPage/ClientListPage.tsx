@@ -6,18 +6,19 @@ import * as S from './ClientListPage.styles'
 
 interface ClientListPageProps extends HTMLAttributes<HTMLDivElement> {
   clients: Client[] | undefined
+  fetching?: boolean
 
   onCreateClientButtonClicked?: () => void
   onShowClientDetailsClicked?: (clientId: string) => void
 }
 
 function ClientListPage(props: ClientListPageProps) {
-  const { clients, onCreateClientButtonClicked, onShowClientDetailsClicked, ...otherProps } = props
+  const { clients, fetching, onCreateClientButtonClicked, onShowClientDetailsClicked, ...otherProps } = props
   return (
     <DashboardLayout>
       <S.Container {...otherProps}>
         <S.TopRow onCreateClientButtonClicked={onCreateClientButtonClicked} />
-        {/* TODO: Loading spinner */}
+        {fetching && <S.Backdrop />}
         {clients && (
           <S.ClientList clients={clients} onShowClientDetailsClicked={onShowClientDetailsClicked} />
         )}

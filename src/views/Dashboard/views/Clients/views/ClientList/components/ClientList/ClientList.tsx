@@ -76,7 +76,7 @@ function ClientList(props: ClientListProps) {
         onSortChanged={sortChangeHandler}
         onSelectedChanged={selectedChangeHandler}
       />
-      <S.TotalCounter id="clientsTotal">{`${totalClients} resultados`}</S.TotalCounter>
+      <S.TotalCounter count={totalClients} id="clientsTotal" />
       <S.Pagination
         id="clientsPagination"
         page={page}
