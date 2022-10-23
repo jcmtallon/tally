@@ -28,6 +28,10 @@ function ClientsRouter() {
     fetchClientData()
   }, [navigate, fetchClientData])
 
+  const onClientDelete = useCallback(() => {
+    fetchClientData()
+  }, [fetchClientData])
+
   return (
     <Routes>
       <Route
@@ -39,6 +43,7 @@ function ClientsRouter() {
               fetching={fetching}
               onCreateClientButtonClicked={() => navigate(`/dashboard/clients/create${search}`)}
               onShowClientDetailsClicked={clientId => navigate(`/dashboard/clients/${clientId}`)}
+              onClientDelete={onClientDelete}
             />
             <Outlet />
           </>

@@ -12,17 +12,24 @@ interface ClientListProps extends HTMLAttributes<HTMLDivElement> {
   clients: Client[]
 
   onShowClientDetailsClicked?: (clientId: string) => void
+  onClientDelete?: () => void
 }
 
 function ClientList(props: ClientListProps) {
-  const { clientId: urlId } = useParams()
+  const { clients, onShowClientDetailsClicked, onClientDelete, ...otherProps } = props
 
-  const { clients, onShowClientDetailsClicked, ...otherProps } = props
+  const { clientId: urlId } = useParams()
 
   const { clientListSearchParams, setPageParam, setLimitParam, setSortingParams, setFilterParam } =
     useClientListSearchParams()
 
   const [listState, dispatch] = useClientListState(clientListSearchParams)
+
+  useEffect(() => {
+    // Reset row selection every time client data gets updated.
+    // E.g.: resetting selection after client deletion.
+    dispatch({ type: 'changeSelected', payload: { selected: [] } })
+  }, [clients, dispatch])
 
   useEffect(() => {
     dispatch({ type: 'changeSearchParams', payload: clientListSearchParams })
@@ -65,7 +72,12 @@ function ClientList(props: ClientListProps) {
   return (
     <S.Container {...otherProps}>
       <S.SearchForm id="clientsSearchForm" values={filters} onValuesChange={searchFormChangeHandler} />
-      <S.Actions id="clientsActions" selected={selected} onResetSelection={() => selectedChangeHandler([])} />
+      <S.Actions
+        id="clientsActions"
+        selected={selected}
+        onResetSelection={() => selectedChangeHandler([])}
+        onClientDeleted={onClientDelete}
+      />
       <S.Table
         id="clientsTable"
         clients={currentPageClients}
