@@ -15,7 +15,11 @@ function calculatePadding(size: TableSize, padding: TableCellPaddingVariant): st
     },
     checkbox: {
       small: '',
-      medium: '12px 12px',
+      medium: '12px 12px 12px 17px', // Keeps into account the left bar when a row is selected
+    },
+    chip: {
+      small: '',
+      medium: '10px 12px',
     },
   }
 

@@ -1,7 +1,8 @@
 import styled, { css } from 'styled-components'
-import { canvas, pickColor } from 'theme'
+import { bg, canvas, pickColor } from 'theme'
 
 const TableRow = styled.tr<{ shadeOnHover: boolean; selected: boolean }>`
+  position: relative;
   vertical-align: middle;
   ${canvas()};
 
@@ -17,6 +18,16 @@ const TableRow = styled.tr<{ shadeOnHover: boolean; selected: boolean }>`
     selected &&
     css`
       background-color: ${pickColor(c => c.bg.primary.muted)};
+
+      ::after {
+        top: 0px;
+        left: 0px;
+        width: 5px;
+        content: '';
+        height: 100%;
+        position: absolute;
+        ${bg(b => b.primary.emphasis)};
+      }
     `}
 
     ${({ shadeOnHover, selected }) =>
