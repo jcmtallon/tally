@@ -10,6 +10,7 @@ import {
   EnhanceTableHead as BaseEnhanceTableHead,
 } from 'components'
 import { shadow } from 'theme/shadows/shadows'
+import { ClientInvoiceCounterDisplay, ClientTypeDisplay } from 'features/clients'
 
 const TableContainer = styled(BaseTableContainer)`
   max-height: 700px;
@@ -24,4 +25,19 @@ const TableRow = styled(BaseTableRow)``
 const Cell = styled(BaseTableCell)``
 const EnhancedCheckbox = styled(TableRowCheckbox)``
 
-export { Cell, EnhancedCheckbox, Table, TableBody, TableContainer, EnhancedTableHead, TableRow }
+const InvoiceCount = styled(ClientInvoiceCounterDisplay)`
+  justify-content: end;
+`
+const ClientName = styled(ClientTypeDisplay)``
+
+export {
+  Cell,
+  ClientName,
+  EnhancedCheckbox,
+  EnhancedTableHead,
+  InvoiceCount,
+  Table,
+  TableBody,
+  TableContainer,
+  TableRow,
+}

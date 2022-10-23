@@ -34,8 +34,6 @@ function mustResetPage(state: State['filters'], draft: State['filters']): boolea
 }
 
 function reducer(state: State, action: Action): State {
-  console.log('reducer')
-
   switch (action.type) {
     case 'changeSearchParams':
       return produce(state, draft => {
@@ -68,9 +66,6 @@ function mapConfigToInitialState(config?: ClientListSearchParams): State {
   if (!config) return initialState
 
   const baseState = mapConfigToListInitialState(config)
-
-  console.log('baseState')
-
   return {
     ...baseState,
     filters: {

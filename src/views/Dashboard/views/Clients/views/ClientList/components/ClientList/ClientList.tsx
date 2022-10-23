@@ -1,6 +1,7 @@
 import { TableSorting } from 'components'
 import React, { HTMLAttributes, useEffect, useMemo } from 'react'
 import { Client } from 'services'
+import { useParams } from 'react-router-dom'
 import { useClientListSearchParams } from './useClientListSearchParams'
 import * as S from './ClientList.styles'
 import { useClientListState } from './useClientListState'
@@ -14,6 +15,8 @@ interface ClientListProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 function ClientList(props: ClientListProps) {
+  const { clientId: urlId } = useParams()
+
   const { clients, onShowClientDetailsClicked, ...otherProps } = props
 
   const { clientListSearchParams, setPageParam, setLimitParam, setSortingParams, setFilterParam } =
@@ -68,6 +71,7 @@ function ClientList(props: ClientListProps) {
         clients={currentPageClients}
         sorting={sorting}
         selected={selected}
+        opened={urlId}
         onRowClicked={invoice => onShowClientDetailsClicked?.(invoice)}
         onSortChanged={sortChangeHandler}
         onSelectedChanged={selectedChangeHandler}

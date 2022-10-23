@@ -10,6 +10,7 @@ interface ClientTableProps extends HTMLAttributes<HTMLDivElement> {
   clients?: Client[]
   sorting?: Sorting
   selected?: Client['clientId'][]
+  opened?: Client['clientId']
 
   onRowClicked?: (clientId: Client['clientId']) => void
   onSortChanged?: (sorting: Sorting | undefined) => void
@@ -21,6 +22,7 @@ function ClientTable(props: ClientTableProps) {
     clients = [],
     selected = [],
     sorting,
+    opened,
     onRowClicked,
     onSortChanged,
     onSelectedChanged,
@@ -32,10 +34,10 @@ function ClientTable(props: ClientTableProps) {
   const headCells: readonly TableHeadCell[] = useMemo(() => {
     const cells: TableHeadCell[] = [
       { label: 'Nombre / Razón', id: 'name' },
-      { label: 'E-mail', id: 'email' },
-      { label: 'Teléfono', id: 'phone' },
-      { label: 'Facturas', id: 'invoices' },
-      { label: 'Añadido', id: 'created' },
+      { label: 'E-mail', id: 'email', width: '260px' },
+      { label: 'Teléfono', id: 'phone', width: '130px' },
+      { label: 'Facturas', id: 'invoices', width: '130px', align: 'right' },
+      { label: 'Añadido', id: 'created', width: '260px' },
     ]
 
     return cells.map(cell => {
@@ -62,7 +64,7 @@ function ClientTable(props: ClientTableProps) {
           {clients.map((client, index) => (
             <S.TableRow
               hover
-              selected={selected.indexOf(client.clientId) !== -1}
+              selected={selected.indexOf(client.clientId) !== -1 || opened === client.clientId}
               key={client.clientId}
               onClick={() => onRowClicked?.(client.clientId)}>
               <S.EnhancedCheckbox
@@ -71,11 +73,14 @@ function ClientTable(props: ClientTableProps) {
                 aria-labelledby={`table-checkbox-${index}`}
                 onSelectedChanged={onSelectedChanged}
               />
-
-              <S.Cell>{client.name}</S.Cell>
+              <S.Cell padding="chip">
+                <S.ClientName clientName={client.name} clientType={client.clientType || 'individual'} />
+              </S.Cell>
               <S.Cell>{client.email}</S.Cell>
               <S.Cell>{client.phone}</S.Cell>
-              <S.Cell>{client.invoicesCount}</S.Cell>
+              <S.Cell align="right">
+                <S.InvoiceCount count={client.invoicesCount} />
+              </S.Cell>
               <S.Cell>{client.created}</S.Cell>
             </S.TableRow>
           ))}
