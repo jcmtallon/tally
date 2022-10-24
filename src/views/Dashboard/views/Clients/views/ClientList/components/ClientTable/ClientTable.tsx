@@ -3,6 +3,7 @@ import { createStylableComponent } from 'utils'
 import { Client } from 'services'
 import { EnhanceTableHeadCell, TableSorting as Sorting } from 'components'
 import { Merge } from 'type-fest'
+import { DateTime } from 'features/dateTime'
 import { isClientListSortableFiled } from '../ClientList'
 import * as S from './ClientTable.styles'
 
@@ -37,7 +38,7 @@ function ClientTable(props: ClientTableProps) {
       { label: 'E-mail', id: 'email', width: '260px' },
       { label: 'Teléfono', id: 'phone', width: '130px' },
       { label: 'Facturas', id: 'invoices', width: '130px', align: 'right' },
-      { label: 'Añadido', id: 'created', width: '260px' },
+      { label: 'Añadido', id: 'created', width: '130px' },
     ]
 
     return cells.map(cell => {
@@ -81,7 +82,9 @@ function ClientTable(props: ClientTableProps) {
               <S.Cell align="right">
                 <S.InvoiceCount count={client.invoicesCount} />
               </S.Cell>
-              <S.Cell>{client.created}</S.Cell>
+              <S.Cell>
+                {client.created ? <S.DurationDisplay date={DateTime.fromISO(client.created)} /> : '-'}
+              </S.Cell>
             </S.TableRow>
           ))}
         </S.TableBody>

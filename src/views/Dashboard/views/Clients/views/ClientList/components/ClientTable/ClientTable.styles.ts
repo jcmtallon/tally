@@ -11,6 +11,7 @@ import {
 } from 'components'
 import { shadow } from 'theme/shadows/shadows'
 import { ClientInvoiceCounterDisplay, ClientTypeDisplay } from 'features/clients'
+import { DurationToNowDisplay } from 'features/dateTime'
 
 const TableContainer = styled(BaseTableContainer)`
   max-height: 700px;
@@ -28,11 +29,14 @@ const EnhancedCheckbox = styled(TableRowCheckbox)``
 const InvoiceCount = styled(ClientInvoiceCounterDisplay)`
   justify-content: end;
 `
+
+const DurationDisplay = styled(DurationToNowDisplay)``
 const ClientName = styled(ClientTypeDisplay)``
 
 export {
   Cell,
   ClientName,
+  DurationDisplay,
   EnhancedCheckbox,
   EnhancedTableHead,
   InvoiceCount,
