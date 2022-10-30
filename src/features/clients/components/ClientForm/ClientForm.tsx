@@ -1,6 +1,6 @@
 import React from 'react'
 import { createStylableComponent } from 'utils'
-import { Form, FormProps, useFieldAutoFocusEffect } from 'features/form'
+import { Form, FormEffect, FormProps, useFieldAutoFocusEffect } from 'features/form'
 import { slidePanelAnimationTimeout } from 'components'
 import { CLIENT_TYPE } from 'services'
 import { ClientFormValues } from '../../hooks/useClientFormConfig'
@@ -8,10 +8,11 @@ import * as S from './ClientForm.styles'
 
 interface ClientFormProps extends FormProps<ClientFormValues> {
   className?: string
+  onDirtyChange?: (dirty: boolean) => void
 }
 
 function ClientForm(props: ClientFormProps) {
-  const { className, ...formProps } = props
+  const { className, onDirtyChange, ...formProps } = props
 
   const firstFieldRef = useFieldAutoFocusEffect(slidePanelAnimationTimeout)
 
@@ -24,7 +25,7 @@ function ClientForm(props: ClientFormProps) {
           </S.FormField>
           <S.TextField
             id="name"
-            label={values.type === CLIENT_TYPE.INDIVIDUAL ? 'Nombre' : 'Razón Social'} // TODO: not changing correctly
+            label={values.type === CLIENT_TYPE.INDIVIDUAL ? 'Nombre' : 'Razón Social'}
             placeholder="Maria Tormentos"
           />
           <S.TextField
@@ -48,6 +49,7 @@ function ClientForm(props: ClientFormProps) {
           <S.TextField id="city" label="Localidad" required={false} placeholder="Spain" />
           <S.SectionTitle id="otherTitle" text="Otros" />
           <S.TextAreaField id="notes" label="Notas" required={false} />
+          <FormEffect onDirtyChange={onDirtyChange} />
         </S.FormContainer>
       )}
     </Form>

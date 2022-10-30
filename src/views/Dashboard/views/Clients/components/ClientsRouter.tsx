@@ -10,6 +10,9 @@ function ClientsRouter() {
   const navigate = useNavigate()
   const { search } = useLocation()
 
+  const parentRoute = '/dashboard/clients'
+  const parentRouteWithSearchParams = `${parentRoute}${search}`
+
   const [clients, setClients] = useState<Client[] | undefined>(undefined)
   const [fetching, setFetching] = useState(true)
 
@@ -24,9 +27,14 @@ function ClientsRouter() {
   }, [fetchClientData])
 
   const onClientCreatedHandle = useCallback(() => {
-    navigate(`/dashboard/clients`)
+    navigate(parentRoute)
     fetchClientData()
-  }, [navigate, fetchClientData])
+  }, [navigate, fetchClientData, parentRoute])
+
+  const onClientUpdateHandle = useCallback(() => {
+    navigate(parentRouteWithSearchParams)
+    fetchClientData()
+  }, [navigate, fetchClientData, parentRouteWithSearchParams])
 
   const onClientDelete = useCallback(() => {
     fetchClientData()
@@ -51,7 +59,7 @@ function ClientsRouter() {
         <Route
           path="create"
           element={
-            <SlidePanelRoute parentRouteUrl={`/dashboard/clients${search}`}>
+            <SlidePanelRoute parentRouteUrl={parentRouteWithSearchParams}>
               <ClientCreation onClientCreated={onClientCreatedHandle} />
             </SlidePanelRoute>
           }
@@ -59,8 +67,8 @@ function ClientsRouter() {
         <Route
           path=":clientId"
           element={
-            <SlidePanelRoute parentRouteUrl={`/dashboard/clients${search}`}>
-              <ClientDetails />
+            <SlidePanelRoute parentRouteUrl={parentRouteWithSearchParams}>
+              <ClientDetails onClientUpdated={onClientUpdateHandle} />
             </SlidePanelRoute>
           }
         />

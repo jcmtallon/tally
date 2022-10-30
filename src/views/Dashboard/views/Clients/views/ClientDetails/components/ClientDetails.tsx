@@ -3,7 +3,12 @@ import { useParams } from 'react-router-dom'
 import { clients as apiClients, Client } from 'services'
 import { ClientEdition } from './ClientEdition'
 
-function ClientDetails() {
+interface ClientDetailsProps {
+  onClientUpdated?: () => void
+}
+
+function ClientDetails(props: ClientDetailsProps) {
+  const { onClientUpdated } = props
   const [client, setClient] = useState<Client | null>(null)
 
   const { clientId } = useParams()
@@ -20,7 +25,8 @@ function ClientDetails() {
 
   if (!client) return <>Loading!</>
 
-  return <ClientEdition client={client} />
+  return <ClientEdition client={client} onClientUpdated={onClientUpdated} />
 }
 
 export { ClientDetails }
+export type { ClientDetailsProps }

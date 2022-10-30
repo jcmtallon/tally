@@ -1,4 +1,4 @@
-import { Client } from 'services'
+import { clients as apiClients, Client } from 'services'
 import {
   useClientFormConfig,
   ClientFormConfig,
@@ -14,7 +14,7 @@ function useClientUpdateFormInitialValues(client: Client): Partial<ClientFormCon
   return {
     type: client.clientType,
     name: client.name,
-    // taxId: client.
+    taxId: client.taxId,
   }
 }
 
@@ -25,6 +25,11 @@ function useClientUpdateFormConfig(
   const initialValues = useClientUpdateFormInitialValues(client)
 
   const formConfig = useClientFormConfig({
+    onSubmit: async values => {
+      await apiClients.update(client.clientId, {
+        name: values.name,
+      })
+    },
     ...config,
     initialValues,
   })

@@ -1,3 +1,4 @@
+import { clients as apiClients, CLIENT_TYPE } from 'services'
 import {
   useClientFormConfig,
   ClientFormConfig,
@@ -10,7 +11,19 @@ type ClientCreationFormInitialConfig = ClientFormInitialConfig
 type ClientCreationFormConfig = ClientFormConfig
 
 function useClientCreationFormConfig(config: ClientCreationFormInitialConfig = {}): ClientFormConfig {
-  const formConfig = useClientFormConfig({})
+  const formConfig = useClientFormConfig({
+    onSubmit: async values => {
+      await apiClients.add({
+        type: values.type === CLIENT_TYPE.INDIVIDUAL ? CLIENT_TYPE.INDIVIDUAL : CLIENT_TYPE.COMPANY,
+        name: values.name,
+        taxId: values.taxId,
+        email: values.mail,
+        phone: values.phone,
+        notes: values.notes,
+      })
+    },
+    ...config,
+  })
 
   return formConfig
 }

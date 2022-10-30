@@ -1,10 +1,11 @@
 import { collection, addDoc, Timestamp } from 'firebase/firestore/lite'
-import { ClientType, CLIENT_TYPE } from 'services/types'
+import { ClientType, CLIENT_TYPE } from '../../types'
 import { firestore } from '../../firestoreSetup'
 
 type AddClientRequest = {
   type: ClientType
   name: string
+  taxId: string
   email: string
   phone: string
   notes: string
@@ -13,6 +14,7 @@ type AddClientRequest = {
 const addClient = async (client: AddClientRequest) => {
   return addDoc(collection(firestore, 'clients'), {
     name: client.name || '',
+    taxId: client.taxId || '',
     email: client.email || '',
     notes: client.notes || '',
     phone: client.phone || '',

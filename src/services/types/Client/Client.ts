@@ -5,6 +5,7 @@ import { ClientType } from './ClientType'
 interface Client {
   clientId: string
   clientType: ClientType
+  taxId: string
   name: string
   phone: string
   email: string

@@ -1,13 +1,13 @@
 import { FormConfig, yup } from 'features/form'
 import { useMemo } from 'react'
-import { clients as apiClients, Client, CLIENT_TYPE, ClientType } from 'services'
+import { clients as apiClients, CLIENT_TYPE, ClientType } from 'services'
 import { Merge } from 'type-fest'
 
 interface ClientFormValues {
   type: ClientType
   name: string
-  mail: string
   taxId: string
+  mail: string
   phone: string
   street: string
   houseNumber: string
@@ -23,7 +23,7 @@ function useClientFormValidationScheme() {
   const validationSchema = useMemo(
     () =>
       yup.object<ClientFormValues>({
-        type: yup.string<Client['clientType']>(), // TODO
+        type: yup.string<ClientType>(),
         name: yup.string().defined(),
         mail: yup.string().email('Wrong e-mail, baby!'),
         taxId: yup.string(),
@@ -65,15 +65,7 @@ function useClientFormConfig(config: ClientFormInitialConfig = {}): ClientFormCo
 
   return {
     validationSchema,
-    onSubmit: async values => {
-      await apiClients.add({
-        type: values.type === CLIENT_TYPE.INDIVIDUAL ? CLIENT_TYPE.INDIVIDUAL : CLIENT_TYPE.COMPANY,
-        name: values.name,
-        email: values.mail,
-        phone: values.phone,
-        notes: values.notes,
-      })
-    },
+    onSubmit: () => undefined,
     ...config,
     initialValues: { ...initialValues, ...config.initialValues },
   }

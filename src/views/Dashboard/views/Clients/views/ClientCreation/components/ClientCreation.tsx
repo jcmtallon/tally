@@ -32,7 +32,7 @@ function ClientCreation(props: ClientCreationProps) {
   return (
     <S.PanelLayout
       title="Crear nuevo cliente"
-      footer={<S.SubmitButton onClick={handleCreateClick}>Create</S.SubmitButton>}>
+      footer={<S.SubmitButton onClick={handleCreateClick}>Crear</S.SubmitButton>}>
       <S.FormWrapper>
         <S.Form formRef={formRef} {...formConfig} />
       </S.FormWrapper>

@@ -14,6 +14,7 @@ const getClient = async (clientId: string): Promise<Client> => {
     clientId,
     clientType: CLIENT_TYPE.INDIVIDUAL,
     name: data.name,
+    taxId: data.taxId,
     email: data.email,
     phone: data.phone,
     notes: data.notes,

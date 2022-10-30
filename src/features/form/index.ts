@@ -5,6 +5,7 @@ export { yup }
 
 export { Form } from './components/Form'
 export { FormField } from './components/FormField'
+export { FormEffect } from './components/FormEffect'
 export { FormSectionTitle } from './components/FormSectionTitle'
 export { FormSelectField } from './components/FormSelectField'
 export { FormTextAreaField } from './components/FormTextAreaField'
