@@ -1,26 +1,18 @@
 import { doc, getDoc } from 'firebase/firestore/lite'
 import { firestore } from '../../firestoreSetup'
-import { Client, CLIENT_TYPE } from '../../types'
+import { Client } from '../../types'
+import { firestoreClientToClient } from './docToClient'
+import { FirestoreClient } from './types'
 
 const getClient = async (clientId: string): Promise<Client> => {
   const clientRef = doc(firestore, `clients/${clientId}`)
 
   const response = await getDoc(clientRef)
-  const data = response.data()
+  const data = response.data() as FirestoreClient
 
   if (!data) throw new Error('No client found')
 
-  return {
-    clientId,
-    clientType: CLIENT_TYPE.INDIVIDUAL,
-    name: data.name,
-    taxId: data.taxId,
-    email: data.email,
-    phone: data.phone,
-    notes: data.notes,
-    invoicesCount: 0,
-    created: '',
-  }
+  return firestoreClientToClient(clientId, data)
 }
 
 export { getClient }

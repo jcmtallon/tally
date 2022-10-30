@@ -13,6 +13,7 @@ interface Client {
   address?: Address
   invoicesCount: number
   created: ISODate
+  updated: ISODate
 }
 
 export type { Client }

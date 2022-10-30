@@ -1,6 +1,7 @@
-import { collection, addDoc, Timestamp } from 'firebase/firestore/lite'
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore/lite'
 import { ClientType, CLIENT_TYPE } from '../../types'
 import { firestore } from '../../firestoreSetup'
+import { FirestoreClient } from './types'
 
 type AddClientRequest = {
   type: ClientType
@@ -12,16 +13,19 @@ type AddClientRequest = {
 }
 
 const addClient = async (client: AddClientRequest) => {
-  return addDoc(collection(firestore, 'clients'), {
+  const payload: FirestoreClient = {
     name: client.name || '',
-    taxId: client.taxId || '',
+    tax_id: client.taxId || '',
     email: client.email || '',
     notes: client.notes || '',
     phone: client.phone || '',
     type: client.type || CLIENT_TYPE.INDIVIDUAL,
     invoices: 0,
-    created: Timestamp.fromDate(new Date()),
-  })
+    created: serverTimestamp(),
+    updated: serverTimestamp(),
+  }
+
+  return addDoc(collection(firestore, 'clients'), payload)
 }
 
 export { addClient }

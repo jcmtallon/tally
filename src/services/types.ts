@@ -1,5 +1,5 @@
 export { INVOICE_STATUS, isInvoiceStatus } from './types/Invoice/InvoiceStatus'
-export { CLIENT_TYPE } from './types/Client/ClientType'
+export { CLIENT_TYPE, isClientType } from './types/Client/ClientType'
 
 export type { Client } from './types/Client/Client'
 export type { ClientType } from './types/Client/ClientType'

@@ -1,20 +1,25 @@
-import { DocumentData, QueryDocumentSnapshot, QuerySnapshot } from 'firebase/firestore/lite'
-import { Client } from '../../types'
+import { Timestamp, DocumentData, QueryDocumentSnapshot, QuerySnapshot } from 'firebase/firestore/lite'
+import { Client, isClientType, CLIENT_TYPE } from '../../types'
+import { FirestoreClient } from './types'
 
-function docToClient(doc: QueryDocumentSnapshot<DocumentData>): Client {
-  const data = doc.data()
-
+function firestoreClientToClient(id: string, data: FirestoreClient): Client {
   return {
-    clientId: doc.id,
-    clientType: data.type,
+    clientId: id,
+    clientType: isClientType(data.type) ? data.type : CLIENT_TYPE.INDIVIDUAL,
     name: data.name,
-    taxId: data.taxId,
+    taxId: data.tax_id,
     email: data.email,
     phone: data.phone,
     notes: data.notes,
-    invoicesCount: data.invoicesCount ?? 0,
-    created: data.created ? data.created.toDate().toISOString() : '',
+    invoicesCount: data.invoices ?? 0,
+    created: data.created ? (data.created as Timestamp).toDate().toISOString() : '',
+    updated: data.updated ? (data.updated as Timestamp).toDate().toISOString() : '',
   }
+}
+
+function docToClient(doc: QueryDocumentSnapshot<DocumentData>): Client {
+  const data = doc.data() as FirestoreClient
+  return firestoreClientToClient(doc.id, data)
 }
 
 function docsToClients(docs: QuerySnapshot<DocumentData>): Client[] {
@@ -27,4 +32,4 @@ function docsToClients(docs: QuerySnapshot<DocumentData>): Client[] {
   return clients
 }
 
-export { docsToClients, docToClient }
+export { docsToClients, docToClient, firestoreClientToClient }
