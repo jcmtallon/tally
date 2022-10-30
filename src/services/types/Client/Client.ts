@@ -1,9 +1,10 @@
 import { ISODate } from 'types'
 import { Address } from '../Address/Address'
+import { ClientType } from './ClientType'
 
 interface Client {
   clientId: string
-  clientType: 'individual' | 'company'
+  clientType: ClientType
   name: string
   phone: string
   email: string

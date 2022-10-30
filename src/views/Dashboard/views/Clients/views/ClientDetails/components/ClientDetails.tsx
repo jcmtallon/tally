@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { clients as apiClients, Client } from 'services'
-import * as S from './ClientDetails.styles'
+import { ClientEdition } from './ClientEdition'
 
 function ClientDetails() {
-  const [clientDetails, setClientDetails] = useState<Client | null>(null)
+  const [client, setClient] = useState<Client | null>(null)
 
   const { clientId } = useParams()
 
@@ -12,19 +12,15 @@ function ClientDetails() {
     const fetchData = async () => {
       if (!clientId) return
       const data = await apiClients.get(clientId)
-      setClientDetails(data)
+      setClient(data)
     }
 
     fetchData()
   }, [clientId])
 
-  if (!clientDetails) return <>Loading!</>
+  if (!client) return <>Loading!</>
 
-  return (
-    <S.PanelLayout title="Detalles de Cliente" footer="Editar">
-      Info
-    </S.PanelLayout>
-  )
+  return <ClientEdition client={client} />
 }
 
 export { ClientDetails }

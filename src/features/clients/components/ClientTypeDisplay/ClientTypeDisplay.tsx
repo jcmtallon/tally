@@ -1,19 +1,19 @@
 import React, { HTMLAttributes, ReactNode } from 'react'
-import { Client } from 'services'
+import { ClientType, CLIENT_TYPE } from 'services'
 import { createStylableComponent } from 'utils'
 import * as S from './ClientTypeDisplay.styles'
 
 interface ClientTypeDisplayProps extends HTMLAttributes<HTMLDivElement> {
   clientName: string
-  clientType?: Client['clientType']
+  clientType?: ClientType
 }
 
 function ClientTypeDisplay(props: ClientTypeDisplayProps) {
-  const { clientName, clientType = 'individual', ...otherProps } = props
+  const { clientName, clientType = CLIENT_TYPE.INDIVIDUAL, ...otherProps } = props
 
-  const icon: Record<Client['clientType'], ReactNode> = {
-    individual: <S.Person />,
-    company: <S.Suitcase />,
+  const icon: Record<ClientType, ReactNode> = {
+    INDIVIDUAL: <S.Person />,
+    COMPANY: <S.Wallet />,
   }
 
   return (

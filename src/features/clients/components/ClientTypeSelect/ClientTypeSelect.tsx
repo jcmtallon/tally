@@ -1,6 +1,7 @@
 import React from 'react'
 import { SelectProps } from 'components'
 import { createStylableComponent } from 'utils'
+import { CLIENT_TYPE } from 'services'
 import * as S from './ClientTypeSelect.styles'
 
 interface ClientTypeSelectProps extends Omit<SelectProps, 'options'> {}
@@ -13,8 +14,8 @@ function ClientTypeSelect(props: ClientTypeSelectProps) {
       // all the time.
       ref={props.forwardedRef}
       options={[
-        { value: 'individual', label: 'Particular' },
-        { value: 'company', label: 'Empresa' },
+        { value: CLIENT_TYPE.INDIVIDUAL, label: 'Particular' },
+        { value: CLIENT_TYPE.COMPANY, label: 'Empresa' },
       ]}
     />
   )

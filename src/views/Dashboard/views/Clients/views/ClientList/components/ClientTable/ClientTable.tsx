@@ -1,6 +1,6 @@
 import React, { HTMLAttributes, useMemo } from 'react'
 import { createStylableComponent } from 'utils'
-import { Client } from 'services'
+import { Client, CLIENT_TYPE } from 'services'
 import { EnhanceTableHeadCell, TableSorting as Sorting } from 'components'
 import { Merge } from 'type-fest'
 import { DateTime } from 'features/dateTime'
@@ -38,7 +38,7 @@ function ClientTable(props: ClientTableProps) {
       { label: 'E-mail', id: 'email', width: '260px' },
       { label: 'Teléfono', id: 'phone', width: '130px' },
       { label: 'Facturas', id: 'invoices', width: '130px', align: 'right' },
-      { label: 'Añadido', id: 'created', width: '130px' },
+      { label: 'Añadido hace', id: 'created', width: '160px' },
     ]
 
     return cells.map(cell => {
@@ -75,7 +75,10 @@ function ClientTable(props: ClientTableProps) {
                 onSelectedChanged={onSelectedChanged}
               />
               <S.Cell padding="chip">
-                <S.ClientName clientName={client.name} clientType={client.clientType || 'individual'} />
+                <S.ClientName
+                  clientName={client.name}
+                  clientType={client.clientType || CLIENT_TYPE.INDIVIDUAL}
+                />
               </S.Cell>
               <S.Cell>{client.email || '-'}</S.Cell>
               <S.Cell>{client.phone || '-'}</S.Cell>

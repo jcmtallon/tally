@@ -42,7 +42,7 @@ function ClientsRouter() {
               clients={clients}
               fetching={fetching}
               onCreateClientButtonClicked={() => navigate(`/dashboard/clients/create${search}`)}
-              onShowClientDetailsClicked={clientId => navigate(`/dashboard/clients/${clientId}`)}
+              onShowClientDetailsClicked={clientId => navigate(`/dashboard/clients/${clientId}${search}`)}
               onClientDelete={onClientDelete}
             />
             <Outlet />
@@ -59,7 +59,7 @@ function ClientsRouter() {
         <Route
           path=":clientId"
           element={
-            <SlidePanelRoute parentRouteUrl="/dashboard/clients/">
+            <SlidePanelRoute parentRouteUrl={`/dashboard/clients${search}`}>
               <ClientDetails />
             </SlidePanelRoute>
           }

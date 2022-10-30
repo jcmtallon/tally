@@ -1,9 +1,10 @@
 import { FormConfig, yup } from 'features/form'
 import { useMemo } from 'react'
-import { clients as apiClients, Client } from 'services'
+import { clients as apiClients, Client, CLIENT_TYPE, ClientType } from 'services'
+import { Merge } from 'type-fest'
 
 interface ClientFormValues {
-  type: string // TODO: create type
+  type: ClientType
   name: string
   mail: string
   taxId: string
@@ -39,11 +40,18 @@ function useClientFormValidationScheme() {
   return validationSchema
 }
 
-function useClientFormConfig(config: Partial<ClientFormConfig> = {}): ClientFormConfig {
+type ClientFormInitialConfig = Merge<
+  Partial<ClientFormConfig>,
+  {
+    initialValues?: Partial<ClientFormConfig['initialValues']>
+  }
+>
+
+function useClientFormConfig(config: ClientFormInitialConfig = {}): ClientFormConfig {
   const validationSchema = useClientFormValidationScheme()
 
   const initialValues = {
-    type: 'individual',
+    type: CLIENT_TYPE.INDIVIDUAL,
     name: '',
     mail: '',
     taxId: '',
@@ -59,6 +67,7 @@ function useClientFormConfig(config: Partial<ClientFormConfig> = {}): ClientForm
     validationSchema,
     onSubmit: async values => {
       await apiClients.add({
+        type: values.type === CLIENT_TYPE.INDIVIDUAL ? CLIENT_TYPE.INDIVIDUAL : CLIENT_TYPE.COMPANY,
         name: values.name,
         email: values.mail,
         phone: values.phone,
@@ -71,4 +80,4 @@ function useClientFormConfig(config: Partial<ClientFormConfig> = {}): ClientForm
 }
 
 export { useClientFormConfig }
-export type { ClientFormValues, ClientFormConfig }
+export type { ClientFormValues, ClientFormConfig, ClientFormInitialConfig }

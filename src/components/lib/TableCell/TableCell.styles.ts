@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-import { pickColor, fg, typo } from 'theme'
+import { pickColor, fg, typo, canvas } from 'theme'
 import { TableSize } from '../Table'
 import { TableCellPaddingVariant } from './TableCell.types'
 
@@ -48,6 +48,7 @@ const Cell = styled.td<{
 const HeadCell = styled.th`
   ${fg(f => f.neutral.muted)};
   ${typo(t => t.body.md.strong)};
+  ${canvas()};
 `
 
 const BodyCell = styled.td`

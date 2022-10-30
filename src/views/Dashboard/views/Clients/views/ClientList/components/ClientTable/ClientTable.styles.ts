@@ -22,7 +22,9 @@ const TableContainer = styled(BaseTableContainer)`
 const Table = styled(BaseTable)``
 const EnhancedTableHead = styled(BaseEnhanceTableHead)``
 const TableBody = styled(BaseTableBody)``
-const TableRow = styled(BaseTableRow)``
+const TableRow = styled(BaseTableRow)`
+  cursor: pointer;
+`
 const Cell = styled(BaseTableCell)``
 const EnhancedCheckbox = styled(TableRowCheckbox)``
 

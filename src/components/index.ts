@@ -1,5 +1,6 @@
 export * from './lib/ActivityIndicator'
 export * from './lib/AppErrorBoundary'
+export * from './lib/AsyncButton'
 export * from './lib/Button'
 export * from './lib/Checkbox'
 export * from './lib/Chip'

@@ -1,5 +1,6 @@
 import React, { useCallback } from 'react'
-import { useClientFormConfig, ClientFormValues } from 'features/clients'
+import isEmpty from 'lodash/isEmpty'
+import { useClientCreationFormConfig, ClientCreationFormValues } from 'features/clients'
 import { useFormRef } from 'features/form'
 import * as S from './ClientCreation.styles'
 
@@ -9,17 +10,13 @@ interface ClientCreationProps {
 
 function ClientCreation(props: ClientCreationProps) {
   const { onClientCreated } = props
-  const { formRef } = useFormRef<ClientFormValues>()
-  const formConfig = useClientFormConfig()
+  const { formRef } = useFormRef<ClientCreationFormValues>()
+  const formConfig = useClientCreationFormConfig()
 
-  const submitHandle = useCallback(async () => {
+  const handleCreateClick = useCallback(async () => {
     await formRef.current?.submitForm()
-    onClientCreated?.()
+    if (isEmpty(formRef.current?.errors)) onClientCreated?.()
   }, [formRef, onClientCreated])
-
-  const handleCreateClick = async () => {
-    await submitHandle()
-  }
 
   return (
     <S.PanelLayout

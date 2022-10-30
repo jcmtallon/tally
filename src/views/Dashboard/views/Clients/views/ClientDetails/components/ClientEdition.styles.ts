@@ -1,4 +1,4 @@
-import { SlidePanelLayout, AsyncButton } from 'components'
+import { SlidePanelLayout, Button } from 'components'
 import { ClientForm } from 'features/clients'
 import styled from 'styled-components'
 
@@ -12,11 +12,11 @@ const FormWrapper = styled.div`
   overflow: overlay;
 `
 
-const Form = styled(ClientForm)``
-
 // TODO: use SubmitButton with async logic instead
-const SubmitButton = styled(AsyncButton).attrs({ size: 'large' })`
+const SubmitButton = styled(Button).attrs({ size: 'large' })`
   width: fit-content;
 `
 
-export { PanelLayout, FormWrapper, Form, SubmitButton }
+const Form = styled(ClientForm)``
+
+export { PanelLayout, FormWrapper, SubmitButton, Form }

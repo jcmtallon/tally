@@ -1,6 +1,8 @@
 export { INVOICE_STATUS, isInvoiceStatus } from './types/Invoice/InvoiceStatus'
+export { CLIENT_TYPE } from './types/Client/ClientType'
 
 export type { Client } from './types/Client/Client'
+export type { ClientType } from './types/Client/ClientType'
 export type { Address } from './types/Address/Address'
 export type { Invoice } from './types/Invoice/Invoice'
 export type { InvoiceServiceEntry } from './types/Invoice/InvoiceServiceEntry'

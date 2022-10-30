@@ -1,6 +1,6 @@
 import { doc, getDoc } from 'firebase/firestore/lite'
 import { firestore } from '../../firestoreSetup'
-import { Client } from '../../types'
+import { Client, CLIENT_TYPE } from '../../types'
 
 const getClient = async (clientId: string): Promise<Client> => {
   const clientRef = doc(firestore, `clients/${clientId}`)
@@ -12,7 +12,7 @@ const getClient = async (clientId: string): Promise<Client> => {
 
   return {
     clientId,
-    clientType: 'individual', // TODO
+    clientType: CLIENT_TYPE.INDIVIDUAL,
     name: data.name,
     email: data.email,
     phone: data.phone,

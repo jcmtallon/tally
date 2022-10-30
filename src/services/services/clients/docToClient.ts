@@ -6,7 +6,7 @@ function docToClient(doc: QueryDocumentSnapshot<DocumentData>): Client {
 
   return {
     clientId: doc.id,
-    clientType: 'individual', // TODO
+    clientType: data.type, // TODO
     name: data.name,
     email: data.email,
     phone: data.phone,

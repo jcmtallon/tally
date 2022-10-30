@@ -2,6 +2,7 @@ import React from 'react'
 import { createStylableComponent } from 'utils'
 import { Form, FormProps, useFieldAutoFocusEffect } from 'features/form'
 import { slidePanelAnimationTimeout } from 'components'
+import { CLIENT_TYPE } from 'services'
 import { ClientFormValues } from '../../hooks/useClientFormConfig'
 import * as S from './ClientForm.styles'
 
@@ -23,12 +24,12 @@ function ClientForm(props: ClientFormProps) {
           </S.FormField>
           <S.TextField
             id="name"
-            label={values.type === 'individual' ? 'Nombre' : 'Razón Social'} // TODO: not changing correctly
+            label={values.type === CLIENT_TYPE.INDIVIDUAL ? 'Nombre' : 'Razón Social'} // TODO: not changing correctly
             placeholder="Maria Tormentos"
           />
           <S.TextField
             id="taxId"
-            label={values.type === 'individual' ? 'DNI/NIE/TIE' : 'CIF'}
+            label={values.type === CLIENT_TYPE.INDIVIDUAL ? 'DNI/NIE/TIE' : 'CIF'}
             required={false}
             placeholder="40886523F"
           />
