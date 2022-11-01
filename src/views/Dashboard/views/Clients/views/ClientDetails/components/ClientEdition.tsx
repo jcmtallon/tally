@@ -3,7 +3,7 @@ import { useFormRef } from 'features/form'
 import isEmpty from 'lodash/isEmpty'
 import React, { useCallback, useState } from 'react'
 import { Client } from 'services'
-import { toast } from 'react-toastify'
+import { showErrorToast } from 'features/toasts'
 import * as S from './ClientEdition.styles'
 
 interface ClientEditionProps {
@@ -25,13 +25,7 @@ function ClientEdition(props: ClientEditionProps) {
     if (isEmpty(formRef.current?.errors)) {
       onClientUpdated?.()
     } else {
-      toast.error('Contiene errores', {
-        position: 'top-center',
-        autoClose: 2000,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: true,
-      })
+      showErrorToast('Contiene errores')
     }
   }, [formRef, onClientUpdated])
 

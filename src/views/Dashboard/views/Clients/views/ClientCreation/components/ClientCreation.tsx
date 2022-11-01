@@ -2,7 +2,7 @@ import React, { useCallback } from 'react'
 import isEmpty from 'lodash/isEmpty'
 import { useClientCreationFormConfig, ClientCreationFormValues } from 'features/clients'
 import { useFormRef } from 'features/form'
-import { toast } from 'react-toastify'
+import { showErrorToast } from 'features/toasts'
 import * as S from './ClientCreation.styles'
 
 interface ClientCreationProps {
@@ -19,13 +19,7 @@ function ClientCreation(props: ClientCreationProps) {
     if (isEmpty(formRef.current?.errors)) {
       onClientCreated?.()
     } else {
-      toast.error('Contiene errores', {
-        position: 'top-center',
-        autoClose: 2000,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: true,
-      })
+      showErrorToast('Contiene errores')
     }
   }, [formRef, onClientCreated])
 

@@ -1,6 +1,6 @@
 import { AppErrorBoundary } from 'components'
 import React from 'react'
-import { ToastContainer } from 'react-toastify'
+import { ToastContainer } from 'features/toasts'
 import { GlobalStyles, ThemeProvider } from './theme'
 import { Routes } from './views/Routes'
 import 'react-toastify/dist/ReactToastify.css'
@@ -15,7 +15,6 @@ import 'react-toastify/dist/ReactToastify.css'
 // - TODO: App ErrorBoundary
 // - TODO: TrackingProvider
 // - TODO: RemoteConfigProvider
-// - TODO: ToastProvider
 
 function App() {
   return (
