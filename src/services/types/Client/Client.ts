@@ -10,7 +10,7 @@ interface Client {
   phone: string
   email: string
   notes: string
-  address?: Address
+  address: Address
   invoicesCount: number
   created: ISODate
   updated: ISODate

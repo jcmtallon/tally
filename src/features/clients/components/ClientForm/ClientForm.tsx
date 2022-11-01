@@ -44,7 +44,6 @@ function ClientForm(props: ClientFormProps) {
             required={false}
             placeholder="Periodista Chacón 5"
           />
-          <S.TextField id="houseNumber" label="Número" required={false} placeholder="5B" />
           <S.TextField id="postalCode" label="Código postal" required={false} placeholder="54002" />
           <S.TextField id="city" label="Localidad" required={false} placeholder="Spain" />
           <S.SectionTitle id="otherTitle" text="Otros" />

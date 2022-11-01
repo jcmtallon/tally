@@ -13,7 +13,7 @@ const FormContainer = styled.form`
     'mail mail phone'
     'addressTitle . .'
     'street street street'
-    'houseNumber postalCode city'
+    'postalCode city .'
     'otherTitle . .'
     'notes notes notes';
 
@@ -47,10 +47,6 @@ const FormContainer = styled.form`
 
   #street {
     grid-area: street;
-  }
-
-  #houseNumber {
-    grid-area: houseNumber;
   }
 
   #postalCode {

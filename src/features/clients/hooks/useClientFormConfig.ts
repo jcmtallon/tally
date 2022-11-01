@@ -1,6 +1,6 @@
 import { FormConfig, yup } from 'features/form'
 import { useMemo } from 'react'
-import { clients as apiClients, CLIENT_TYPE, ClientType } from 'services'
+import { CLIENT_TYPE, ClientType } from 'services'
 import { Merge } from 'type-fest'
 
 interface ClientFormValues {
@@ -10,7 +10,6 @@ interface ClientFormValues {
   mail: string
   phone: string
   street: string
-  houseNumber: string
   postalCode: string
   city: string
   notes: string
@@ -29,7 +28,6 @@ function useClientFormValidationScheme() {
         taxId: yup.string(),
         phone: yup.string(),
         street: yup.string(),
-        houseNumber: yup.string(),
         postalCode: yup.string(),
         city: yup.string(),
         notes: yup.string(),
@@ -57,7 +55,6 @@ function useClientFormConfig(config: ClientFormInitialConfig = {}): ClientFormCo
     taxId: '',
     phone: '',
     street: '',
-    houseNumber: '',
     postalCode: '',
     city: '',
     notes: '',

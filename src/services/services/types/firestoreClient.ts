@@ -1,4 +1,5 @@
 import { FieldValue } from 'firebase/firestore/lite'
+import { FirestoreAddress } from './firestoreAddress'
 
 interface FirestoreClient {
   name: string
@@ -10,6 +11,7 @@ interface FirestoreClient {
   invoices: number
   created: FieldValue // Timestamp
   updated: FieldValue // Timestamp
+  address: FirestoreAddress
 }
 
 export type { FirestoreClient }

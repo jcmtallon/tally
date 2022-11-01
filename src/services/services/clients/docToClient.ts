@@ -1,19 +1,25 @@
 import { Timestamp, DocumentData, QueryDocumentSnapshot, QuerySnapshot } from 'firebase/firestore/lite'
 import { Client, isClientType, CLIENT_TYPE } from '../../types'
-import { FirestoreClient } from './types'
+import { FirestoreClient } from '../types/firestoreClient'
 
 function firestoreClientToClient(id: string, data: FirestoreClient): Client {
+  const { type, name, tax_id: propsTaxId, email, phone, notes, invoices, created, updated, address } = data
   return {
     clientId: id,
-    clientType: isClientType(data.type) ? data.type : CLIENT_TYPE.INDIVIDUAL,
-    name: data.name,
-    taxId: data.tax_id,
-    email: data.email,
-    phone: data.phone,
-    notes: data.notes,
-    invoicesCount: data.invoices ?? 0,
-    created: data.created ? (data.created as Timestamp).toDate().toISOString() : '',
-    updated: data.updated ? (data.updated as Timestamp).toDate().toISOString() : '',
+    clientType: isClientType(type) ? type : CLIENT_TYPE.INDIVIDUAL,
+    name,
+    taxId: propsTaxId,
+    email,
+    phone,
+    notes,
+    invoicesCount: invoices ?? 0,
+    created: created ? (created as Timestamp).toDate().toISOString() : '',
+    updated: updated ? (updated as Timestamp).toDate().toISOString() : '',
+    address: {
+      city: address?.city || '',
+      postalCode: address?.postal_code || '',
+      street: address?.street || '',
+    },
   }
 }
 

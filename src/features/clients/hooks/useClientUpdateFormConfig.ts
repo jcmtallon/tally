@@ -1,4 +1,4 @@
-import { clients as apiClients, Client } from 'services'
+import { clients as apiClients, Client, CLIENT_TYPE } from 'services'
 import {
   useClientFormConfig,
   ClientFormConfig,
@@ -11,10 +11,17 @@ type ClientUpdateFormInitialConfig = Omit<ClientFormInitialConfig, 'initialValue
 type ClientUpdateFormConfig = ClientFormConfig
 
 function useClientUpdateFormInitialValues(client: Client): Partial<ClientFormConfig['initialValues']> {
+  const { clientType, name, taxId, address, email, notes, phone } = client
   return {
-    type: client.clientType,
-    name: client.name,
-    taxId: client.taxId,
+    type: clientType,
+    name,
+    taxId,
+    city: address.city,
+    mail: email,
+    notes,
+    phone,
+    postalCode: address.postalCode,
+    street: address.street,
   }
 }
 
@@ -28,6 +35,16 @@ function useClientUpdateFormConfig(
     onSubmit: async values => {
       await apiClients.update(client.clientId, {
         name: values.name,
+        type: values.type === CLIENT_TYPE.INDIVIDUAL ? CLIENT_TYPE.INDIVIDUAL : CLIENT_TYPE.COMPANY,
+        taxId: values.taxId,
+        email: values.mail,
+        phone: values.phone,
+        address: {
+          street: values.street,
+          postalCode: values.postalCode,
+          city: values.city,
+        },
+        notes: values.notes,
       })
     },
     ...config,

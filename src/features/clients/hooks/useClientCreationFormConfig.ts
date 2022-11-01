@@ -19,6 +19,11 @@ function useClientCreationFormConfig(config: ClientCreationFormInitialConfig = {
         taxId: values.taxId,
         email: values.mail,
         phone: values.phone,
+        address: {
+          street: values.street,
+          postalCode: values.postalCode,
+          city: values.city,
+        },
         notes: values.notes,
       })
     },
