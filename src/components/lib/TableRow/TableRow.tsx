@@ -10,12 +10,15 @@ type TableRowProps = Merge<
 
     /** If `true`, the table row will have the selected shading. */
     selected?: boolean
+
+    /** If `true`, displays fade-in fade-out animation  */
+    animate?: boolean
   }
 >
 
 function TableRow(props: TableRowProps, ref: Ref<HTMLTableRowElement>) {
-  const { hover = false, selected = false } = props
-  return <S.TableRow shadeOnHover={hover} selected={selected} ref={ref} {...props} />
+  const { hover = false, selected = false, animate = false } = props
+  return <S.TableRow shadeOnHover={hover} selected={selected} animate={animate} ref={ref} {...props} />
 }
 
 const ForwardRefTableRow = React.forwardRef(TableRow)

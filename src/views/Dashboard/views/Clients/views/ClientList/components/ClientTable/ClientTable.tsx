@@ -3,7 +3,7 @@ import { createStylableComponent } from 'utils'
 import { Client, CLIENT_TYPE } from 'services'
 import { EnhanceTableHeadCell, TableSorting as Sorting } from 'components'
 import { Merge } from 'type-fest'
-import { DateTime } from 'features/dateTime'
+import { DateTime, getDurationToNow } from 'features/dateTime'
 import { isClientListSortableFiled } from '../ClientList'
 import * as S from './ClientTable.styles'
 
@@ -64,6 +64,7 @@ function ClientTable(props: ClientTableProps) {
         <S.TableBody>
           {clients.map((client, index) => (
             <S.TableRow
+              animate={getDurationToNow(DateTime.fromISO(client.created)).toMillis() < 10000}
               hover
               selected={selected.indexOf(client.clientId) !== -1 || opened === client.clientId}
               key={client.clientId}
