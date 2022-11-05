@@ -1,4 +1,4 @@
-import React, { HTMLAttributes, useMemo } from 'react'
+import React, { HTMLAttributes, useCallback, useMemo, useState } from 'react'
 import { createStylableComponent } from 'utils'
 import { Client, CLIENT_TYPE } from 'services'
 import { EnhanceTableHeadCell, TableSorting as Sorting } from 'components'
@@ -30,7 +30,8 @@ function ClientTable(props: ClientTableProps) {
     ...otherProps
   } = props
 
-  // TODO(now): created??
+  const [dateFieldType, setDateFieldType] = useState<'created' | 'updated'>('created')
+
   type TableHeadCell = Merge<EnhanceTableHeadCell, { id: keyof Client | 'revenue' | 'invoices' | 'created' }>
   const headCells: readonly TableHeadCell[] = useMemo(() => {
     const cells: TableHeadCell[] = [
@@ -38,15 +39,28 @@ function ClientTable(props: ClientTableProps) {
       { label: 'E-mail', id: 'email', width: '260px' },
       { label: 'Teléfono', id: 'phone', width: '130px' },
       { label: 'Facturas', id: 'invoices', width: '130px', align: 'right' },
-      { label: 'Añadido hace', id: 'created', width: '160px' },
     ]
+
+    cells.push(
+      dateFieldType === 'created'
+        ? { label: 'Añadido hace', id: 'created', width: '160px' }
+        : { label: 'Editado hace', id: 'updated', width: '160px' },
+    )
 
     return cells.map(cell => {
       // eslint-disable-next-line no-param-reassign -- Shrug
       cell.sortable = isClientListSortableFiled(cell.id)
       return cell
     })
-  }, [])
+  }, [dateFieldType])
+
+  const handleDateFieldTypeChange: React.MouseEventHandler<HTMLTableCellElement> = useCallback(
+    e => {
+      e.stopPropagation()
+      setDateFieldType(prev => (prev === 'created' ? 'updated' : 'created'))
+    },
+    [setDateFieldType],
+  )
 
   const allRowIds = useMemo(() => clients.map(n => n.clientId), [clients])
 
@@ -86,9 +100,13 @@ function ClientTable(props: ClientTableProps) {
               <S.Cell align="right">
                 <S.InvoiceCount count={client.invoicesCount} />
               </S.Cell>
-              <S.Cell>
-                {client.created ? <S.DurationDisplay date={DateTime.fromISO(client.created)} /> : '-'}
-              </S.Cell>
+              <S.DateCell onClick={handleDateFieldTypeChange}>
+                {dateFieldType === 'created' ? (
+                  <>{client.created ? <S.DurationDisplay date={DateTime.fromISO(client.created)} /> : '-'}</>
+                ) : (
+                  <>{client.updated ? <S.DurationDisplay date={DateTime.fromISO(client.updated)} /> : '-'}</>
+                )}
+              </S.DateCell>
             </S.TableRow>
           ))}
         </S.TableBody>

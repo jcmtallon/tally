@@ -26,6 +26,13 @@ const TableRow = styled(BaseTableRow)`
   cursor: pointer;
 `
 const Cell = styled(BaseTableCell)``
+
+const DateCell = styled(BaseTableCell)`
+  :hover {
+    text-decoration: underline;
+  }
+`
+
 const EnhancedCheckbox = styled(TableRowCheckbox)``
 
 const InvoiceCount = styled(ClientInvoiceCounterDisplay)`
@@ -38,6 +45,7 @@ const ClientName = styled(ClientTypeDisplay)``
 export {
   Cell,
   ClientName,
+  DateCell,
   DurationDisplay,
   EnhancedCheckbox,
   EnhancedTableHead,

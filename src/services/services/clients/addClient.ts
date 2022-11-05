@@ -25,7 +25,6 @@ const addClient = async (client: AddClientRequest) => {
     type: type || CLIENT_TYPE.INDIVIDUAL,
     invoices: 0,
     created: serverTimestamp(),
-    updated: serverTimestamp(),
     address: {
       city: address.city,
       postal_code: address.postalCode,

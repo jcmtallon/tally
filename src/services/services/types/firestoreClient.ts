@@ -10,7 +10,7 @@ interface FirestoreClient {
   type: string
   invoices: number
   created: FieldValue // Timestamp
-  updated: FieldValue // Timestamp
+  updated?: FieldValue // Timestamp
   address: FirestoreAddress
 }
 
