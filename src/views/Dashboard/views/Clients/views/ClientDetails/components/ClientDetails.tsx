@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { clients as apiClients, Client } from 'services'
-import { ClientEdition } from './ClientEdition'
+import { ClientDetailsEdition } from './ClientDetailsEdition'
 import { ClientDetailsDisplay } from './ClientDetailsDisplay'
 
 interface ClientDetailsProps {
@@ -28,7 +28,13 @@ function ClientDetails(props: ClientDetailsProps) {
   if (!client) return <>Loading!</>
   if (!isEditMode) return <ClientDetailsDisplay client={client} onEditModeClick={() => setIsEditMode(true)} />
 
-  return <ClientEdition client={client} onClientUpdated={onClientUpdated} />
+  return (
+    <ClientDetailsEdition
+      client={client}
+      onClientUpdate={onClientUpdated}
+      onEditModeCancel={() => setIsEditMode(false)}
+    />
+  )
 }
 
 export { ClientDetails }
