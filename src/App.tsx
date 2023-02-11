@@ -14,7 +14,7 @@ import 'react-toastify/dist/ReactToastify.css'
 // - TODO: GlobalStyles
 // - TODO: App ErrorBoundary
 // - TODO: TrackingProvider
-// - TODO: RemoteConfigProvider
+// - TODO: RemoteConfigProvider.
 
 function App() {
   return (
